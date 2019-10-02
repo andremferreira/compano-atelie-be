@@ -1,0 +1,144 @@
+{
+    "messages": [
+        {
+            "id": 1,
+            "code": "err-0001",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Página não encontrada!",
+                    "info": "A página / serviço não foi encontrada ou não está disponível.",
+                    "type": "warning"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Page not found.",
+                    "info": "Page not found.",
+                    "type": "warning"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "code": "err-0002",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Dados não encontrados!",
+                    "info": "Dados não encontrados ou inexistente.",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Data not found!",
+                    "info": "Data not found or empty.",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "code": "3D000",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Erro de conexão!",
+                    "info": "Falha ao tentar conectar com o banco de dados.",
+                    "type": "danger"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Error connect!",
+                    "info": "Couldn't connect to database.",
+                    "type": "danger"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "code": "suc-0001",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Exclusão realizada.",
+                    "info": "Itens removindos com sucesso.",
+                    "type": "success"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Deletion done.",
+                    "info": "Delete item was realized with success.",
+                    "type": "success"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "code": "suc-0002",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Inclusão realizada.",
+                    "info": "Item incluído com sucesso.",
+                    "type": "success"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Insert done.",
+                    "info": "Insert item, was realized with success.",
+                    "type": "success"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "code": "ECONNREFUSED",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Conexão recusada!",
+                    "info": "Falha ao tentar conectar-se ao banco de dados ou a conexão foi recusada.",
+                    "type": "danger"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Connection refused!",
+                    "info": "Couldn't connect to database or connection refused.",
+                    "type": "danger"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "code": "suc-0003",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Conexão com o banco de dados.",
+                    "info": "Conexões com o banco de dados foi realizada com sucesso!",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Connected with database.",
+                    "info": "Database connection has been established with success!",
+                    "type": "info"
+                }
+            ]
+        }
+    ]
+}

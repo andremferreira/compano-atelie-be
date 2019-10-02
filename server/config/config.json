@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "compano_servico",
+    "database": "compano",
     "host": "127.0.0.1",
     "port": "5420",
     "dialect": "postgres",
@@ -19,7 +19,7 @@
   "test": {
     "username": "postgres",
     "password": "postgres",
-    "database": "compano_servico",
+    "database": "compano",
     "host": "127.0.0.1",
     "port": "5420",
     "dialect": "postgres",
@@ -36,7 +36,7 @@
   "production": {
     "username": "postgres",
     "password": "postgres",
-    "database": "compano_servico",
+    "database": "compano",
     "host": "127.0.0.1",
     "port": "5420",
     "dialect": "postgres",
