@@ -7,13 +7,12 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-
 // Configure message report data base
 const msgDb = fs.readFileSync(path.resolve(path.resolve(__dirname), '../../msg/db/db.json'), 'utf8')
 const dbMsg = JSON.parse(msgDb)
 
 // Define default language
-const dLang = 'en_US'
+const dLang = 'pt_BR'
 
 let sequelize;
 if (config.use_env_variable) {

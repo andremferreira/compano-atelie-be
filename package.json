@@ -5,7 +5,7 @@
   "main": "init.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec babel-node ./bin/www"
+    "dev": "set NODE_ENV=development&& nodemon --exec babel-node ./bin/www "
   },
   "repository": {
     "type": "git",
