@@ -1,18 +1,24 @@
+// ----------------------------------- SEQUELIZE MODULE IMPORT -----------------------
 const Usuario = require('../models').Usuario;
+// ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
 const fs = require('fs')
 const path = require('path')
-
-// Configure message report data base
+// ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
+const dtCurr = require('../factory/currentTimeStamp')
+// ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgDb = fs.readFileSync(path.resolve(path.resolve(__dirname), '../../msg/db/db.json'), 'utf8')
 const dbMsg = JSON.parse(msgDb)
-
-// Define default language
-const dLang = 'pt_BR'
-
-// CRUD
+// ----------------------------------- DEFAULT CONFIGURATION REPORT AND LANG ---------
+const dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../dConfig/config.json'), 'utf8')
+const config = JSON.parse(dConfig)
+const dLang = config.dConfig.dLang
+// const dLogActionRegister = config.dConfig.dLogActionRegister
+// const dLogRegisterTimeTransaction = config.dConfig.dLogRegisterTimeTransaction
+// const dSendError = config.dConfig.dSendError.active
+// const dSendErrorMail = config.dConfig.dSendError.email
+// ----------------------------------- CRUD ------------------------------------------
 module.exports = {
-    // List all 
-
+// ----------------------------------- LIST ALL --------------------------------------
     list(req, res) {
         return Usuario
             .findAll()
@@ -37,7 +43,7 @@ module.exports = {
                 }
             });
     },
-    // Find by id
+// ----------------------------------- FIND BY ID -------------------------------------
     getById(req, res) {
         return Usuario
             .findByPk(req.params.id)
@@ -57,10 +63,9 @@ module.exports = {
                     }
                     return res.status(404).send(errResp);
                 }
-                return res.status(200).send(group);
+                return res.status(200).send(usuario);
             })
             .catch((error) => {
-
                 for (var idKeyA in dbMsg.messages) {
                     if (dbMsg.messages[idKeyA].code == error.original.code) {
                         var codErrMsg = dbMsg.messages[idKeyA].msgObj
@@ -79,21 +84,30 @@ module.exports = {
                 }
             });
     },
-    // Add new 
+// ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
         return Usuario
             .create({
-                isn_father: req.body.isn_father || null,
-                isn_son: req.body.isn_son || null,
-                dsc_group: req.body.dsc_group,
-                flg_primal: req.body.flg_primal || false,
-                int_seq_group: req.body.int_seq_group || 1
+                vc_nome: req.body.vc_nome || null,
+                vc_sobrenome: req.body.vc_sobrenome || null,
+                nu_ddd: req.body.nu_ddd || null,
+                nu_celular: req.body.nu_celular || null,
+                vc_contato: req.body.vc_contato,
+                vc_email: req.body.vc_email || null,
+                nu_cpf: req.body.nu_cpf || null,
+                nu_cep: req.body.nu_cep,
+                vc_cidade: req.body.vc_cidade || null,
+                vc_estado: req.body.vc_estado || null,
+                vc_endereco: req.body.vc_endereco || null,
+                vc_endereco_numero: req.body.vc_endereco_numero || null,
+                vc_endereco_complemento: req.body.vc_endereco_complemento,
+                vc_aniversario: req.body.vc_aniversario || null,
+                bo_promocao: req.body.bo_promocao || false
             })
             .then((usuario) => {
-
                 return res.status(201).send({
                     success: true,
-                    message: `Insert item of ID: ${usuario.id_usuario} on users, was realized with success.`
+                    message: `Add register to Client ID: ${usuario.id_usuario} with success!`
                 })
             })
             .catch((error) => {
@@ -102,11 +116,10 @@ module.exports = {
                     message: error.original.detail
                 })
             })
-        // Configure sequence to next available position
-        // .then(() => { return Group.sequelize.query("SELECT SETVAL('cog.groups_isn_group_seq'::regclass, COALESCE((SELECT MAX(isn_group::INT) + 1 FROM cog.groups), 1), FALSE)")})
     },
-    // Update by id
+// ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
+        console.log(dtCurr.timestamp)
         return Usuario
             .findByPk(req.params.id)
             .then(usuario => {
@@ -125,15 +138,25 @@ module.exports = {
                     }
                     return res.status(404).send(errResp);
                 }
-                return usuario
+                return Usuario
                     .update({
-                        isn_father: req.body.isn_father || usuario.isn_father,
-                        isn_son: req.body.isn_son || usuario.isn_son,
-                        dsc_group: req.body.dsc_group || usuario.dsc_group,
-                        flg_primal: req.body.flg_primal || usuario.flg_primal,
-                        int_seq_group: req.body.int_seq_group || usuario.int_seq_group
+                        vc_nome: req.body.vc_nome || usuario.vc_nome,
+                        vc_sobrenome: req.body.vc_sobrenome || usuario.vc_sobrenome,
+                        nu_ddd: req.body.nu_ddd || usuario.nu_ddd,
+                        nu_celular: req.body.nu_celular || usuario.nu_celular,
+                        vc_contato: req.body.vc_contato || usuario.vc_contato,
+                        vc_email: req.body.vc_email || usuario.vc_email,
+                        nu_cpf: req.body.nu_cpf || usuario.nu_cpf,
+                        nu_cep: req.body.nu_cep || usuario.nu_cep,
+                        vc_cidade: req.body.vc_cidade || usuario.vc_cidade,
+                        vc_estado: req.body.vc_estado || usuario.vc_estado,
+                        vc_endereco: req.body.vc_endereco || usuario.vc_endereco,
+                        vc_endereco_numero: req.body.vc_endereco_numero || usuario.vc_endereco_numero,
+                        vc_endereco_complemento: req.body.vc_endereco_complemento || usuario.vc_endereco_complemento,
+                        vc_aniversario: req.body.vc_aniversario || usuario.vc_aniversario,
+                        dt_atualiacao: dtCurr.timestamp
                     })
-                    .then((usuario) => res.status(200).send(group))
+                    .then((usuario) => res.status(200).send(usuario))
                     .catch((error) => res.status(400).send(error));
             })
             .catch((error) => {
@@ -155,7 +178,7 @@ module.exports = {
                 }
             });
     },
-    // Remove by id
+// ----------------------------------- REMOVE BY ID ------------------------------------
     delete(req, res) {
         return Usuario
             .findByPk(req.params.id)
@@ -175,7 +198,7 @@ module.exports = {
                     }
                     return res.status(404).send(errResp);
                 }
-                return usuario
+                return Usuario
                     .destroy()
                     .then(() => {
                         for (var idKeyA in dbMsg.messages) {

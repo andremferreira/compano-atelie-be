@@ -1,11 +1,12 @@
 {
     "dConfig": {
         "dlang": "pt_BR",
-        "dLogActionRegister": "true",
-        "dLogRegisterTimeTransaction":"true",
+        "dLogActionRegister": true,
+        "dLogRegisterTimeTransaction": true,
         "dSendError": {
-            "active": "false",
+            "active": false,
             "email": "andremendesferreira@live.com"
-        }
+        },
+        "dShowHeaderToken": false
     }
 }
