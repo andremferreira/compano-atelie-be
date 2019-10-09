@@ -11,7 +11,7 @@ module.exports = {
       nu_ddd: 85,
       nu_celular: 999999999,
       vc_contato: 'CONTATO-TESTE-1',
-      vc_email: 'EMAIL@TESTE-1.com',
+      vc_email: 'EMAIL@TESTE-1.COM',
       nu_cpf: 31273587872,
       nu_cep: 60170000,
       vc_cidade: 'FORTALEZA',

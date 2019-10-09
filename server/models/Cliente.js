@@ -1,110 +1,69 @@
-'use strict';
-const withDateNoTz = require('sequelize-date-no-tz-postgres')
 const Sequelize = require('sequelize')
-const seq = withDateNoTz(Sequelize)
+const withDateNoTz = require('sequelize-date-no-tz-postgres')
 module.exports = (sequelize, DataTypes) => {
+  const seq = withDateNoTz(Sequelize)
   const Cliente = sequelize.define('Cliente', {
       id_cliente: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
       },
       vc_nome: {
         allowNull: false,
-        type: Sequelize.STRING(50),
-        validate: {
-          len: [3, 50],
-          msg: "Only allow values with length between 3 and 50 characters."
-        },
+        type: DataTypes.STRING(50),
       },
       vc_sobrenome: {
         allowNull: false,
-        type: Sequelize.STRING(100),
-        validate: {
-          len: [5, 100],
-          msg: "Only allow values with length between 5 and 100 characters."
-        },
+        type: DataTypes.STRING(100),
       },
       nu_ddd: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
       },
       nu_celular: {
         allowNull: false,
-        type: Sequelize.BIGINT,
+        type: DataTypes.BIGINT,
       },
       vc_contato: {
-        type: Sequelize.STRING(30),
-        validate: {
-          len: [3, 30],
-          msg: "Only allow values with length between 3 and 30 characters."
-        },
+        type: DataTypes.STRING(30),
       },
       vc_email: {
         unique: true,
-        type: Sequelize.STRING(100),
-        validate: {
-          len: [10, 100],
-          msg: "Only allow values with length between 10 and 100 characters."
-        },
+        type: DataTypes.STRING(100),
       },
       nu_cpf: {
         allowNull: false,
         unique: true,
-        type: Sequelize.BIGINT,
+        type: DataTypes.BIGINT,
       },
       nu_cep: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
       },
       vc_cidade: {
         allowNull: false,
-        type: Sequelize.STRING(50),
-        validate: {
-          len: [5, 50],
-          msg: "Only allow values with length between 5 and 50 characters."
-        },
+        type: DataTypes.STRING(50),
       },
       vc_estado: {
         allowNull: false,
-        type: Sequelize.STRING(50),
-        validate: {
-          len: [5, 50],
-          msg: "Only allow values with length between 5 and 50 characters."
-        },
+        type: DataTypes.STRING(50),
       },
       vc_endereco: {
         allowNull: false,
-        type: Sequelize.STRING(100),
-        validate: {
-          len: [5, 100],
-          msg: "Only allow values with length between 5 and 100 characters."
-        },
+        type: DataTypes.STRING(100),
       },
       vc_endereco_numero: {
         allowNull: false,
-        type: Sequelize.STRING(10),
-        validate: {
-          len: [2, 10],
-          msg: "Only allow values with length between 2 and 10 characters."
-        },
+        type: DataTypes.STRING(10),
       },
       vc_endereco_complemento: {
-        type: Sequelize.STRING(100),
-        validate: {
-          len: [4, 100],
-          msg: "Only allow values with length between 4 and 100 characters."
-        },
+        type: DataTypes.STRING(100),
       },
       vc_aniversario: {
-        type: Sequelize.STRING(5),
-        validate: {
-          len: [5],
-          msg: "Only allow values with 5 characters."
-        },
+        type: DataTypes.STRING(5),
       }, 
       bo_promocao: {
-        type: Sequelize.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
       dt_cadastro: {

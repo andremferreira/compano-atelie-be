@@ -1,8 +1,10 @@
+// ----------------------------------- SEQUELIZE MODULE IMPORT -----------------------
+const Cliente = require('../models').Cliente;
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
 const fs = require('fs')
 const path = require('path')
-// ----------------------------------- SEQUELIZE MODULE IMPORT -----------------------
-const Cliente = require('../models/index').Cliente;
+// ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
+const dtCurr = require('../factory/currentTimeStamp')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgDb = fs.readFileSync(path.resolve(path.resolve(__dirname), '../../msg/db/db.json'), 'utf8')
 const dbMsg = JSON.parse(msgDb)
@@ -14,10 +16,6 @@ const dLang = config.dConfig.dLang
 // const dLogRegisterTimeTransaction = config.dConfig.dLogRegisterTimeTransaction
 // const dSendError = config.dConfig.dSendError.active
 // const dSendErrorMail = config.dConfig.dSendError.email
-// ----------------------------------- SEQUELIZE OBJ DATE NO TIME ZONE ---------------
-const withDateNoTz = require('sequelize-date-no-tz-postgres')
-const Sequelize = require('sequelize')
-const seq = withDateNoTz(Sequelize)
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
 // ----------------------------------- LIST ALL --------------------------------------
@@ -94,21 +92,22 @@ module.exports = {
                 vc_sobrenome: req.body.vc_sobrenome || null,
                 nu_ddd: req.body.nu_ddd || null,
                 nu_celular: req.body.nu_celular || null,
-                vc_contato: req.body.vc_contato || null,
+                vc_contato: req.body.vc_contato,
                 vc_email: req.body.vc_email || null,
                 nu_cpf: req.body.nu_cpf || null,
-                nu_cep: req.body.nu_cep || null,
+                nu_cep: req.body.nu_cep,
                 vc_cidade: req.body.vc_cidade || null,
                 vc_estado: req.body.vc_estado || null,
                 vc_endereco: req.body.vc_endereco || null,
                 vc_endereco_numero: req.body.vc_endereco_numero || null,
-                vc_endereco_complemento: req.body.vc_endereco_complemento || null,
-                vc_aniversario: req.body.vc_aniversario || false,
+                vc_endereco_complemento: req.body.vc_endereco_complemento,
+                vc_aniversario: req.body.vc_aniversario || null,
+                bo_promocao: req.body.bo_promocao || false
             })
             .then((cliente) => {
                 return res.status(201).send({
                     success: true,
-                    message: `Insert register "ID": ${cliente.id_usuario} to users with success!`
+                    message: `Add register to Client ID: ${cliente.id_cliente} with success!`
                 })
             })
             .catch((error) => {
@@ -120,6 +119,7 @@ module.exports = {
     },
 // ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
+        console.log(dtCurr.timestamp)
         return Cliente
             .findByPk(req.params.id)
             .then(cliente => {
@@ -154,7 +154,7 @@ module.exports = {
                         vc_endereco_numero: req.body.vc_endereco_numero || cliente.vc_endereco_numero,
                         vc_endereco_complemento: req.body.vc_endereco_complemento || cliente.vc_endereco_complemento,
                         vc_aniversario: req.body.vc_aniversario || cliente.vc_aniversario,
-                        dt_atualiacao: seq.fn('now')
+                        dt_atualiacao: dtCurr.timestamp
                     })
                     .then((cliente) => res.status(200).send(cliente))
                     .catch((error) => res.status(400).send(error));
