@@ -42,13 +42,13 @@ module.exports = {
       },
       vc_senha: {
         allowNull: false,
-        type: Sequelize.STRING(32)
+        type: Sequelize.STRING(64)
       },
       tx_imagem: {
         type: Sequelize.TEXT
       },
       vc_reset_senha: {
-        type: Sequelize.STRING(32)
+        type: Sequelize.STRING(64)
       },
       dt_exp_reset: {
         type: sequelize.DATE_NO_TZ
