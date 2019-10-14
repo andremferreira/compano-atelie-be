@@ -107,7 +107,7 @@ module.exports = {
             .then((cliente) => {
                 return res.status(201).send({
                     success: true,
-                    message: `Add register to Client ID: ${cliente.id_cliente} with success!`
+                    message: `Add register to "Client" with ID: ${cliente.id_cliente}!`
                 })
             })
             .catch((error) => {

@@ -2,6 +2,7 @@
 const auth = require('../../auth/userAuth')
 // ----------------------------------- SEQUELIZE CONTROLLER IMPORT -----------------------
 const clienteController = require('../controllers/Cliente')
+const usuarioController = require('../controllers/Usuario')
 // ----------------------------------- IMPORT EXPRESS TO CONFIG ROUTE --------------------
 const express = require('express')
 const ProtectedRoutes = express.Router()
@@ -45,13 +46,14 @@ module.exports = (app) => {
             message: 'Serviço inexistente!'
         })
     })
-// ----------------------------------- ROUTE OF CRUD CLIENT ------------------------------
+// ----------------------------------- ROUTE OF CRUD CLIENTES ----------------------------
     ProtectedRoutes.get('/clientes', clienteController.list)
     ProtectedRoutes.get('/cliente/:id', clienteController.getById)
     ProtectedRoutes.post('/cliente', clienteController.add);
     ProtectedRoutes.put('/cliente/:id', clienteController.update);
 // ---------------------------------------------------------------------------------------
-    ProtectedRoutes.get('/cryptopass', ( req, res)=>{
+    // TESTE CRIPTO VALUE AND COMPARE
+    ProtectedRoutes.get('/cryptopass', (req, res)=>{
         // let secretHex = bcrypt.genSalt(Buffer.from('@SolutIon0864!*')) //Buffer.from('@SolutIon0864!*') 
         // console.log(secretHex)
         let salt = bcrypt.genSaltSync()
@@ -64,5 +66,8 @@ module.exports = (app) => {
             passwordHash: passwordHash,
             comparar: compare,
         })
-    } )
+    })
+// ----------------------------------- ROUTE OF CRUD USUARIOS ----------------------------
+    ProtectedRoutes.get('/usuarios', usuarioController.list)
+    ProtectedRoutes.get('/usuario/:id', usuarioController.getById)
 };

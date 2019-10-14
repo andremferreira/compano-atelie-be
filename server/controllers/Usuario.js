@@ -90,24 +90,16 @@ module.exports = {
             .create({
                 vc_nome: req.body.vc_nome || null,
                 vc_sobrenome: req.body.vc_sobrenome || null,
-                nu_ddd: req.body.nu_ddd || null,
-                nu_celular: req.body.nu_celular || null,
-                vc_contato: req.body.vc_contato,
                 vc_email: req.body.vc_email || null,
-                nu_cpf: req.body.nu_cpf || null,
-                nu_cep: req.body.nu_cep,
-                vc_cidade: req.body.vc_cidade || null,
-                vc_estado: req.body.vc_estado || null,
-                vc_endereco: req.body.vc_endereco || null,
-                vc_endereco_numero: req.body.vc_endereco_numero || null,
-                vc_endereco_complemento: req.body.vc_endereco_complemento,
-                vc_aniversario: req.body.vc_aniversario || null,
-                bo_promocao: req.body.bo_promocao || false
+                vc_senha: req.body.vc_senha || null,
+                tx_imagem: req.body.nu_cep || null,
+                vc_reset_senha: req.body.vc_reset_senha || null,
+                dt_exp_reset: req.body.dt_exp_reset || null,
             })
             .then((usuario) => {
                 return res.status(201).send({
                     success: true,
-                    message: `Add register to Client ID: ${usuario.id_usuario} with success!`
+                    message: `Add register to user with ID: ${usuario.id_usuario}!`
                 })
             })
             .catch((error) => {
