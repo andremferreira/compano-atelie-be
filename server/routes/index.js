@@ -6,6 +6,7 @@ const usuarioController = require('../controllers/Usuario')
 // ----------------------------------- IMPORT EXPRESS TO CONFIG ROUTE --------------------
 const express = require('express')
 const ProtectedRoutes = express.Router()
+const OpenRoutes = express.Router()
 // ----------------------------------- IMPORT BCRYPT TO COMPARE HASH ---------------------
 const bcrypt = require('bcrypt')
 const Secret = 'secret'
@@ -19,31 +20,30 @@ const config = JSON.parse(dConfig)
 const showHToken = Boolean(config.dConfig.dShowHeaderToken)
 // ----------------------------------- APP REQUISITION METHODS ---------------------------
 module.exports = (app) => {
+
+// ----------------------------------- DEFAULT RETURN WITHOUT DEFINE ROUTE ---------------
+    app.get('', (req, res)=>{
+        return res.status(403).send({
+            message: 'Service listen activate.'
+        })
+    })
+// ----------------------------------- TESTING OPEN API EXPRESS ROUTE ----------------------------
+    app.use('/oapi', OpenRoutes)
+    OpenRoutes.get('', (req, res, next)=>{
+        return res.status(200).send({
+            message: 'Express works open api defined!'
+        })
+    })
 // ----------------------------------- HELP TO GENERATION TOKEN  -------------------------
     ProtectedRoutes.use((req, res, next) => {
-    if (process.env.NODE_ENV = 'development' && showHToken) {
-        console.log('Set development configuration!')
-        let usuarios = [{
-            id_usuario: 1,
-            vc_email: 'teste@teste.com',
-            vc_password: 'TESTE!123@'}]
-        let devTolk = auth.createIdToken(usuarios, true)
-        console.log(`Using key:"access-token" \n Value:"${devTolk}"`)
-        }
         return auth.verifyToken(req, res, next)
     })
 // ----------------------------------- APPLY THE PROTECTION ON API -----------------------
     app.use('/api', ProtectedRoutes)
 // ----------------------------------- VERIFICATION OF START WEBSERVICE ------------------
-    ProtectedRoutes.get('/teste', (req, res)=>{
+    ProtectedRoutes.get('/teste', (req, res, next)=>{
         return res.status(200).send({
-            message: 'Entrou em rota projegida dentro da api!'
-        })
-    })
-// ----------------------------------- DEFAULT RETURN WITHOUT DEFINE ROUTE ---------------
-    ProtectedRoutes.get('', (req, res)=>{
-        return res.status(403).send({
-            message: 'Serviço inexistente!'
+            message: 'Return with protected route!'
         })
     })
 // ----------------------------------- ROUTE OF CRUD CLIENTES ----------------------------

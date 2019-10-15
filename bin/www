@@ -1,9 +1,9 @@
 const http = require('http');
 const app = require('../init');
-const pt = 'listPort' 
-const Secret = 'secret'
-const port = require('../config/.config')[pt]
-const secret = require('../config/.config')[Secret]
+const pt = 'listPort' ;
+const Secret = 'secret';
+const port = require('../config/.config')[pt];
+const secret = require('../config/.config')[Secret];
 // set secret key configuration
 app.set('Secret', secret);
 // set webservice port configuration
@@ -11,5 +11,6 @@ app.set('port', port);
 // create server
 const server = http.createServer(app);
 server.listen(port, () => {
-    console.log(`Listen on port ${port}`)
+    //console.log(`Listen on port ${port}`);
 });
+module.exports = server;
