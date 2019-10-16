@@ -26,20 +26,20 @@ describe('Loading express..', function () {
     afterEach(function () {
         server.close()
     })
-    it(`Responds forbidden(403), when request to slash (url="http://localhost:${port}");`, function testSlash(done) {
+    it(`Responds forbidden(403), when request to slash (GET: url="http://localhost:${port}");`, function testSlash(done) {
         request(server)
             .get('/')
             .expect(403, done)
     })
     // ----------------------------------- TEST OPEN ROUTE IF WORK -----------------------
-    it(`Try to access open route on path "/oapi";`, function testOpenRoute(done) {
+    it(`Try to access open route on path "GET: /oapi";`, function testOpenRoute(done) {
         request(server)
             .get('/oapi/')
             .expect(200, done)
 
     })
     // ----------------------------------- TEST ACCESS PROTECTED ROUTE WITHOUT AUTH -------
-    it(`Try to access without permission on route in path "/api";`, function testProtectRoute(done) {
+    it(`Try to access without permission on route in path "GET: /api";`, function testProtectRoute(done) {
         request(server)
             .get('/api/')
             .expect(403, done)
@@ -54,16 +54,32 @@ describe('Initialize client test..', function () {
     afterEach(function () {
         server.close()
     })
-    it(`Try getClientList, return a json list on route "/api/clientes";`, function testListClient(done) {
+    it(`Try getClientList, return a json list on route "GET: /api/clientes";`, function testListClient(done) {
         request(server)
             .get('/api/clientes')
             .set('access-token', devToken)
             .expect(200, done)
     })
-    it(`Try getByIdClient, return a client with id_clientes: 1 on route "/api/cliente/1";`, function testListClient(done) {
+    it(`Try getByIdClient, return a client with id_clientes: 1 on route "GET: /api/cliente/1";`, function testListClient(done) {
         request(server)
             .get('/api/cliente/1')
             .set('access-token', devToken)
-            .expect(200, done)
+            .expect(200)
+            .end(function(err,res){
+                if (err) throw err;
+                console.log(res.text)
+                done()
+            })
+    })
+    it(`Try addClient, register new client on route "POST: /api/cliente";`, function testListClient(done) {
+        request(server)
+            .get('/api/cliente/1')
+            .set('access-token', devToken)
+            .expect(400)
+            .end(function(err,res){
+                if (err) throw err;
+                // console.log(res.text)
+                done()
+            })
     })
 })
