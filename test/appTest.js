@@ -5,15 +5,17 @@ const port = require('../config/.config')[pt];
 const request = require('supertest')
 const auth = require('../auth/userAuth')
 // ----------------------------------- CONFIGURE USER TO PROTECTED API ACCESS ---------
+//*
+// *********************************** TODO: MAKE FACTOR TO RETURN THIS INFORMATION **
 const usuarios = [{
     id_usuario: 1,
     vc_email: 'teste@teste.com',
     vc_password: 'TESTE!123@'
 }]
 const devTolk = auth.createIdToken(usuarios, true)
-console.log(`Using key:"access-token" \n Value:"${devTolk}"`)
+//*/
 // ----------------------------------- TEST LOADING EXPRESS SERVER --------------------
-describe('Loading express', function () {
+describe('Loading express..', function () {
     var server
     beforeEach(function () {
         server = require('../bin/www');
@@ -26,7 +28,6 @@ describe('Loading express', function () {
             .get('/')
             .expect(403, done)
     })
-
     // ----------------------------------- TEST OPEN ROUTE IF WORK -----------------------
     it(`Try to access open route on path "/oapi";`, function testOpenRoute(done) {
         request(server)
@@ -35,9 +36,31 @@ describe('Loading express', function () {
 
     })
     // ----------------------------------- TEST ACCESS PROTECTED ROUTE WITHOUT AUTH -------
-    it(`Try to access without permission on route on path "/api";`, function testOpenRoute(done) {
+    it(`Try to access without permission on route in path "/api";`, function testProtectRoute(done) {
         request(server)
             .get('/api/')
             .expect(403, done)
+    })
+})
+// ----------------------------------- TEST CLIENT ---------------------------------------
+describe('Initialize client test..', function () {
+    var server
+    beforeEach(function () {
+        server = require('../bin/www');
+    })
+    afterEach(function () {
+        server.close()
+    })
+    it(`Try to access without permission on route in path "/api/clientes";`, function testListClient(done) {
+        request(server)
+            .get('/api/clientes')
+            .set('access-token', devTolk)
+            .expect(200, done)
+    })
+    it(`Try getByIdClient, return a client with id_clientes: 1;`, function testListClient(done) {
+        request(server)
+            .get('/api/cliente/1')
+            .set('access-token', devTolk)
+            .expect(200, done)
     })
 })

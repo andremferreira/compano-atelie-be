@@ -139,6 +139,26 @@
                     "type": "info"
                 }
             ]
+        },
+        {
+            "id": 8,
+            "code": "usr-0001",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Perfil de usuário.",
+                    "info": "Iniciando aplicação no perfil: ",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "User type.",
+                    "info": "Start application on profile: ",
+                    "type": "info"
+                }
+            ]
         }
     ]
 }

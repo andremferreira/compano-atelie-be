@@ -12,12 +12,12 @@ const bcrypt = require('bcrypt')
 const Secret = 'secret'
 const secret = require('../../config/.config')[Secret]
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
-const fs = require('fs')
-const path = require('path')
+// const fs = require('fs')
+// const path = require('path')
 // ----------------------------------- DEFAULT CONFIGURATION REPORT AND LANG ---------
-const dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../dConfig/config.json'), 'utf8')
-const config = JSON.parse(dConfig)
-const showHToken = Boolean(config.dConfig.dShowHeaderToken)
+// const dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../dConfig/config.json'), 'utf8')
+// const config = JSON.parse(dConfig)
+// const showHToken = Boolean(config.dConfig.dShowHeaderToken)
 // ----------------------------------- APP REQUISITION METHODS ---------------------------
 module.exports = (app) => {
 

@@ -9,6 +9,7 @@
     "operatorAliases": "false",
     "freezeTableName": "true",
     "migrationStorageTableName": "sequelizes",
+    "logging": true,
     "pool": {
       "max": 5,
       "min": 0,
@@ -26,6 +27,7 @@
     "operatorAliases": "false",
     "freezeTableName": "true",
     "migrationStorageTableName": "sequelizes",
+    "logging": false,
     "pool": {
       "max": 5,
       "min": 0,
@@ -43,6 +45,7 @@
     "operatorAliases": "false",
     "freezeTableName": "true",
     "migrationStorageTableName": "sequelizes",
+    "logging": false,
     "pool": {
       "max": 5,
       "min": 0,
