@@ -1,6 +1,6 @@
 {
     "dConfig": {
-        "dlang": "pt_BR",
+        "dlang": "en_US",
         "dLogActionRegister": true,
         "dLogRegisterTimeTransaction": true,
         "dSendError": {

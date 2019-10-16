@@ -4,6 +4,9 @@ const port = require('../config/.config')[pt];
 // ----------------------------------- INITIAL MOCHA WITH SUPERTEST -------------------
 const request = require('supertest')
 const auth = require('../auth/userAuth')
+// const dToken = require('../server/factory/devTolk').getDevToken()
+// console.log(dToken)
+// const devTolk = dToken.getDevToken()
 // ----------------------------------- CONFIGURE USER TO PROTECTED API ACCESS ---------
 //*
 // *********************************** TODO: MAKE FACTOR TO RETURN THIS INFORMATION **
@@ -12,7 +15,7 @@ const usuarios = [{
     vc_email: 'teste@teste.com',
     vc_password: 'TESTE!123@'
 }]
-const devTolk = auth.createIdToken(usuarios, true)
+const devToken = auth.createIdToken(usuarios, true)
 //*/
 // ----------------------------------- TEST LOADING EXPRESS SERVER --------------------
 describe('Loading express..', function () {
@@ -51,16 +54,16 @@ describe('Initialize client test..', function () {
     afterEach(function () {
         server.close()
     })
-    it(`Try to access without permission on route in path "/api/clientes";`, function testListClient(done) {
+    it(`Try getClientList, return a json list on route "/api/clientes";`, function testListClient(done) {
         request(server)
             .get('/api/clientes')
-            .set('access-token', devTolk)
+            .set('access-token', devToken)
             .expect(200, done)
     })
-    it(`Try getByIdClient, return a client with id_clientes: 1;`, function testListClient(done) {
+    it(`Try getByIdClient, return a client with id_clientes: 1 on route "/api/cliente/1";`, function testListClient(done) {
         request(server)
             .get('/api/cliente/1')
-            .set('access-token', devTolk)
+            .set('access-token', devToken)
             .expect(200, done)
     })
 })

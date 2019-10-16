@@ -54,7 +54,7 @@ if (config.use_env_variable) {
           }
         }
       }
-      console.log(msgReport.info)
+      if (env !== 'test') console.log(msgReport.info)
     })
     .catch(err => {
       for (var idKeyA in dbMsg.messages) {
