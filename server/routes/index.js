@@ -48,9 +48,12 @@ module.exports = (app) => {
     })
 // ----------------------------------- ROUTE OF CRUD CLIENTES ----------------------------
     ProtectedRoutes.get('/clientes', clienteController.list)
-    ProtectedRoutes.get('/cliente/:id', clienteController.getById)
+    ProtectedRoutes.get('/cliente/id/:id', clienteController.getById)
+    ProtectedRoutes.get('/cliente/email/:email', clienteController.getByEmail)
     ProtectedRoutes.post('/cliente', clienteController.add);
-    ProtectedRoutes.put('/cliente/:id', clienteController.update);
+    ProtectedRoutes.put('/cliente/id/:id', clienteController.update);
+    ProtectedRoutes.delete('/cliente/id/:id', clienteController.delete);
+    ProtectedRoutes.delete('/cliente/email/:email', clienteController.deleteByEmail);
 // ---------------------------------------------------------------------------------------
     // TESTE CRIPTO VALUE AND COMPARE
     ProtectedRoutes.get('/cryptopass', (req, res)=>{

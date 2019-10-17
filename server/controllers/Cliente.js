@@ -18,7 +18,7 @@ const dLang = config.dConfig.dLang
 // const dSendErrorMail = config.dConfig.dSendError.email
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
-// ----------------------------------- LIST ALL --------------------------------------
+    // ----------------------------------- LIST ALL --------------------------------------
     list(req, res) {
         return Cliente
             .findAll()
@@ -43,7 +43,7 @@ module.exports = {
                 }
             });
     },
-// ----------------------------------- FIND BY ID -------------------------------------
+    // ----------------------------------- FIND BY ID -------------------------------------
     getById(req, res) {
         return Cliente
             .findByPk(req.params.id)
@@ -84,7 +84,53 @@ module.exports = {
                 }
             });
     },
-// ----------------------------------- ADD NEW -----------------------------------------
+    // ----------------------------------- FIND BY EMAIL -------------------------------------
+    getByEmail(req, res, condition) {
+        condition = {
+            where: {
+                vc_email: req.params.email
+            }
+        }
+        return Cliente
+            .findAll(condition)
+            .then((cliente) => {
+                if (!cliente) {
+                    for (var idKeyA in dbMsg.messages) {
+                        // MSG NO RESULT - CODE: err-0002
+                        if (dbMsg.messages[idKeyA].code == 'err-0002') {
+                            var codErrMsg = dbMsg.messages[idKeyA].msgObj
+                            var lang = req.query.lang || dLang
+                            for (var idkeyB in codErrMsg) {
+                                if (codErrMsg[idkeyB].lang == lang) {
+                                    var errResp = codErrMsg[idkeyB]
+                                }
+                            }
+                        }
+                    }
+                    return res.status(404).send(errResp);
+                }
+                return res.status(200).send(cliente);
+            })
+            .catch((error) => {
+                for (var idKeyA in dbMsg.messages) {
+                    if (dbMsg.messages[idKeyA].code == error.original.code) {
+                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
+                        var lang = req.query.lang || dLang
+                        for (var idkeyB in codErrMsg) {
+                            if (codErrMsg[idkeyB].lang == lang) {
+                                var errResp = codErrMsg[idkeyB]
+                            }
+                        }
+                    }
+                }
+                if (!errResp) {
+                    return res.status(400).send(error)
+                } else {
+                    return res.status(400).send(errResp)
+                }
+            });
+    },
+    // ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
         return Cliente
             .create({
@@ -117,7 +163,7 @@ module.exports = {
                 })
             })
     },
-// ----------------------------------- UPDATE BY ID ------------------------------------
+    // ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
         console.log(dtCurr.timestamp)
         return Cliente
@@ -178,7 +224,7 @@ module.exports = {
                 }
             });
     },
-// ----------------------------------- REMOVE BY ID ------------------------------------
+    // ----------------------------------- REMOVE BY ID ------------------------------------
     delete(req, res) {
         return Cliente
             .findByPk(req.params.id)
@@ -253,4 +299,84 @@ module.exports = {
                 }
             });
     },
+    // ----------------------------------- REMOVE BY ID ------------------------------------
+    deleteByEmail(req, res, condition) {
+        condition = {
+            where: {
+                vc_email: req.params.email
+            }
+        }
+        return Cliente
+            .findAll(condition)
+            .then(cliente => {
+                if (!cliente) {
+                    for (var idKeyA in dbMsg.messages) {
+                        // MSG - CODE: err-0002 - NO RESULT
+                        if (dbMsg.messages[idKeyA].code == 'err-0002') {
+                            var codErrMsg = dbMsg.messages[idKeyA].msgObj
+                            var lang = req.query.lang || dLang
+                            for (var idkeyB in codErrMsg) {
+                                if (codErrMsg[idkeyB].lang == lang) {
+                                    var errResp = codErrMsg[idkeyB]
+                                }
+                            }
+                        }
+                    }
+                    return res.status(404).send(errResp);
+                }
+                return Cliente
+                    .destroy(condition)
+                    .then(() => {
+                        for (var idKeyA in dbMsg.messages) {
+                            // MSG - CODE: suc-0001 - DELETE DONE
+                            if (dbMsg.messages[idKeyA].code == 'suc-0001') {
+                                var codErrMsg = dbMsg.messages[idKeyA].msgObj
+                                var lang = req.query.lang || dLang
+                                for (var idkeyB in codErrMsg) {
+                                    if (codErrMsg[idkeyB].lang == lang) {
+                                        var errResp = codErrMsg[idkeyB]
+                                    }
+                                }
+                            }
+                        }
+                        return res.status(204).send(errResp);
+                    })
+                    .catch((error) => {
+                        for (var idKeyA in dbMsg.messages) {
+                            if (dbMsg.messages[idKeyA].code == error.original.code) {
+                                var codErrMsg = dbMsg.messages[idKeyA].msgObj
+                                var lang = req.query.lang || dLang
+                                for (var idkeyB in codErrMsg) {
+                                    if (codErrMsg[idkeyB].lang == lang) {
+                                        var errResp = codErrMsg[idkeyB]
+                                    }
+                                }
+                            }
+                        }
+                        if (!errResp) {
+                            return res.status(400).send(error)
+                        } else {
+                            return res.status(400).send(errResp)
+                        }
+                    });
+            })
+            .catch((error) => {
+                for (var idKeyA in dbMsg.messages) {
+                    if (dbMsg.messages[idKeyA].code == error.original.code) {
+                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
+                        var lang = req.query.lang || dLang
+                        for (var idkeyB in codErrMsg) {
+                            if (codErrMsg[idkeyB].lang == lang) {
+                                var errResp = codErrMsg[idkeyB]
+                            }
+                        }
+                    }
+                }
+                if (!errResp) {
+                    return res.status(400).send(error)
+                } else {
+                    return res.status(400).send(errResp)
+                }
+            });
+    }
 }
