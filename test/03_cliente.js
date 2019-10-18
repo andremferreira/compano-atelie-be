@@ -7,6 +7,7 @@ const auth = require('../auth/userAuth')
 // ----------------------------------- CONFIGURE USER TO PROTECTED API ACCESS ---------
 //*
 // *********************************** TODO: MAKE FACTOR TO RETURN THIS INFORMATION **
+// *********************************** TODO: CREATE NEGATION CLASS TEST **************
 const usuarios = [{
     id_usuario: 1,
     vc_email: 'teste@teste.com',
@@ -36,12 +37,24 @@ describe('Initialize client test..', function () {
             .expect(200)
             .end(function (err, res) {
                 if (err) throw err;
-                console.log(res.text)
+                // console.log(res.text)
+                done()
+            })
+    })
+    it(`Try deleteClientById, return a client with id_clientes: 2 on route "DELETE: /api/cliente/id/1";`, function testListClient(done) {
+        request(server)
+            .delete('/api/cliente/id/1')
+            .set('access-token', devToken)
+            .expect(204)
+            .end(function (err, res) {
+                if (err) throw err;
+                // console.log(res.text)
                 done()
             })
     })
     it(`Try addClient, register new client on route "POST: /api/cliente";`, function testListClient(done, cliente) {
         cliente = {
+            id_cliente: 2,
             vc_nome: 'NOME-TESTE-2',
             vc_sobrenome: 'SOBRENOME-TESTE-2',
             nu_ddd: 99,
@@ -64,7 +77,7 @@ describe('Initialize client test..', function () {
             .expect(201)
             .end(function (err, res) {
                 if (err) throw (err);
-                console.log(res.text)
+                // console.log(res.text)
                 done()
             })
     })
@@ -75,7 +88,7 @@ describe('Initialize client test..', function () {
             .expect(200)
             .end(function(err,res){
                 if (err) throw err;
-                console.log(res.text)
+                // console.log(res.text)
                 done()
             })
     })

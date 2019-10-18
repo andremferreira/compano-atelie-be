@@ -72,7 +72,6 @@ if (config.use_env_variable) {
       console.error(`ErrorID: ${idError}\n`, errResp)
     })
 }
-
 fs
   .readdirSync(__dirname)
   .filter(file => {

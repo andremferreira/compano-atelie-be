@@ -10,8 +10,8 @@ const msgDb = fs.readFileSync(path.resolve(path.resolve(__dirname), '../../msg/d
 const dbMsg = JSON.parse(msgDb)
 // ----------------------------------- DEFAULT CONFIGURATION REPORT AND LANG ---------
 const dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../dConfig/config.json'), 'utf8')
-const config = JSON.parse(dConfig)
-const dLang = config.dConfig.dLang
+const dconfig = JSON.parse(dConfig)
+const dLang = dconfig.dConfig.dlang
 // const dLogActionRegister = config.dConfig.dLogActionRegister
 // const dLogRegisterTimeTransaction = config.dConfig.dLogRegisterTimeTransaction
 // const dSendError = config.dConfig.dSendError.active
@@ -225,7 +225,12 @@ module.exports = {
             });
     },
     // ----------------------------------- REMOVE BY ID ------------------------------------
-    delete(req, res) {
+    delete(req, res, condition) {
+        condition = {
+            where: {
+                id_cliente: req.params.id
+            }
+        }
         return Cliente
             .findByPk(req.params.id)
             .then(cliente => {
@@ -245,7 +250,7 @@ module.exports = {
                     return res.status(404).send(errResp);
                 }
                 return Cliente
-                    .destroy()
+                    .destroy(condition)
                     .then(() => {
                         for (var idKeyA in dbMsg.messages) {
                             // MSG - CODE: suc-0001 - DELETE DONE
@@ -299,7 +304,7 @@ module.exports = {
                 }
             });
     },
-    // ----------------------------------- REMOVE BY ID ------------------------------------
+    // ----------------------------------- REMOVE BY EMAIL ------------------------------------
     deleteByEmail(req, res, condition) {
         condition = {
             where: {

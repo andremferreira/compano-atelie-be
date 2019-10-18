@@ -20,7 +20,6 @@ const secret = require('../../config/.config')[Secret]
 // const showHToken = Boolean(config.dConfig.dShowHeaderToken)
 // ----------------------------------- APP REQUISITION METHODS ---------------------------
 module.exports = (app) => {
-
 // ----------------------------------- DEFAULT RETURN WITHOUT DEFINE ROUTE ---------------
     app.get('', (req, res)=>{
         return res.status(403).send({

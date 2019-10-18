@@ -6,6 +6,7 @@ module.exports = {
       schemaDelimiter: '.',
       tableName: 'clientes'
     }, [{
+      id_cliente: 1,
       vc_nome: 'NOME-TESTE-1',
       vc_sobrenome: 'SOBRENOME-TESTE-1',
       nu_ddd: 85,
