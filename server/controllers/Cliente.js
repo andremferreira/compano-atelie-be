@@ -31,7 +31,31 @@ module.exports = {
                         for (var idkeyB in codErrMsg) {
                             if (codErrMsg[idkeyB].lang == lang) {
                                 var errResp = codErrMsg[idkeyB]
-                                console.log(errResp)
+                            }
+                        }
+                    }
+                }
+                if (!errResp) {
+                    return res.status(400).send(error)
+                } else {
+                    return res.status(400).send(errResp)
+                }
+            });
+    },
+    // ----------------------------------- COUNT ---------------------------------------
+    count(req, res) {
+        return Cliente
+            .findAndCountAll()
+            //.findAndCountAll({ offset: 10, limit: 2})
+            .then(cliente => {res.status(200).send({'count':cliente.count})})
+            .catch((error) => {
+                for (var idKeyA in dbMsg.messages) {
+                    if (dbMsg.messages[idKeyA].code == error.original.code) {
+                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
+                        var lang = req.query.lang || dLang
+                        for (var idkeyB in codErrMsg) {
+                            if (codErrMsg[idkeyB].lang == lang) {
+                                var errResp = codErrMsg[idkeyB]
                             }
                         }
                     }
@@ -144,6 +168,7 @@ module.exports = {
                 nu_cep: req.body.nu_cep,
                 vc_cidade: req.body.vc_cidade || null,
                 vc_estado: req.body.vc_estado || null,
+                vc_bairro: req.body.vc_bairro || null,
                 vc_endereco: req.body.vc_endereco || null,
                 vc_endereco_numero: req.body.vc_endereco_numero || null,
                 vc_endereco_complemento: req.body.vc_endereco_complemento,
@@ -196,6 +221,7 @@ module.exports = {
                         nu_cep: req.body.nu_cep || cliente.nu_cep,
                         vc_cidade: req.body.vc_cidade || cliente.vc_cidade,
                         vc_estado: req.body.vc_estado || cliente.vc_estado,
+                        vc_bairro: req.body.vc_bairro || cliente.vc_bairro,
                         vc_endereco: req.body.vc_endereco || cliente.vc_endereco,
                         vc_endereco_numero: req.body.vc_endereco_numero || cliente.vc_endereco_numero,
                         vc_endereco_complemento: req.body.vc_endereco_complemento || cliente.vc_endereco_complemento,

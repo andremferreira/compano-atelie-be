@@ -6,7 +6,6 @@ module.exports = {
       schemaDelimiter: '.',
       tableName: 'clientes'
     }, [{
-      id_cliente: 1,
       vc_nome: 'NOME-TESTE-1',
       vc_sobrenome: 'SOBRENOME-TESTE-1',
       nu_ddd: 85,
@@ -17,6 +16,7 @@ module.exports = {
       nu_cep: 60170000,
       vc_cidade: 'FORTALEZA',
       vc_estado: 'CEARA',
+      vc_bairro: 'MEIRELES',
       vc_endereco: 'AV. DESEMBARGADOR MOREIRA',
       vc_endereco_numero: '505',
       vc_endereco_complemento: 'APTO 3001',

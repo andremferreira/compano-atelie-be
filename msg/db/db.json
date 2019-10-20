@@ -128,7 +128,7 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Conexão com o banco de dados.",
-                    "info": "Conexões com o banco de dados foi realizada com sucesso!",
+                    "info": "Conexão com o banco de dados foi realizada com sucesso!",
                     "type": "info"
                 },
                 {
@@ -156,6 +156,186 @@
                     "lang": "en_US",
                     "title": "User type.",
                     "info": "Start application on profile: ",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "code": "tst-0001",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Teste express.",
+                    "info": "Iniciando express.. ",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "test Express.",
+                    "info": "Loading express.. ",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "code": "tst-0002",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Acesso negado!",
+                    "info": " Resposta proibida(403), ao requerir rota raiz (GET: url=\"http://localhost:%1\");",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Responds forbidden!",
+                    "info":  " Responds forbidden(403), when request to slash (GET: url=\"http://localhost:%1\");",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "code": "tst-0003",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Rota aberta!",
+                    "info": " Tentando acessar a rota aberta no caminho \"GET: /oapi\"",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Open route.",
+                    "info":  " Try to access open route on path \"GET: /oapi\"",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "code": "tst-0004",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Rota autenticada!",
+                    "info": " Tentando acessar rota protegida sem autenticação no caminho \"GET: /oapi\"",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Access route protected!",
+                    "info":  " Try to access without permission on route in path \"GET: /api\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "code": "tst-0005",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Iniciando sequelize..",
+                    "info": "Iniciando conexão com sequelize..",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Sequelize conection..",
+                    "info":  "Sequelize conection start..",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "code": "tst-0006",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Conectando sequelize..",
+                    "info": " Tentando conectar com o banco de dados utilizando sequelize.",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Sequelize conection..",
+                    "info":  " Try connect to database using sequelize.",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "code": "tst-0007",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Iniciando o teste na classe \"Cliente\".",
+                    "info": "Iniciando o teste da classe \"Cliente\".",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Start test on \"Cliente\" class.",
+                    "info":  "Start test on \"Cliente\" class.",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "code": "tst-0008",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getClientList.",
+                    "info": " Tente executar o método getClientList, esperando o retorno da lista de clientes na rota \"GET: /api/clientes\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getClientList.",
+                    "info":  " Try execute method getClientList and expect the return of clients list on route \"GET: /api/clientes\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "code": "tst-0009",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método clientCount.",
+                    "info": " Tente contar clientes, esperando o retorno da quantidade de clientes utilizando a rota \"GET: /api/clientes\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method clientCount.",
+                    "info":  " Try clients count, expect to return the quantity of clients using route \"GET: /api/clientes/qtd\";",
                     "type": "info"
                 }
             ]

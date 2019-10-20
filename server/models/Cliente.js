@@ -48,6 +48,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING(50),
       },
+      vc_bairro: {
+        allowNull: false,
+        type: DataTypes.STRING(50),
+      },
       vc_endereco: {
         allowNull: false,
         type: DataTypes.STRING(100),

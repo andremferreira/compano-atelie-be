@@ -1,33 +1,20 @@
 // ----------------------------------- DEFAULT CONFIGURATION EXPRESS PORT -------------
-const fs = require('fs')
-const path = require('path')
 const Sequelize = require('sequelize');
 const config = require('../server/config/config.json').test
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
-const msgDb = fs.readFileSync(path.resolve(path.resolve(__dirname), '../msg/db/db.json'), 'utf8')
-const dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../server/dConfig/config.json'), 'utf8')
-const dconfig = JSON.parse(dConfig)
-const dLang = dconfig.dConfig.dlang
-const dbMsg = JSON.parse(msgDb)
+// ----------------------------------- CONSOLE.LOG COLOR HELPER -----------------------
+const color = require('../server/factory/consoleLogColor')
+// ----------------------------------- MSG FACTORY SEND REPORT ------------------------
+const msgF  = require('../server/factory/msgFactory')
+// ----------------------------------- AJUST OF TEXT OUTPUT TAB SHOW ------------------
 const space = '  '
-// ----------------------------------- VALIDATION VARIABLE ---------------------------
-describe('Sequelize conection..', function () {
-    it('Try connect to database using sequelize', function testSlash(done) {
+// ----------------------------------- VALIDATION VARIABLE ----------------------------
+describe(msgF('tst-0005').title, function () {
+    it(color('f-yellow','└') + color('f-hidden', msgF('tst-0006').info), function testSlash(done) {
         sequelize
             .authenticate()
             .then(() => { 
-                for (var idKeyA in dbMsg.messages) {
-                    if (dbMsg.messages[idKeyA].code == "suc-0003") {
-                      var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                      var lang = dLang
-                      for (var idkeyB in codErrMsg) {
-                        if (codErrMsg[idkeyB].lang == lang) {
-                          var msgReport = codErrMsg[idkeyB]
-                        }
-                      }
-                    }
-                  }
-                  console.log(`\x1b[32m${space}${msgReport.info}\x1b[0m`)
+                console.log(color('f-green', space + msgF('suc-0003').info))
                 done() 
             })
             .catch(err => { if (!err) throw (err) })

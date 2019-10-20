@@ -47,6 +47,7 @@ module.exports = (app) => {
     })
 // ----------------------------------- ROUTE OF CRUD CLIENTES ----------------------------
     ProtectedRoutes.get('/clientes', clienteController.list)
+    ProtectedRoutes.get('/clientes/qtd', clienteController.count)
     ProtectedRoutes.get('/cliente/id/:id', clienteController.getById)
     ProtectedRoutes.get('/cliente/email/:email', clienteController.getByEmail)
     ProtectedRoutes.post('/cliente', clienteController.add);

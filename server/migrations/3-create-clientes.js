@@ -78,6 +78,14 @@ module.exports = {
           msg: "Only allow values with length between 5 and 50 characters."
         },
       },
+      vc_bairro: {
+        allowNull: false,
+        type: Sequelize.STRING(50),
+        validate: {
+          len: [5, 50],
+          msg: "Only allow values with length between 5 and 50 characters."
+        },
+      },
       vc_endereco: {
         allowNull: false,
         type: Sequelize.STRING(100),
