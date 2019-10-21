@@ -72,5 +72,6 @@ module.exports = (app) => {
     })
 // ----------------------------------- ROUTE OF CRUD USUARIOS ----------------------------
     ProtectedRoutes.get('/usuarios', usuarioController.list)
-    ProtectedRoutes.get('/usuario/:id', usuarioController.getById)
+    ProtectedRoutes.get('/usuarios/qtd', usuarioController.count)
+    ProtectedRoutes.get('/usuario/id/:id', usuarioController.getById)
 };

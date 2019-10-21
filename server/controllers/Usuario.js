@@ -43,6 +43,31 @@ module.exports = {
                 }
             });
     },
+    // ----------------------------------- COUNT ---------------------------------------
+    count(req, res) {
+        return Usuario
+            .findAndCountAll()
+            //.findAndCountAll({ offset: 10, limit: 2})
+            .then(usuario => {res.status(200).send({'count':usuario.count})})
+            .catch((error) => {
+                for (var idKeyA in dbMsg.messages) {
+                    if (dbMsg.messages[idKeyA].code == error.original.code) {
+                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
+                        var lang = req.query.lang || dLang
+                        for (var idkeyB in codErrMsg) {
+                            if (codErrMsg[idkeyB].lang == lang) {
+                                var errResp = codErrMsg[idkeyB]
+                            }
+                        }
+                    }
+                }
+                if (!errResp) {
+                    return res.status(400).send(error)
+                } else {
+                    return res.status(400).send(errResp)
+                }
+            });
+    },
 // ----------------------------------- FIND BY ID -------------------------------------
     getById(req, res) {
         return Usuario

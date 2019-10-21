@@ -287,15 +287,15 @@
                 {
                     "id": 1,
                     "lang": "pt_BR",
-                    "title": "Iniciando o teste na classe \"Cliente\".",
-                    "info": "Iniciando o teste da classe \"Cliente\".",
+                    "title": "Iniciando teste da classe \"Cliente\"..",
+                    "info": "Iniciando teste da classe \"Cliente\"..",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
-                    "title": "Start test on \"Cliente\" class.",
-                    "info":  "Start test on \"Cliente\" class.",
+                    "title": "Start test \"Cliente\" class..",
+                    "info":  "Start test \"Cliente\" class..",
                     "type": "info"
                 }
             ]
@@ -308,14 +308,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método getClientList.",
-                    "info": " Tente executar o método getClientList, esperando o retorno da lista de clientes na rota \"GET: /api/clientes\";",
+                    "info": " Tente listar clientes, esperando o retorno da lista de clientes na rota \"GET: /api/clientes\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method getClientList.",
-                    "info":  " Try execute method getClientList and expect the return of clients list on route \"GET: /api/clientes\";",
+                    "info":  " Try list clients, expect the return of clients list on route \"GET: /api/clientes\";",
                     "type": "info"
                 }
             ]
@@ -328,17 +328,277 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método clientCount.",
-                    "info": " Tente contar clientes, esperando o retorno da quantidade de clientes utilizando a rota \"GET: /api/clientes\";",
+                    "info": " Tente contar clientes, esperando o retorno da quantidade de clientes na rota \"GET: /api/clientes/qtd\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method clientCount.",
-                    "info":  " Try clients count, expect to return the quantity of clients using route \"GET: /api/clientes/qtd\";",
+                    "info":  " Try clients count, expect to return the quantity of clients on route \"GET: /api/clientes/qtd\";",
                     "type": "info"
                 }
             ]
-        }
+        },
+        {
+            "id": 18,
+            "code": "tst-0010",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método addClient.",
+                    "info": " Tente adicionar novo cliente, aguardando o retorno (statusCode:201) utilizando a rota \"POST: /api/cliente\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method addClient.",
+                    "info": " Try add new Client, expect to return (statusCode:201) on route \"POST: /api/cliente\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "code": "tst-0011",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getByIdClient.",
+                    "info": " Tente trazer cliente pelo código, aguardando o retorno das informações do cliente na rota \"GET: /api/cliente/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getByIdClient.",
+                    "info": " Try get client by id, expect to return the client information on route \"GET: /api/cliente/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "code": "tst-0012",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getByIdClientNeg.",
+                    "info": " Tente trazer cliente pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) no resultado, utilizando a rota \"GET: /api/cliente/id/999999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getByIdClientNeg.",
+                    "info": " Try get client by id %1(negation)%2, expect return (codeStatus:404) result, using route \"GET: /api/cliente/id/999999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "code": "tst-0013",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método deleteClientByEmail.",
+                    "info": " Tente remover cliente por e-mail, aguardando o retorno (codeStatus:204) na rota \"delete: /api/cliente/email/WOUTEMAIL@TESTE.COM\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method deleteClientByEmail.",
+                    "info": " Try delete client by e-mail, expect return (codeStatus:204) on route \"delete: /api/cliente/email/WOUTEMAIL@TESTE.COM\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "code": "tst-0014",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método deleteClientByEmailNeg.",
+                    "info": " Tente remover cliente por e-mail %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"delete: /api/cliente/email/WOUTEMAIL@TESTE.COM\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method deleteClientByEmailNeg.",
+                    "info": " Try delete client by e-mail %1(negation)%2, expect return (codeStatus:404) on route \"delete: /api/cliente/email/WOUTEMAIL@TESTE.COM\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "code": "tst-0015",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getClientByEmail.",
+                    "info": " Tente buscar cliente por e-mail, aguardando o retorno das informações do cliente na rota \"GET /api/cliente/email/EMAIL@TESTE-2.COM\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getClientByEmail.",
+                    "info": " Try get client by e-mail, expect to return the client response on route \"GET /api/cliente/email/EMAIL@TESTE-2.COM\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "code": "tst-0016",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getClientByEmailNeg.",
+                    "info": " Tente buscar cliente por e-mail %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"GET /api/cliente/email/EMAIL@TESTE-2.COM\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getClientByEmailNeg.",
+                    "info": " Try get client by e-mail %1(negation)%2, expect to return (codeStatus:404) on route \"GET /api/cliente/email/EMAIL@TESTE-2.COM\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 25,
+            "code": "tst-0017",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delClientById.",
+                    "info": " Tente remover cliente pelo código, aguardando o retorno (codeStatus:204) na rota \"DELETE /api/cliente/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delClientById.",
+                    "info": " Try delete client by id, expect to return (codeStatus:204) on route \"DELETE /api/cliente/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 26,
+            "code": "tst-0018",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delClientByIdNeg.",
+                    "info": " Tente remover cliente pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"DELETE /api/cliente/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delClientByIdNeg.",
+                    "info": " Try delete client by id %1(negation)%2, expect to return (codeStatus:404) on route \"DELETE /api/cliente/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 27,
+            "code": "tst-0019",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Iniciando teste da classe \"Usuario\"..",
+                    "info": "Iniciando teste da classe \"Usuario\"..",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Start test \"Usuario\" class..",
+                    "info":  "Start test \"Usuario\" class..",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 28,
+            "code": "tst-0020",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getUserList.",
+                    "info": " Tente listar usuários, esperando o retorno da lista de usuários na rota \"GET: /api/usuarios\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getUserList.",
+                    "info":  " Try list users, expect the return of users list on route \"GET: /api/usuarios\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 29,
+            "code": "tst-0021",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método userCount.",
+                    "info": " Tente contar usuarios, esperando o retorno da quantidade de usuarios na rota \"GET: /api/usuarios/qtd\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method userCount.",
+                    "info":  " Try users count, expect to return the quantity of users on route \"GET: /api/usuarios/qtd\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 30,
+            "code": "tst-0022",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getUserById.",
+                    "info": " Tente trazer usuário pelo código, aguardando o retorno das informações do usuário na rota \"GET: /api/usuario/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getUserById.",
+                    "info": " Try get user by id, expect to return the user information on route \"GET: /api/cliente/id/1\";",
+                    "type": "info"
+                }
+            ]
+        }              
     ]
 }

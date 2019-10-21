@@ -72,7 +72,7 @@ module.exports = {
         return Cliente
             .findByPk(req.params.id)
             .then((cliente) => {
-                if (!cliente) {
+                if (!cliente || Object.keys(cliente).length === 0) {
                     for (var idKeyA in dbMsg.messages) {
                         // MSG NO RESULT - CODE: err-0002
                         if (dbMsg.messages[idKeyA].code == 'err-0002') {
@@ -118,7 +118,7 @@ module.exports = {
         return Cliente
             .findAll(condition)
             .then((cliente) => {
-                if (!cliente) {
+                if (!cliente || Object.keys(cliente).length === 0) {
                     for (var idKeyA in dbMsg.messages) {
                         // MSG NO RESULT - CODE: err-0002
                         if (dbMsg.messages[idKeyA].code == 'err-0002') {
@@ -190,11 +190,11 @@ module.exports = {
     },
     // ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
-        console.log(dtCurr.timestamp)
+        // console.log(dtCurr.timestamp)
         return Cliente
             .findByPk(req.params.id)
             .then(cliente => {
-                if (!cliente) {
+                if (!cliente || Object.keys(cliente).length === 0 ) {
                     for (var idKeyA in dbMsg.messages) {
                         // MSG - CODE: err-0002 - NO RESULT
                         if (dbMsg.messages[idKeyA].code == 'err-0002') {
@@ -251,16 +251,11 @@ module.exports = {
             });
     },
     // ----------------------------------- REMOVE BY ID ------------------------------------
-    delete(req, res, condition) {
-        condition = {
-            where: {
-                id_cliente: req.params.id
-            }
-        }
+    delete(req, res) {
         return Cliente
             .findByPk(req.params.id)
             .then(cliente => {
-                if (!cliente) {
+                if (!cliente || Object.keys(cliente).length === 0) {
                     for (var idKeyA in dbMsg.messages) {
                         // MSG - CODE: err-0002 - NO RESULT
                         if (dbMsg.messages[idKeyA].code == 'err-0002') {
@@ -340,7 +335,7 @@ module.exports = {
         return Cliente
             .findAll(condition)
             .then(cliente => {
-                if (!cliente) {
+                if (!cliente || Object.keys(cliente).length === 0) {
                     for (var idKeyA in dbMsg.messages) {
                         // MSG - CODE: err-0002 - NO RESULT
                         if (dbMsg.messages[idKeyA].code == 'err-0002') {
