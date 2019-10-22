@@ -11,14 +11,30 @@ const msgF  = require('../server/factory/msgFactory')
 let msgS = msgF('tst-0001').info
 describe(color('f-yellow','► ') + color('default', msgS), function () {
     var server
+
     beforeEach(function () {
         server = require('../bin/www');
     })
     afterEach(function () {
         server.close()
     })
-    msgS =  msgF('tst-0002').info
-    it(color('f-yellow','├') + color('f-hidden', msgS.replace('%1',port)), function testSlash(done) {
+
+    async function msg(){
+        return new Promise(function(resolve, reject){
+            msgS = msgF('tst-0002').info
+            msgS = msgS.replace('%1',port)
+            if(!msgS || Object.keys(msgS).length !== 0 ) { resolve(msgS) }
+            else { reject(new Error('Stop test, no database message report!') ) }
+        })
+    }
+
+    async function msgA(){
+        msgS = await msg()
+    }
+
+    msgA()
+
+    it(color('f-yellow','├') + color('f-hidden', msgS ), function testSlash(done) {
         request(server)
             .get('/')
             .expect(403, done)

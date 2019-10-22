@@ -1,5 +1,5 @@
 // ----------------------------------- DEFAULT CONFIGURATION REPORT AND LANG ---------
-module.exports = function (cod) {
+module.exports = function (cod, lang) {
     // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
     let fs = require('fs')
     let path = require('path')
@@ -10,13 +10,15 @@ module.exports = function (cod) {
     let dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../dConfig/config.json'), 'utf8')
     let dconfig = JSON.parse(dConfig)
     let dLang = dconfig.dConfig.dlang
+    // ----------------------------------- VERIFY LAG VARIABLE --------------------------
+    if (!lang) lang = dLang
+    // ----------------------------------- VERIFY COD VARIABLE --------------------------
     if (!cod) {
         callback(new Error('Need a code to return information!'));
     } else {
         for (var idKeyA in dbMsg.messages) {
             if (dbMsg.messages[idKeyA].code == cod) {
                 var codMsg = dbMsg.messages[idKeyA].msgObj
-                var lang = dLang
                 for (var idkeyB in codMsg) {
                     if (codMsg[idkeyB].lang == lang) {
                         var msgResp = codMsg[idkeyB]

@@ -88,15 +88,17 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Inclusão realizada.",
-                    "info": "Item incluído com sucesso.",
-                    "type": "success"
+                    "info": "Dados adicionados no código: %1, com sucesso.",
+                    "type": "success",
+                    "success": true
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
-                    "title": "Insert done.",
-                    "info": "Insert item, was realized with success.",
-                    "type": "success"
+                    "title": "Data registered!",
+                    "info": "Data added on ID: %1, with success.",
+                    "type": "success",
+                    "success": true
                 }
             ]
         },

@@ -8,6 +8,7 @@ const dtCurr = require('../factory/currentTimeStamp')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgDb = fs.readFileSync(path.resolve(path.resolve(__dirname), '../../msg/db/db.json'), 'utf8')
 const dbMsg = JSON.parse(msgDb)
+const msgF = require('../factory/msgFactory')
 // ----------------------------------- DEFAULT CONFIGURATION REPORT AND LANG ---------
 const dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../dConfig/config.json'), 'utf8')
 const dconfig = JSON.parse(dConfig)
@@ -24,17 +25,7 @@ module.exports = {
             .findAll()
             .then((cliente) => res.status(200).send(cliente))
             .catch((error) => {
-                for (var idKeyA in dbMsg.messages) {
-                    if (dbMsg.messages[idKeyA].code == error.original.code) {
-                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                        var lang = req.query.lang || dLang
-                        for (var idkeyB in codErrMsg) {
-                            if (codErrMsg[idkeyB].lang == lang) {
-                                var errResp = codErrMsg[idkeyB]
-                            }
-                        }
-                    }
-                }
+                var errResp = msgF(error.original.code, req.query.lang)
                 if (!errResp) {
                     return res.status(400).send(error)
                 } else {
@@ -47,19 +38,13 @@ module.exports = {
         return Cliente
             .findAndCountAll()
             //.findAndCountAll({ offset: 10, limit: 2})
-            .then(cliente => {res.status(200).send({'count':cliente.count})})
+            .then(cliente => {
+                res.status(200).send({
+                    'count': cliente.count
+                })
+            })
             .catch((error) => {
-                for (var idKeyA in dbMsg.messages) {
-                    if (dbMsg.messages[idKeyA].code == error.original.code) {
-                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                        var lang = req.query.lang || dLang
-                        for (var idkeyB in codErrMsg) {
-                            if (codErrMsg[idkeyB].lang == lang) {
-                                var errResp = codErrMsg[idkeyB]
-                            }
-                        }
-                    }
-                }
+                var errResp = msgF(error.original.code, req.query.lang)
                 if (!errResp) {
                     return res.status(400).send(error)
                 } else {
@@ -73,34 +58,14 @@ module.exports = {
             .findByPk(req.params.id)
             .then((cliente) => {
                 if (!cliente || Object.keys(cliente).length === 0) {
-                    for (var idKeyA in dbMsg.messages) {
-                        // MSG NO RESULT - CODE: err-0002
-                        if (dbMsg.messages[idKeyA].code == 'err-0002') {
-                            var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                            var lang = req.query.lang || dLang
-                            for (var idkeyB in codErrMsg) {
-                                if (codErrMsg[idkeyB].lang == lang) {
-                                    var errResp = codErrMsg[idkeyB]
-                                }
-                            }
-                        }
-                    }
+                    // ../../msg/db/db.json -> NOT FIND -> 'err-0002'
+                    var errResp = msgF('err-0002', req.query.lang)
                     return res.status(404).send(errResp);
                 }
                 return res.status(200).send(cliente);
             })
             .catch((error) => {
-                for (var idKeyA in dbMsg.messages) {
-                    if (dbMsg.messages[idKeyA].code == error.original.code) {
-                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                        var lang = req.query.lang || dLang
-                        for (var idkeyB in codErrMsg) {
-                            if (codErrMsg[idkeyB].lang == lang) {
-                                var errResp = codErrMsg[idkeyB]
-                            }
-                        }
-                    }
-                }
+                var errResp = msgF(error.original.code, req.query.lang)
                 if (!errResp) {
                     return res.status(400).send(error)
                 } else {
@@ -119,34 +84,14 @@ module.exports = {
             .findAll(condition)
             .then((cliente) => {
                 if (!cliente || Object.keys(cliente).length === 0) {
-                    for (var idKeyA in dbMsg.messages) {
-                        // MSG NO RESULT - CODE: err-0002
-                        if (dbMsg.messages[idKeyA].code == 'err-0002') {
-                            var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                            var lang = req.query.lang || dLang
-                            for (var idkeyB in codErrMsg) {
-                                if (codErrMsg[idkeyB].lang == lang) {
-                                    var errResp = codErrMsg[idkeyB]
-                                }
-                            }
-                        }
-                    }
+                    // ../../msg/db/db.json -> NOT FIND -> 'err-0002'
+                    var errResp = msgF('err-0002', req.query.lang)
                     return res.status(404).send(errResp);
                 }
                 return res.status(200).send(cliente);
             })
             .catch((error) => {
-                for (var idKeyA in dbMsg.messages) {
-                    if (dbMsg.messages[idKeyA].code == error.original.code) {
-                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                        var lang = req.query.lang || dLang
-                        for (var idkeyB in codErrMsg) {
-                            if (codErrMsg[idkeyB].lang == lang) {
-                                var errResp = codErrMsg[idkeyB]
-                            }
-                        }
-                    }
-                }
+                var errResp = msgF(error.original.code, req.query.lang)
                 if (!errResp) {
                     return res.status(400).send(error)
                 } else {
@@ -176,16 +121,17 @@ module.exports = {
                 bo_promocao: req.body.bo_promocao || false
             })
             .then((cliente) => {
+                // ../../msg/db/db.json -> ADD SUCCESS %1(tableName) ,%2(idTable) -> 'err-0002'
+                var msgResp = msgF('suc-0002', req.query.lang).info
+                msgRpl = msgResp.replace('%1', cliente.id_cliente)
                 return res.status(201).send({
                     success: true,
-                    message: `Add register to "Client" with ID: ${cliente.id_cliente}!`
+                    message: msgRpl
                 })
             })
             .catch((error) => {
-                return res.status(400).send({
-                    error: true,
-                    message: error.original.detail
-                })
+                var errResp = msgF(error.original.code, req.query.lang)
+                return res.status(400).send(errResp)
             })
     },
     // ----------------------------------- UPDATE BY ID ------------------------------------
@@ -194,19 +140,8 @@ module.exports = {
         return Cliente
             .findByPk(req.params.id)
             .then(cliente => {
-                if (!cliente || Object.keys(cliente).length === 0 ) {
-                    for (var idKeyA in dbMsg.messages) {
-                        // MSG - CODE: err-0002 - NO RESULT
-                        if (dbMsg.messages[idKeyA].code == 'err-0002') {
-                            var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                            var lang = req.query.lang || dLang
-                            for (var idkeyB in codErrMsg) {
-                                if (codErrMsg[idkeyB].lang == lang) {
-                                    var errResp = codErrMsg[idkeyB]
-                                }
-                            }
-                        }
-                    }
+                if (!cliente || Object.keys(cliente).length === 0) {
+                    var errResp = msgF('err-0002', req.query.lang)
                     return res.status(404).send(errResp);
                 }
                 return Cliente
@@ -229,20 +164,13 @@ module.exports = {
                         dt_atualiacao: dtCurr.timestamp
                     })
                     .then((cliente) => res.status(200).send(cliente))
-                    .catch((error) => res.status(400).send(error));
+                    .catch((error) => {
+                        var errResp = msgF(error.original.code, req.query.lang)
+                        return res.status(400).send(errResp)
+                    });
             })
             .catch((error) => {
-                for (var idKeyA in dbMsg.messages) {
-                    if (dbMsg.messages[idKeyA].code == error.original.code) {
-                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                        var lang = req.query.lang || dLang
-                        for (var idkeyB in codErrMsg) {
-                            if (codErrMsg[idkeyB].lang == lang) {
-                                var errResp = codErrMsg[idkeyB]
-                            }
-                        }
-                    }
-                }
+                var errResp = msgF(error.original.code, req.query.lang)
                 if (!errResp) {
                     return res.status(400).send(error)
                 } else {
@@ -256,49 +184,17 @@ module.exports = {
             .findByPk(req.params.id)
             .then(cliente => {
                 if (!cliente || Object.keys(cliente).length === 0) {
-                    for (var idKeyA in dbMsg.messages) {
-                        // MSG - CODE: err-0002 - NO RESULT
-                        if (dbMsg.messages[idKeyA].code == 'err-0002') {
-                            var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                            var lang = req.query.lang || dLang
-                            for (var idkeyB in codErrMsg) {
-                                if (codErrMsg[idkeyB].lang == lang) {
-                                    var errResp = codErrMsg[idkeyB]
-                                }
-                            }
-                        }
-                    }
+                    var errResp = msgF('err-0002', req.query.lang)
                     return res.status(404).send(errResp);
                 }
                 return Cliente
                     .destroy(condition)
                     .then(() => {
-                        for (var idKeyA in dbMsg.messages) {
-                            // MSG - CODE: suc-0001 - DELETE DONE
-                            if (dbMsg.messages[idKeyA].code == 'suc-0001') {
-                                var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                                var lang = req.query.lang || dLang
-                                for (var idkeyB in codErrMsg) {
-                                    if (codErrMsg[idkeyB].lang == lang) {
-                                        var errResp = codErrMsg[idkeyB]
-                                    }
-                                }
-                            }
-                        }
-                        return res.status(204).send(errResp);
+                        var msgResp = msgF('suc-0001', req.query.lang)
+                        return res.status(204).send(msgResp);
                     })
                     .catch((error) => {
-                        for (var idKeyA in dbMsg.messages) {
-                            if (dbMsg.messages[idKeyA].code == error.original.code) {
-                                var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                                var lang = req.query.lang || dLang
-                                for (var idkeyB in codErrMsg) {
-                                    if (codErrMsg[idkeyB].lang == lang) {
-                                        var errResp = codErrMsg[idkeyB]
-                                    }
-                                }
-                            }
-                        }
+                        var errResp = msgF(error.original.code, req.query.lang)
                         if (!errResp) {
                             return res.status(400).send(error)
                         } else {
@@ -307,17 +203,7 @@ module.exports = {
                     });
             })
             .catch((error) => {
-                for (var idKeyA in dbMsg.messages) {
-                    if (dbMsg.messages[idKeyA].code == error.original.code) {
-                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                        var lang = req.query.lang || dLang
-                        for (var idkeyB in codErrMsg) {
-                            if (codErrMsg[idkeyB].lang == lang) {
-                                var errResp = codErrMsg[idkeyB]
-                            }
-                        }
-                    }
-                }
+                var errResp = msgF(error.original.code, req.query.lang)
                 if (!errResp) {
                     return res.status(400).send(error)
                 } else {
@@ -327,58 +213,22 @@ module.exports = {
     },
     // ----------------------------------- REMOVE BY EMAIL ------------------------------------
     deleteByEmail(req, res, condition) {
-        condition = {
-            where: {
-                vc_email: req.params.email
-            }
-        }
+        condition = { where: { vc_email: req.params.email } }
         return Cliente
             .findAll(condition)
             .then(cliente => {
                 if (!cliente || Object.keys(cliente).length === 0) {
-                    for (var idKeyA in dbMsg.messages) {
-                        // MSG - CODE: err-0002 - NO RESULT
-                        if (dbMsg.messages[idKeyA].code == 'err-0002') {
-                            var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                            var lang = req.query.lang || dLang
-                            for (var idkeyB in codErrMsg) {
-                                if (codErrMsg[idkeyB].lang == lang) {
-                                    var errResp = codErrMsg[idkeyB]
-                                }
-                            }
-                        }
-                    }
+                    var errResp = msgF('err-0002', req.query.lang)
                     return res.status(404).send(errResp);
                 }
                 return Cliente
                     .destroy(condition)
                     .then(() => {
-                        for (var idKeyA in dbMsg.messages) {
-                            // MSG - CODE: suc-0001 - DELETE DONE
-                            if (dbMsg.messages[idKeyA].code == 'suc-0001') {
-                                var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                                var lang = req.query.lang || dLang
-                                for (var idkeyB in codErrMsg) {
-                                    if (codErrMsg[idkeyB].lang == lang) {
-                                        var errResp = codErrMsg[idkeyB]
-                                    }
-                                }
-                            }
-                        }
-                        return res.status(204).send(errResp);
+                        var msgResp = msgF('err-0002', req.query.lang)
+                        return res.status(204).send(msgResp);
                     })
                     .catch((error) => {
-                        for (var idKeyA in dbMsg.messages) {
-                            if (dbMsg.messages[idKeyA].code == error.original.code) {
-                                var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                                var lang = req.query.lang || dLang
-                                for (var idkeyB in codErrMsg) {
-                                    if (codErrMsg[idkeyB].lang == lang) {
-                                        var errResp = codErrMsg[idkeyB]
-                                    }
-                                }
-                            }
-                        }
+                        var errResp = msgF(error.original.code, req.query.lang)
                         if (!errResp) {
                             return res.status(400).send(error)
                         } else {
@@ -387,17 +237,7 @@ module.exports = {
                     });
             })
             .catch((error) => {
-                for (var idKeyA in dbMsg.messages) {
-                    if (dbMsg.messages[idKeyA].code == error.original.code) {
-                        var codErrMsg = dbMsg.messages[idKeyA].msgObj
-                        var lang = req.query.lang || dLang
-                        for (var idkeyB in codErrMsg) {
-                            if (codErrMsg[idkeyB].lang == lang) {
-                                var errResp = codErrMsg[idkeyB]
-                            }
-                        }
-                    }
-                }
+                var errResp = msgF(error.original.code, req.query.lang)
                 if (!errResp) {
                     return res.status(400).send(error)
                 } else {
