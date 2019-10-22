@@ -1,22 +1,9 @@
 // ----------------------------------- SEQUELIZE MODULE IMPORT -----------------------
 const Cliente = require('../models').Cliente;
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
-const fs = require('fs')
-const path = require('path')
-// ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
 const dtCurr = require('../factory/currentTimeStamp')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
-const msgDb = fs.readFileSync(path.resolve(path.resolve(__dirname), '../../msg/db/db.json'), 'utf8')
-const dbMsg = JSON.parse(msgDb)
 const msgF = require('../factory/msgFactory')
-// ----------------------------------- DEFAULT CONFIGURATION REPORT AND LANG ---------
-const dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../dConfig/config.json'), 'utf8')
-const dconfig = JSON.parse(dConfig)
-const dLang = dconfig.dConfig.dlang
-// const dLogActionRegister = config.dConfig.dLogActionRegister
-// const dLogRegisterTimeTransaction = config.dConfig.dLogRegisterTimeTransaction
-// const dSendError = config.dConfig.dSendError.active
-// const dSendErrorMail = config.dConfig.dSendError.email
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
@@ -58,7 +45,6 @@ module.exports = {
             .findByPk(req.params.id)
             .then((cliente) => {
                 if (!cliente || Object.keys(cliente).length === 0) {
-                    // ../../msg/db/db.json -> NOT FIND -> 'err-0002'
                     var errResp = msgF('err-0002', req.query.lang)
                     return res.status(404).send(errResp);
                 }
@@ -84,7 +70,6 @@ module.exports = {
             .findAll(condition)
             .then((cliente) => {
                 if (!cliente || Object.keys(cliente).length === 0) {
-                    // ../../msg/db/db.json -> NOT FIND -> 'err-0002'
                     var errResp = msgF('err-0002', req.query.lang)
                     return res.status(404).send(errResp);
                 }
@@ -121,7 +106,7 @@ module.exports = {
                 bo_promocao: req.body.bo_promocao || false
             })
             .then((cliente) => {
-                // ../../msg/db/db.json -> ADD SUCCESS %1(tableName) ,%2(idTable) -> 'err-0002'
+                // ../../msg/db/db.json -> ADD SUCCESS %2(idTable) -> 'suc-0002'
                 var msgResp = msgF('suc-0002', req.query.lang).info
                 msgRpl = msgResp.replace('%1', cliente.id_cliente)
                 return res.status(201).send({
@@ -136,7 +121,6 @@ module.exports = {
     },
     // ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
-        // console.log(dtCurr.timestamp)
         return Cliente
             .findByPk(req.params.id)
             .then(cliente => {

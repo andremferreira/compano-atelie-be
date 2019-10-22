@@ -74,4 +74,5 @@ module.exports = (app) => {
     ProtectedRoutes.get('/usuarios', usuarioController.list)
     ProtectedRoutes.get('/usuarios/qtd', usuarioController.count)
     ProtectedRoutes.get('/usuario/id/:id', usuarioController.getById)
+    ProtectedRoutes.post('/usuario', usuarioController.add)
 };

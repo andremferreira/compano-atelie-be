@@ -8,6 +8,15 @@ const msgF = require('../server/factory/msgFactory')
 const auth = require('../auth/userAuth')
 const usuarios = require('../server/factory/userTest').user
 const devToken = auth.createIdToken(usuarios, true)
+// ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
+const fs = require('fs')
+const path = require('path')
+// ----------------------------------- DEFAULT CONFIGURATION  ------------------------
+const dConfig = fs.readFileSync(path.resolve(path.resolve(__dirname), '../server/dConfig/config.json'), 'utf8')
+const config = JSON.parse(dConfig)
+const passToken = config.dConfig.dInitPassHashAdm
+// ----------------------------------- CONVERT IMAGE TO BYTE ARRAY --------------------
+const sysUserImg = fs.readFileSync(path.resolve(path.resolve(__dirname), '../server/img/SysAdmImg.png')).toString('base64')
 // ----------------------------------- TEST USER ----------------------------------------
 describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
     let msgS
@@ -33,40 +42,26 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
             .set('access-token', devToken)
             .expect(200, done)
     })
- /*
+ 
     // ----------------------------------- ADD CLIENT ---------------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0010').info), function addNewClient(done, cliente) {
-        cliente = {
-            vc_nome: 'NOME-TESTE-2',
-            vc_sobrenome: 'SOBRENOME-TESTE-2',
-            nu_ddd: 99,
-            nu_celular: 988888888,
-            vc_contato: 'CONTATO-TESTE-2',
-            vc_email: 'EMAIL@TESTE-2.COM',
-            nu_cpf: 94818843335,
-            nu_cep: 60170201,
-            vc_cidade: 'FORTALEZA',
-            vc_estado: 'CEARA',
-            vc_bairro: 'DIONISIO TORRES',
-            vc_endereco: 'RUA LEONEL DE BORBA',
-            vc_endereco_numero: '1748',
-            vc_endereco_complemento: 'CASA 2',
-            vc_aniversario: '07/09',
-        }
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0010').info), function addNewClient(done, usrTest) {
+        usrTest = {
+            vc_nome: 'TEST_NEW_USER',
+            vc_sobrenome: 'TEST_NEW_USER',
+            vc_email: 'TESTE@NEW.USER',
+            vc_senha: passToken,
+            tx_imagem: sysUserImg
+          }
         request(server)
-            .post('/api/cliente')
+            .post('/api/usuario')
             .set('access-token', devToken)
-            .send(cliente)
+            .send(usrTest)
             .expect(201)
             .end(function (err, res) {
-                if (err) {
-                    throw (err)
-                };
+                if (err) throw (err)
                 done()
             })
     })
-*/
-
     // ----------------------------------- GET USER BY ID ---------------------------------
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0022').info), function getUserById(done) {
         request(server)

@@ -13,27 +13,15 @@ module.exports = (sequelize, DataTypes) => {
     vc_nome: {
       allowNull: false,
       type: Sequelize.STRING(50),
-      validate: {
-        len: [3, 100],
-        msg: "Only allow values with length between 3 and 50 characters."
-      },
     },
     vc_sobrenome: {
       allowNull: false,
       type: Sequelize.STRING(100),
-      validate: {
-        len: [5, 100],
-        msg: "Only allow values with length between 5 and 100 characters."
-      },
     },
     vc_email: {
       allowNull: false,
       unique: true,
       type: Sequelize.STRING(100),
-      validate: {
-        len: [5, 100],
-        msg: "Only allow values with length between 5 and 100 characters."
-      },
     },
     vc_senha: {
       allowNull: false,
