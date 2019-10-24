@@ -3,18 +3,18 @@ const Sequelize = require('sequelize')
 const withDateNoTz = require('sequelize-date-no-tz-postgres');
 module.exports = (sequelize, DataTypes) => {
   const seq = withDateNoTz(Sequelize)
-  const Usuario = sequelize.define('Usuario', {
-    id_usuario: {
+  const User = sequelize.define('User', {
+    id_user: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    vc_nome: {
+    vc_name: {
       allowNull: false,
       type: Sequelize.STRING(50),
     },
-    vc_sobrenome: {
+    vc_lastname: {
       allowNull: false,
       type: Sequelize.STRING(100),
     },
@@ -23,25 +23,25 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       type: Sequelize.STRING(100),
     },
-    vc_senha: {
+    vc_password: {
       allowNull: false,
       type: Sequelize.STRING(64)
     },
-    tx_imagem: {
+    tx_image: {
       type: Sequelize.TEXT
     },
-    vc_reset_senha: {
+    vc_password_reset: {
       type: Sequelize.STRING(64)
     },
-    dt_exp_reset: {
+    dt_exp_password_reset: {
       type: Sequelize.TIME
     },
-    dt_cadastro: {
+    dt_create: {
       allowNull: false,
       type: seq.DATE_NO_TZ,
       defaultValue: seq.fn('now'),
     },
-    dt_atualiacao: {
+    dt_update: {
       allowNull: false,
       type: seq.DATE_NO_TZ,
       defaultValue: seq.fn('now'),
@@ -51,13 +51,5 @@ module.exports = (sequelize, DataTypes) => {
     schema: 'atelie',
     timestamps: false
   });
-  //   Usuarios.associate = function (models) {
-  //     Group.hasMany(models.Jsontable, {
-  //       foreignKey: 'isn_group',
-  //       onDelete: 'CASCADE',
-  //       onUpdate: 'CASCADE'
-  //     });
-  //     Group.schema('cog')
-  //   };
-  return Usuario;
+  return User;
 };

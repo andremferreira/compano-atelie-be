@@ -7,58 +7,48 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'usuarios'
+      tableName: 'budgets'
     }, {
-      id_usuario: {
+      id_budget: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
       },
-      vc_nome: {
+      id_client: {
         allowNull: false,
-        type: Sequelize.STRING(50),
-        validate: {
-          len: [3, 100],
-          msg: "Only allow values with length between 3 and 50 characters."
+        type: Sequelize.INTEGER,
+        schema: 'atelie',
+        references: {
+          model: {
+            schema: 'atelie',
+            tableName: 'clients'
+          },
+          key: 'id_client'
         },
       },
-      vc_sobrenome: {
+      id_user: {
         allowNull: false,
-        type: Sequelize.STRING(100),
-        validate: {
-          len: [5, 100],
-          msg: "Only allow values with length between 5 and 100 characters."
+        type: Sequelize.INTEGER,
+        schema: 'atelie',
+        references: {
+          model: {
+            schema: 'atelie',
+            tableName: 'users'
+          },
+          key: 'id_user'
         },
       },
-      vc_email: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING(100),
-        validate: {
-          len: [5, 100],
-          msg: "Only allow values with length between 5 and 100 characters."
-        },
+      js_budget_service: {
+        type: Sequelize.JSON,
+        allowNull: false
       },
-      vc_senha: {
-        allowNull: false,
-        type: Sequelize.STRING(64)
-      },
-      tx_imagem: {
-        type: Sequelize.TEXT
-      },
-      vc_reset_senha: {
-        type: Sequelize.STRING(64)
-      },
-      dt_exp_reset: {
-        type: sequelize.DATE_NO_TZ
-      },
-      dt_cadastro: {
+      dt_create: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
       },
-      dt_atualiacao: {
+      dt_update: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
@@ -70,7 +60,7 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'usuarios'
+      tableName: 'budgets'
     }, {
       force: true,
       cascade: true

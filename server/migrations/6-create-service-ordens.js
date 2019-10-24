@@ -7,48 +7,76 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'orcamentos'
+      tableName: 'service_orders'
     }, {
-      id_orcamento: {
+      id_service_order: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
       },
-      id_cliente: {
+      id_client: {
         allowNull: false,
         type: Sequelize.INTEGER,
         schema: 'atelie',
         references: {
           model: {
             schema: 'atelie',
-            tableName: 'clientes'
+            tableName: 'clients'
           },
-          key: 'id_cliente'
+          key: 'id_client'
         },
       },
-      id_usuario: {
+      id_user: {
         allowNull: false,
         type: Sequelize.INTEGER,
         schema: 'atelie',
         references: {
           model: {
             schema: 'atelie',
-            tableName: 'usuarios'
+            tableName: 'users'
           },
-          key: 'id_usuario'
+          key: 'id_user'
         },
       },
-      js_servicos_orcados: {
-        type: Sequelize.JSON,
-        allowNull: false
+      id_orcamento: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        schema: 'atelie',
+        references: {
+          model: {
+            schema: 'atelie',
+            tableName: 'budgets'
+          },
+          key: 'id_budget'
+        },
       },
-      dt_cadastro: {
+      nu_value_of_service: {
+        allowNull: false,
+        type: Sequelize.NUMERIC(10,2),
+      },  
+      bo_canceled: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      bo_received: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      bo_paid: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      bo_delivered: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      dt_create: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
       },
-      dt_atualiacao: {
+      dt_update: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
@@ -60,7 +88,7 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'orcamentos'
+      tableName: 'service_orders'
     }, {
       force: true,
       cascade: true

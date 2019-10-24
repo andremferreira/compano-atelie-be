@@ -7,58 +7,58 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'servicos'
+      tableName: 'users'
     }, {
-      id_servico: {
+      id_user: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
       },
-      vc_codigo: {
+      vc_name: {
         allowNull: false,
-        type: Sequelize.STRING(5),
+        type: Sequelize.STRING(50),
         validate: {
-          len: [5],
-          msg: "Only allow values with length 5 characters."
+          len: [3, 100],
+          msg: "Only allow values with length between 3 and 50 characters."
         },
       },
-      tx_servico: {
+      vc_lastname: {
         allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING(100),
+        validate: {
+          len: [5, 100],
+          msg: "Only allow values with length between 5 and 100 characters."
+        },
       },
-      tm_realizacao_servico: {
+      vc_email: {
         allowNull: false,
-        type: Sequelize.TIME,
+        unique: true,
+        type: Sequelize.STRING(100),
+        validate: {
+          len: [5, 100],
+          msg: "Only allow values with length between 5 and 100 characters."
+        },
       },
-      nu_custo_material: {
+      vc_password: {
         allowNull: false,
-        type: Sequelize.NUMERIC(10,2),
-        defaultValue: 0.00
+        type: Sequelize.STRING(64)
       },
-      nu_custo_terceiros: {
-        allowNull: false,
-        type: Sequelize.NUMERIC(10,2),
-        defaultValue: 0.00
+      tx_image: {
+        type: Sequelize.TEXT
       },
-      nu_custo_servico: {
-        allowNull: false,
-        type: Sequelize.NUMERIC(10,2),
-      },  
-      bo_contato: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      vc_password_reset: {
+        type: Sequelize.STRING(64)
       },
-      bo_critico: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      dt_exp_password_reset: {
+        type: sequelize.DATE_NO_TZ
       },
-      dt_cadastro: {
+      dt_create: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
       },
-      dt_atualiacao: {
+      dt_update: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
@@ -70,7 +70,7 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'servicos'
+      tableName: 'users'
     }, {
       force: true,
       cascade: true

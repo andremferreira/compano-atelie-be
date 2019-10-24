@@ -1,8 +1,8 @@
 // ----------------------------------- MODULE OF AUTHENTICATION --------------------------
 const auth = require('../../auth/userAuth')
 // ----------------------------------- SEQUELIZE CONTROLLER IMPORT -----------------------
-const clienteController = require('../controllers/Cliente')
-const usuarioController = require('../controllers/Usuario')
+const clientController = require('../controllers/Client')
+const userController = require('../controllers/User')
 // ----------------------------------- IMPORT EXPRESS TO CONFIG ROUTE --------------------
 const express = require('express')
 const ProtectedRoutes = express.Router()
@@ -46,16 +46,25 @@ module.exports = (app) => {
         })
     })
 // ----------------------------------- ROUTE OF CRUD CLIENTES ----------------------------
-    ProtectedRoutes.get('/clientes', clienteController.list)
-    ProtectedRoutes.get('/clientes/qtd', clienteController.count)
-    ProtectedRoutes.get('/cliente/id/:id', clienteController.getById)
-    ProtectedRoutes.get('/cliente/email/:email', clienteController.getByEmail)
-    ProtectedRoutes.post('/cliente', clienteController.add);
-    ProtectedRoutes.put('/cliente/id/:id', clienteController.update);
-    ProtectedRoutes.delete('/cliente/id/:id', clienteController.delete);
-    ProtectedRoutes.delete('/cliente/email/:email', clienteController.deleteByEmail);
+    ProtectedRoutes.get('/clients', clientController.list)
+    ProtectedRoutes.get('/clients/count', clientController.count)
+    ProtectedRoutes.get('/client/id/:id', clientController.getById)
+    ProtectedRoutes.get('/client/email/:email', clientController.getByEmail)
+    ProtectedRoutes.post('/client', clientController.add);
+    ProtectedRoutes.post('/client/id/:id', clientController.addById);
+    ProtectedRoutes.put('/client/email/:email', clientController.updateByEmail);
+    ProtectedRoutes.put('/client/id/:id', clientController.update);
+    ProtectedRoutes.delete('/client/id/:id', clientController.delete);
+    ProtectedRoutes.delete('/client/email/:email', clientController.deleteByEmail);
 // ---------------------------------------------------------------------------------------
-    // TESTE CRIPTO VALUE AND COMPARE
+// ----------------------------------- ROUTE OF CRUD USUARIOS ----------------------------
+    ProtectedRoutes.get('/users', userController.list)
+    ProtectedRoutes.get('/users/count', userController.count)
+    ProtectedRoutes.get('/user/id/:id', userController.getById)
+    ProtectedRoutes.post('/user', userController.add)
+    ProtectedRoutes.delete('/user/email/:email', userController.deleteByEmail)
+// ---------------------------------------------------------------------------------------
+    // TEST CRIPTO PROCESS AND COMPARE
     ProtectedRoutes.get('/cryptopass', (req, res)=>{
         // let secretHex = bcrypt.genSalt(Buffer.from('@SolutIon0864!*')) //Buffer.from('@SolutIon0864!*') 
         // console.log(secretHex)
@@ -70,9 +79,5 @@ module.exports = (app) => {
             comparar: compare,
         })
     })
-// ----------------------------------- ROUTE OF CRUD USUARIOS ----------------------------
-    ProtectedRoutes.get('/usuarios', usuarioController.list)
-    ProtectedRoutes.get('/usuarios/qtd', usuarioController.count)
-    ProtectedRoutes.get('/usuario/id/:id', usuarioController.getById)
-    ProtectedRoutes.post('/usuario', usuarioController.add)
+
 };

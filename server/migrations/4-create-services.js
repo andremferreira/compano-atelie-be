@@ -7,76 +7,58 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'ordens_de_servico'
+      tableName: 'services'
     }, {
-      id_ordem_de_servico: {
+      id_service: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
       },
-      id_cliente: {
+      vc_service_mnemonic: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        schema: 'atelie',
-        references: {
-          model: {
-            schema: 'atelie',
-            tableName: 'clientes'
-          },
-          key: 'id_cliente'
+        type: Sequelize.STRING(5),
+        validate: {
+          len: [5],
+          msg: "Only allow values with length 5 characters."
         },
       },
-      id_usuario: {
+      tx_service_description: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        schema: 'atelie',
-        references: {
-          model: {
-            schema: 'atelie',
-            tableName: 'usuarios'
-          },
-          key: 'id_usuario'
-        },
+        type: Sequelize.TEXT,
       },
-      id_orcamento: {
+      tm_time_service_estimate: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        schema: 'atelie',
-        references: {
-          model: {
-            schema: 'atelie',
-            tableName: 'orcamentos'
-          },
-          key: 'id_orcamento'
-        },
+        type: Sequelize.TIME,
       },
-      nu_valor_servico: {
+      nu_material_cost: {
+        allowNull: false,
+        type: Sequelize.NUMERIC(10,2),
+        defaultValue: 0.00
+      },
+      nu_third_party_cost: {
+        allowNull: false,
+        type: Sequelize.NUMERIC(10,2),
+        defaultValue: 0.00
+      },
+      nu_service_cost: {
         allowNull: false,
         type: Sequelize.NUMERIC(10,2),
       },  
-      bo_cancelado: {
+      bo_contact: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
-      bo_recebido: {
+      bo_critical_service: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
       },
-      bo_pago: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
-      bo_entregue: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
-      dt_cadastro: {
+      dt_create: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
       },
-      dt_atualiacao: {
+      dt_update: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
@@ -88,7 +70,7 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'ordens_de_servico'
+      tableName: 'services'
     }, {
       force: true,
       cascade: true

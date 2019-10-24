@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const env = process.env.NODE_ENV.replace(' ','');
+let env = process.env.NODE_ENV
+    env = env.replace(' ','');
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgDb = fs.readFileSync(path.resolve(path.resolve(__dirname), 'msg/db/db.json'), 'utf8')
 const dbMsg = JSON.parse(msgDb)

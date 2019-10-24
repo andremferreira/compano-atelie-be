@@ -7,15 +7,15 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'clientes'
+      tableName: 'clients'
     }, {
-      id_cliente: {
+      id_client: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
       },
-      vc_nome: {
+      vc_name: {
         allowNull: false,
         type: Sequelize.STRING(50),
         validate: {
@@ -23,7 +23,7 @@ module.exports = {
           msg: "Only allow values with length between 3 and 50 characters."
         },
       },
-      vc_sobrenome: {
+      vc_lastname: {
         allowNull: false,
         type: Sequelize.STRING(100),
         validate: {
@@ -31,15 +31,15 @@ module.exports = {
           msg: "Only allow values with length between 5 and 100 characters."
         },
       },
-      nu_ddd: {
+      nu_code_area: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      nu_celular: {
+      nu_mobile: {
         allowNull: false,
         type: Sequelize.BIGINT,
       },
-      vc_contato: {
+      vc_contact: {
         type: Sequelize.STRING(30),
         validate: {
           len: [3, 30],
@@ -54,15 +54,15 @@ module.exports = {
           msg: "Only allow values with length between 10 and 100 characters."
         },
       },
-      nu_cpf: {
+      nu_social_security_code: {
         allowNull: false,
         unique: true,
         type: Sequelize.BIGINT,
       },
-      nu_cep: {
+      nu_zip_code: {
         type: Sequelize.INTEGER,
       },
-      vc_cidade: {
+      vc_city: {
         allowNull: false,
         type: Sequelize.STRING(50),
         validate: {
@@ -70,7 +70,7 @@ module.exports = {
           msg: "Only allow values with length between 5 and 50 characters."
         },
       },
-      vc_estado: {
+      vc_state: {
         allowNull: false,
         type: Sequelize.STRING(50),
         validate: {
@@ -78,7 +78,7 @@ module.exports = {
           msg: "Only allow values with length between 5 and 50 characters."
         },
       },
-      vc_bairro: {
+      vc_district: {
         allowNull: false,
         type: Sequelize.STRING(50),
         validate: {
@@ -86,7 +86,7 @@ module.exports = {
           msg: "Only allow values with length between 5 and 50 characters."
         },
       },
-      vc_endereco: {
+      vc_address: {
         allowNull: false,
         type: Sequelize.STRING(100),
         validate: {
@@ -94,7 +94,7 @@ module.exports = {
           msg: "Only allow values with length between 5 and 100 characters."
         },
       },
-      vc_endereco_numero: {
+      vc_address_number: {
         allowNull: false,
         type: Sequelize.STRING(10),
         validate: {
@@ -102,30 +102,30 @@ module.exports = {
           msg: "Only allow values with length between 2 and 10 characters."
         },
       },
-      vc_endereco_complemento: {
+      vc_address_complement: {
         type: Sequelize.STRING(100),
         validate: {
           len: [4, 100],
           msg: "Only allow values with length between 4 and 100 characters."
         },
       },
-      vc_aniversario: {
+      vc_birthday: {
         type: Sequelize.STRING(5),
         validate: {
           len: [5],
           msg: "Only allow values with 5 characters."
         },
       },
-      bo_promocao: {
+      bo_promotion: {
         type: sequelize.BOOLEAN,
         defaultValue: false,
       },
-      dt_cadastro: {
+      dt_create: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
       },
-      dt_atualiacao: {
+      dt_update: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
@@ -137,7 +137,7 @@ module.exports = {
       schema: 'atelie',
       schemaDelimiter: '.',
       modelName: 'atelie',
-      tableName: 'clientes'
+      tableName: 'clients'
     }, {
       force: true,
       cascade: true

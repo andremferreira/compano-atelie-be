@@ -19,14 +19,14 @@ module.exports = {
     return queryInterface.bulkInsert({
       schema: 'atelie',
       schemaDelimiter: '.',
-      tableName: 'usuarios',
+      tableName: 'users',
     }, [{
-      vc_nome: userName,
-      vc_sobrenome: 'SYSTEM ADMINISTRATOR',
+      vc_name: userName,
+      vc_lastname: 'SYSTEM ADMINISTRATOR',
       vc_email: useEmail,
-      vc_senha: passToken,
-      tx_imagem: sysUserImg
-    }], {parameters:'vc_nome, vc_sobrenome, vc_email, vc_senha, ba_imagem'})
+      vc_password: passToken,
+      tx_image: sysUserImg
+    }], {parameters:'vc_name, vc_last_name, vc_email, vc_senha, ba_imagem'})
     .then((success) => console.log("System administrator was populated with success!"))
     .catch((error) => console.log("System administrator already populated!"));
   },
@@ -34,7 +34,7 @@ module.exports = {
     return queryInterface.bulkDelete({
       schema: 'atelie',
       schemaDelimiter: '.',
-      tableName: 'usuarios'
+      tableName: 'users'
     }, null, {});
   },
 }

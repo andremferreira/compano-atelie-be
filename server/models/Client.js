@@ -2,80 +2,80 @@ const Sequelize = require('sequelize')
 const withDateNoTz = require('sequelize-date-no-tz-postgres')
 module.exports = (sequelize, DataTypes) => {
   const seq = withDateNoTz(Sequelize)
-  const Cliente = sequelize.define('Cliente', {
-      id_cliente: {
+  const Client = sequelize.define('Client', {
+      id_client: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
       },
-      vc_nome: {
+      vc_name: {
         allowNull: false,
         type: DataTypes.STRING(50),
       },
-      vc_sobrenome: {
+      vc_lastname: {
         allowNull: false,
         type: DataTypes.STRING(100),
       },
-      nu_ddd: {
+      nu_code_area: {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      nu_celular: {
+      nu_mobile: {
         allowNull: false,
         type: DataTypes.BIGINT,
       },
-      vc_contato: {
+      vc_contact: {
         type: DataTypes.STRING(30),
       },
       vc_email: {
         unique: true,
         type: DataTypes.STRING(100),
       },
-      nu_cpf: {
+      nu_social_security_code: {
         allowNull: false,
         unique: true,
         type: DataTypes.BIGINT,
       },
-      nu_cep: {
+      nu_zip_code: {
         type: DataTypes.INTEGER,
       },
-      vc_cidade: {
+      vc_city: {
         allowNull: false,
         type: DataTypes.STRING(50),
       },
-      vc_estado: {
+      vc_state: {
         allowNull: false,
         type: DataTypes.STRING(50),
       },
-      vc_bairro: {
+      vc_district: {
         allowNull: false,
         type: DataTypes.STRING(50),
       },
-      vc_endereco: {
+      vc_address: {
         allowNull: false,
         type: DataTypes.STRING(100),
       },
-      vc_endereco_numero: {
+      vc_address_number: {
         allowNull: false,
         type: DataTypes.STRING(10),
       },
-      vc_endereco_complemento: {
+      vc_address_complement: {
         type: DataTypes.STRING(100),
       },
-      vc_aniversario: {
+      vc_birthday: {
         type: DataTypes.STRING(5),
       }, 
-      bo_promocao: {
+      bo_promotion: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      dt_cadastro: {
+      dt_create: {
         allowNull: false,
         type: seq.DATE_NO_TZ,
         defaultValue: seq.fn('now'),
       },
-      dt_atualiacao: {
+      dt_update: {
         allowNull: false,
         type: seq.DATE_NO_TZ,
         defaultValue: seq.fn('now'),
@@ -93,5 +93,5 @@ module.exports = (sequelize, DataTypes) => {
 //     });
 //     Group.schema('cog')
 //   };
-  return Cliente;
+  return Client;
 };

@@ -1,4 +1,4 @@
-function currentTimeStamp(){
+module.exports = function currentTimeStamp(){
 // ----------------------------------- RETURN DATE AND TIME FROM BACKEND ------------------------------------
     let date_ob = new Date();
     // current date
@@ -17,7 +17,7 @@ function currentTimeStamp(){
     // current millisenconds
     let millisenconds = date_ob.getMilliseconds ();
     // current_timestamp
-    let timeStamp = toString(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + "." + millisenconds)
+    let timeStamp = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds + "." + millisenconds
     // return of current date and time
     let jsonDate = { 
         "date":date,
@@ -31,5 +31,3 @@ function currentTimeStamp(){
      }
     return jsonDate
 }
-
-module.exports [currentTimeStamp]
