@@ -42,17 +42,6 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
             .set('access-token', devToken)
             .expect(200, done)
     })
-     // ----------------------------------- GET USER BY ID ---------------------------------
-     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0022').info), function getUserById(done) {
-        request(server)
-            .get('/api/user/id/1')
-            .set('access-token', devToken)
-            .expect(200)
-            .end(function (err, res) {
-                if (err) throw err;
-                done()
-            })
-    })
     // ----------------------------------- ADD CLIENT ---------------------------------------
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0023').info), function addNewUser(done) {
         usrTest = {
@@ -69,6 +58,50 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
             .expect(201)
             .end(function (err, res) {
                 if (err) throw (err)
+                done()
+            })
+    })
+    // ----------------------------------- UPDATE USER BY ID ------------------------------
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0033').info), function updUserById(done) {
+        usrTest = {
+            vc_lastname: 'SYSTEM-ADMINISTRATOR-1'
+          }
+        request(server)
+            .put('/api/user/id/1')
+            .set('access-token', devToken)
+            .send(usrTest)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) throw (err)
+                done()
+            })
+    })
+    // ----------------------------------- UPDATE USER BY ID NEG --------------------------
+    msgS = msgF('tst-0034').info
+    msgS = msgS.replace('%1', color('f-red-i', ''))
+    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    it(color('f-yellow', '├') + color('f-hidden', msgS), function updUserByIdNeg(done) {
+        usrTest = {
+            vc_lastname: 'SYSTEM-ADMINISTRATOR-1'
+          }
+        request(server)
+            .put('/api/user/id/999')
+            .set('access-token', devToken)
+            .send(usrTest)
+            .expect(404)
+            .end(function (err, res) {
+                if (err) throw (err)
+                done()
+            })
+    })
+     // ----------------------------------- GET USER BY ID ---------------------------------
+     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0022').info), function getUserById(done) {
+        request(server)
+            .get('/api/user/id/1')
+            .set('access-token', devToken)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) throw err;
                 done()
             })
     })

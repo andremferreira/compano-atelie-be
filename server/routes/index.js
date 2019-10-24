@@ -62,6 +62,7 @@ module.exports = (app) => {
     ProtectedRoutes.get('/users/count', userController.count)
     ProtectedRoutes.get('/user/id/:id', userController.getById)
     ProtectedRoutes.post('/user', userController.add)
+    ProtectedRoutes.put('/user/id/:id', userController.update)
     ProtectedRoutes.delete('/user/email/:email', userController.deleteByEmail)
 // ---------------------------------------------------------------------------------------
     // TEST CRIPTO PROCESS AND COMPARE

@@ -635,7 +635,7 @@
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method addUser.",
-                    "info": " Try add new User, expect to return (statusCode:201) on route \"POST: /api/user\";",
+                    "info": " Try add new user, expect to return (statusCode:201) on route \"POST: /api/user\";",
                     "type": "info"
                 }
             ]
@@ -708,7 +708,7 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updClientByEmail.",
-                    "info": " Tente atualizar usuário pelo e-mail, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/email/EMAIL@TESTE-2.COM\";",
+                    "info": " Tente atualizar cliente pelo e-mail, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/email/EMAIL@TESTE-2.COM\";",
                     "type": "info"
                 },
                 {
@@ -728,7 +728,7 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updClientByEmailNeg.",
-                    "info": " Tente atualizar usuário pelo e-mail %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/email/TEST@CLIENT.UPD\";",
+                    "info": " Tente atualizar cliente pelo e-mail %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/email/TEST@CLIENT.UPD\";",
                     "type": "info"
                 },
                 {
@@ -748,7 +748,7 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updClientById.",
-                    "info": " Tente atualizar usuário pelo código, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/id/999\";",
+                    "info": " Tente atualizar cliente pelo código, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/id/999\";",
                     "type": "info"
                 },
                 {
@@ -768,7 +768,7 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updClientByIdNeg.",
-                    "info": " Tente atualizar usuário pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/id/999\";",
+                    "info": " Tente atualizar cliente pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/id/999\";",
                     "type": "info"
                 },
                 {
@@ -816,6 +816,46 @@
                     "lang": "en_US",
                     "title": "Method addClientById.",
                     "info": " Try add client by id 999 %1(negation)%2, expect return (codeStatus:400) on route \"POST: /api/client/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 42,
+            "code": "tst-0033",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updUserById.",
+                    "info": " Tente atualizar usuário pelo código, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updUserById.",
+                    "info": " Try update user by id, expect return (codeStatus:200) on route \"PUT: /api/client/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 43,
+            "code": "tst-0034",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updUserById.",
+                    "info": " Tente atualizar usuário pelo código 999 %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updUserById.",
+                    "info": " Try update user by id 999 %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/client/id/999\";",
                     "type": "info"
                 }
             ]
