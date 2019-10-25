@@ -52,13 +52,15 @@ Using padronization structure names fields.
 |**js_**|JSON|
 |**ai_**|Array Integer|
 |**as_**|Array String|
-|**nu_** |Numeric|
 |**tm_**|Time|
 |**dt_**|Date|
 |**ts_**|Timestamp|
 |**bo_**|Boolean|
-|**fl_**|Float|
 |**id_**|Serial|
+|**in_**|Integer|
 |**bi_**|BigInt|
-|**bl_** |Blob|
+|**fl_**|Float|
+|**nu_**|Numeric|
+|**bl_**|Double|
+|**bl_**|Blob|
 |**cl_**|Clob|
