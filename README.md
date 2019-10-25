@@ -44,17 +44,21 @@ $ npm run prod
 Using padronization structure names fields.
 
 ### Preparation
-**vc_** - Character Varying
-**tx_** - Text
-**ch_** - Character
-**js_** - JSON
-**nu_** - Numeric
-**tm_** - Time
-**dt_** - Date
-**ts_** - Timestamp
-**bo_** - Boolean
-**fl_** - Float
-**id_** - Serial
-**bi_** - Bigint
-**bl_** - Blob
-**cl_** - Clob
+| Prefix | Type |
+| ------------- | ------------- |
+|**vc_**|Character Varying|
+|**tx_**|Text|
+|**ch_**|Character|
+|**js_**|JSON|
+|**ai_**|Array Integer|
+|**as_**|Array String|
+|**nu_** |Numeric|
+|**tm_**|Time|
+|**dt_**|Date|
+|**ts_**|Timestamp|
+|**bo_**|Boolean|
+|**fl_**|Float|
+|**id_**|Serial|
+|**bi_**|BigInt|
+|**bl_** |Blob|
+|**cl_**|Clob|
