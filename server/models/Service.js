@@ -3,38 +3,44 @@ const Sequelize = require('sequelize')
 const withDateNoTz = require('sequelize-date-no-tz-postgres');
 module.exports = (sequelize, DataTypes) => {
   const seq = withDateNoTz(Sequelize)
-  const User = sequelize.define('User', {
-    id_user: {
+  const Service = sequelize.define('Service', {
+    id_service: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    vc_name: {
-      allowNull: false,
-      type: Sequelize.STRING(50),
-    },
-    vc_lastname: {
-      allowNull: false,
-      type: Sequelize.STRING(100),
-    },
-    vc_email: {
+    vc_service_mnemonic: {
       allowNull: false,
       unique: true,
-      type: Sequelize.STRING(100),
+      type: Sequelize.STRING(5),
     },
-    vc_password: {
+    tx_service_description: {
       allowNull: false,
+      type: Sequelize.TEXT,
+    },
+    vc_time_service_estimate: {
+      allowNull: false,
+      type: Sequelize.TIME,
+    },
+    nu_material_cost: {
+      allowNull: false,
+      type: Sequelize.NUMERIC(10,2)
+    },
+    nu_third_party_cost: {
+      allowNull: false,
+      type: Sequelize.NUMERIC(10,2)
+    },
+    vc_contact: {
       type: Sequelize.STRING(64)
     },
-    tx_image: {
-      type: Sequelize.TEXT
+    bo_critical_service: {
+      allowNull: false,
+      type: Sequelize.BOOLEAN,
     },
-    vc_password_reset: {
-      type: Sequelize.STRING(64)
-    },
-    ts_exp_password_reset: {
-      type: seq.DATE_NO_TZ
+    id_user: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
     },
     ts_create: {
       allowNull: false,
@@ -51,5 +57,5 @@ module.exports = (sequelize, DataTypes) => {
     schema: 'atelie',
     timestamps: false
   });
-  return User;
+  return Service;
 };

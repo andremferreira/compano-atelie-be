@@ -70,12 +70,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-      dt_create: {
+      ts_create: {
         allowNull: false,
         type: seq.DATE_NO_TZ,
         defaultValue: seq.fn('now'),
       },
-      dt_update: {
+      ts_update: {
         allowNull: false,
         type: seq.DATE_NO_TZ,
         defaultValue: seq.fn('now'),

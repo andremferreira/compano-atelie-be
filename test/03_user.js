@@ -132,7 +132,7 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
     msgS = msgF('tst-0026').info
     msgS = msgS.replace('%1', color('f-red-i', ''))
     msgS = msgS.replace('%2', color('f-hidden-i', ''))
-    it(color('f-yellow', '├') + color('f-hidden', msgS), function getUserByEmailNeg(done) {
+    it(color('f-yellow', '└') + color('f-hidden', msgS), function getUserByEmailNeg(done) {
         request(server)
             .delete('/api/user/email/WOUTEMAIL@TESTE-2.COM')
             .set('access-token', devToken)

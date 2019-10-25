@@ -17,6 +17,7 @@ module.exports = {
       },
       vc_service_mnemonic: {
         allowNull: false,
+        unique: true,
         type: Sequelize.STRING(5),
         validate: {
           len: [5],
@@ -45,25 +46,37 @@ module.exports = {
         allowNull: false,
         type: Sequelize.NUMERIC(10,2),
       },  
-      bo_contact: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      vc_contact: {
+        type: Sequelize.STRING(30),
       },
       bo_critical_service: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
-      dt_create: {
+      id_user: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        schema: 'atelie',
+        references: {
+          model: {
+            schema: 'atelie',
+            tableName: 'users',
+          },
+          key: 'id_user',
+        },
+        defaultValue: 1
+      },      
+      ts_create: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
       },
-      dt_update: {
+      ts_update: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
       }
-    }, {});
+    }, );
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable({

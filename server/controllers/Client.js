@@ -188,7 +188,7 @@ module.exports = {
                         vc_address_complement: req.body.vc_address_complement || client.vc_address_complement,
                         vc_birthday: req.body.vc_birthday || client.vc_birthday,
                         bo_promotion: req.body.bo_promotion || client.bo_promotion,
-                        dt_update: nDate.timestamp || null
+                        ts_update: nDate.timestamp || null
                     }, condition ).then((success) => {
                         var msgResp = msgF('suc-0004', req.query.lang).info
                         msgRpl = msgResp.replace('%1', client.id_client)
@@ -240,7 +240,7 @@ module.exports = {
                         vc_address_complement: req.body.vc_address_complement || client.vc_address_complement,
                         vc_birthday: req.body.vc_birthday || client.vc_birthday,
                         bo_promotion: req.body.bo_promotion || client.bo_promotion,
-                        dt_update: nDate.timestamp || null
+                        ts_update: nDate.timestamp || null
                     }, condition ).then((success) => {
                         var msgResp = msgF('suc-0004', req.query.lang).info
                         msgRpl = msgResp.replace('%1', client.id_client)

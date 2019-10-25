@@ -50,15 +50,15 @@ module.exports = {
       vc_password_reset: {
         type: Sequelize.STRING(64)
       },
-      dt_exp_password_reset: {
+      ts_exp_password_reset: {
         type: sequelize.DATE_NO_TZ
       },
-      dt_create: {
+      ts_create: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),
       },
-      dt_update: {
+      ts_update: {
         allowNull: false,
         type: sequelize.DATE_NO_TZ,
         defaultValue: Sequelize.fn('now'),

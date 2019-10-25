@@ -69,7 +69,7 @@ module.exports = {
                 vc_password: req.body.vc_password || null,
                 tx_image: req.body.tx_image || null,
                 vc_password_reset: req.body.vc_password_reset || null,
-                dt_exp_password_reset: req.body.dt_exp_password_reset || null
+                ts_exp_password_reset: req.body.ts_exp_password_reset || null
             })
             .then((user) => {
                 // ../../msg/db/db.json -> ADD SUCCESS %2(idTable) -> 'suc-0002'
@@ -127,8 +127,8 @@ module.exports = {
                     vc_password: req.body.vc_password || user.vc_password,
                     tx_image: req.body.tx_image || user.tx_image,
                     vc_password_reset: req.body.vc_password_reset || user.vc_password_reset,
-                    dt_exp_password_reset: req.body.dt_exp_password_reset || user.dt_exp_password_reset,
-                    dt_update: nDate.timestamp || null,
+                    ts_exp_password_reset: req.body.ts_exp_password_reset || user.ts_exp_password_reset,
+                    ts_update: nDate.timestamp || null,
                 }, condition).then(() => {
                     var msgResp = msgF('suc-0004', req.query.lang).info
                     msgRpl = msgResp.replace('%1', user.id_user)
