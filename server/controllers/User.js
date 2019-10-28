@@ -85,25 +85,6 @@ module.exports = {
                 return res.status(400).send(errResp)
             })
     },
-
-    updateTest(req, res) {
-        console.log('entrou na rota')
-        condition = {
-            where: {
-                id_user: req.params.id
-            }
-        }
-        console.log(req.params.id)
-        return User.update({
-                vc_lastname: req.body.vc_lastname
-            }, condition)
-            .then(() => {
-                return res.status(200).send({
-                    sucesso: true,
-                    modificacao: req.body.vc_lastname
-                })
-            })
-    },
     // ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
         nDate = new dtCurr
@@ -149,6 +130,11 @@ module.exports = {
     },
     // ----------------------------------- REMOVE BY ID ------------------------------------
     delete(req, res) {
+        condition = {
+            where: {
+                id_user: req.params.id
+            }
+        }
         return User
             .findByPk(req.params.id)
             .then(user => {
@@ -157,7 +143,7 @@ module.exports = {
                     return res.status(404).send(errResp);
                 }
                 return User
-                    .destroy()
+                    .destroy(condition)
                     .then(() => {
                         var errResp = msgF('suc-0001', req.query.lang)
                         return res.status(204).send(errResp);
@@ -171,14 +157,6 @@ module.exports = {
                         }
                     });
             })
-            .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
-                    return res.status(400).send(error)
-                } else {
-                    return res.status(400).send(errResp)
-                }
-            });
     },
     // ----------------------------------- REMOVE BY EMAIL ------------------------------------
     deleteByEmail(req, res, condition) {

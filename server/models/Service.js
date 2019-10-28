@@ -1,4 +1,3 @@
-'use strict';
 const Sequelize = require('sequelize')
 const withDateNoTz = require('sequelize-date-no-tz-postgres');
 module.exports = (sequelize, DataTypes) => {
@@ -19,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: Sequelize.TEXT,
     },
-    vc_time_service_estimate: {
+    tm_estimate_time_service: {
       allowNull: false,
       type: Sequelize.TIME,
     },
@@ -28,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
       type: Sequelize.NUMERIC(10,2)
     },
     nu_third_party_cost: {
+      allowNull: false,
+      type: Sequelize.NUMERIC(10,2)
+    },
+    nu_service_cost: {
       allowNull: false,
       type: Sequelize.NUMERIC(10,2)
     },

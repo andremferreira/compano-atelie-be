@@ -648,14 +648,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método delUserByEmail.",
-                    "info": " Tente remover usuário por e-mail, aguardando o retorno (codeStatus:204) na rota \"delete: /api/user/email/TESTE@NEW.USER\";",
+                    "info": " Tente remover usuário por e-mail, aguardando o retorno (codeStatus:200) na rota \"delete: /api/user/email/TESTE@NEW.USER\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method delUserByEmail.",
-                    "info": " Try delete user by e-mail, expect return (codeStatus:204) on route \"delete: /api/user/email/TESTE@NEW.USER\";",
+                    "info": " Try delete user by e-mail, expect return (codeStatus:200) on route \"delete: /api/user/email/TESTE@NEW.USER\";",
                     "type": "info"
                 }
             ]
@@ -828,14 +828,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updUserById.",
-                    "info": " Tente atualizar usuário pelo código, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/id/1\";",
+                    "info": " Tente atualizar usuário pelo código, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/user/id/1\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method updUserById.",
-                    "info": " Try update user by id, expect return (codeStatus:200) on route \"PUT: /api/client/id/1\";",
+                    "info": " Try update user by id, expect return (codeStatus:200) on route \"PUT: /api/user/id/1\";",
                     "type": "info"
                 }
             ]
@@ -848,14 +848,214 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updUserById.",
-                    "info": " Tente atualizar usuário pelo código 999 %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/client/id/999\";",
+                    "info": " Tente atualizar usuário pelo código 999 %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/user/id/999\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method updUserById.",
-                    "info": " Try update user by id 999 %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/client/id/999\";",
+                    "info": " Try update user by id 999 %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/user/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 44,
+            "code": "tst-0035",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Iniciando teste da classe \"Serviço\"..",
+                    "info": "Iniciando teste da classe \"Serviço\"..",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Start test on \"Service\" class..",
+                    "info":  "Start test on \"Service\" class..",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "code": "tst-0036",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getServiceList.",
+                    "info": " Tente listar serviços, esperando o retorno da lista de serviços na rota \"GET: /api/services\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getServiceList.",
+                    "info":  " Try list services, expect the return of services list on route \"GET: /api/services\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "code": "tst-0037",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método serviceCount.",
+                    "info": " Tente contar serviços, esperando o retorno da quantidade de serviços na rota \"GET: /api/services/count\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method serviceCount.",
+                    "info":  " Try services count, expect to return the quantity of services on route \"GET: /api/services/count\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 47,
+            "code": "tst-0038",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método addService.",
+                    "info": " Tente adicionar novo serviço, aguardando o retorno (statusCode:201) na rota \"POST: /api/service\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method addService.",
+                    "info": " Try add new service, expect to return (statusCode:201) on route \"POST: /api/service\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 48,
+            "code": "tst-0039",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updServiceById.",
+                    "info": " Tente atualizar serviço pelo código, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/service/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updServiceById.",
+                    "info": " Try update service by id, expect return (codeStatus:200) on route \"PUT: /api/service/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "code": "tst-0040",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updServiceByIdNeg.",
+                    "info": " Tente atualizar serviço pelo código 999 %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/service/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updServiceByIdNeg.",
+                    "info": " Try update service by id 999 %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/service/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "code": "tst-0041",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getserviceById.",
+                    "info": " Tente trazer service pelo código, aguardando o retorno das informações do serviço na rota \"GET: /api/service/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getServiceById.",
+                    "info": " Try get service by id, expect to return the service information on route \"GET: /api/service/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 51,
+            "code": "tst-0042",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getServiceByIdNeg.",
+                    "info": " Tente trazer serviço pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) no resultado, utilizando a rota \"GET: /api/user/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getServiceByIdNeg.",
+                    "info": " Try get service by id %1(negation)%2, expect return (codeStatus:404) result, using route \"GET: /api/user/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 52,
+            "code": "tst-0043",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delServiceById.",
+                    "info": " Tente remover serviço pelo código, aguardando o retorno (codeStatus:200) na rota \"delete: /api/service/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delServiceById.",
+                    "info": " Try delete service by id, expect return (codeStatus:200) on route \"delete: /api/service/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 53,
+            "code": "tst-0044",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delServiceByIdNeg.",
+                    "info": " Tente remover serviço pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"DELETE: /api/service/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delServiceByIdNeg.",
+                    "info": " Try delete service by id %1(negation)%2, expect return (codeStatus:404) on route \"DELETE: /api/service/id/999\";",
                     "type": "info"
                 }
             ]

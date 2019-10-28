@@ -28,7 +28,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      tm_time_service_estimate: {
+      tm_estimate_time_service: {
         allowNull: false,
         type: Sequelize.TIME,
       },
