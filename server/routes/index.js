@@ -12,6 +12,7 @@
 /* ║ -User    */ const userController    = require('../controllers/User');                           /*║*/
 /* ║ -Client  */ const clientController  = require('../controllers/Client');                         /*║*/
 /* ║ -Service */ const serviceController = require('../controllers/Service');                        /*║*/
+/* ║ -Budget  */ const budgetController = require('../controllers/Budget');                          /*║*/
 // ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝ 
 // ╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗
 // ║██████████████████████████████████ REQUIRE EXPRESS & ROUTE  ███████████████████████████████████████║
@@ -45,7 +46,7 @@
 /* ║║ -Apply   */ app.use('/api', ProtectedRoutes);                                              /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
-// ║║██████████████████████████████████ ROUTE OF CRUD CLIENTES   ██████████████████████████████████║   ║
+// ║║██████████████████████████████████ ROUTE OF CRUD CLIENTS    ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
 /* ║║ -ListAll */ ProtectedRoutes.get('/clients', clientController.list);                        /*║   ║*/
 /* ║║ -Count   */ ProtectedRoutes.get('/clients/count', clientController.count);                 /*║   ║*/
@@ -59,7 +60,7 @@
 /* ║║ -DelEml  */ ProtectedRoutes.delete('/client/email/:email', clientController.deleteByEmail);/*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
-// ║║██████████████████████████████████ ROUTE OF CRUD USUARIOS   ██████████████████████████████████║   ║
+// ║║██████████████████████████████████ ROUTE OF CRUD USERS      ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
 /* ║║ -ListAll */ ProtectedRoutes.get('/users', userController.list);                            /*║   ║*/
 /* ║║ -Count   */ ProtectedRoutes.get('/users/count', userController.count);                     /*║   ║*/
@@ -78,6 +79,16 @@
 /* ║║ -Update  */ ProtectedRoutes.put('/service/id/:id', serviceController.update);              /*║   ║*/
 /* ║║ -UpdMne  */ ProtectedRoutes.put('/service/mne/:mne', serviceController.updateMne);         /*║   ║*/
 /* ║║ -Delete  */ ProtectedRoutes.delete('/service/id/:id', serviceController.delete);           /*║   ║*/
+// ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
+// ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
+// ║║██████████████████████████████████ ROUTE OF CRUD BUDGETS    ██████████████████████████████████║   ║
+// ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
+/* ║║ -ListAll */ ProtectedRoutes.get('/budgets', budgetController.list);                        /*║   ║*/
+/* ║║ -Count   */ ProtectedRoutes.get('/budgets/count', budgetController.count);                 /*║   ║*/
+/* ║║ -GetId   */ ProtectedRoutes.get('/budget/id/:id', budgetController.getById);               /*║   ║*/
+/* ║║ -AddNew  */ ProtectedRoutes.post('/budget', budgetController.add);                         /*║   ║*/
+/* ║║ -Update  */ ProtectedRoutes.put('/budget/id/:id', budgetController.update);                /*║   ║*/
+/* ║║ -Delete  */ ProtectedRoutes.delete('/budget/id/:id', budgetController.delete);             /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
 // ║║██████████████████████████████████ CRIPTO PROCESS COMPARE   ██████████████████████████████████║   ║

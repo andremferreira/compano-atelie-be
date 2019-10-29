@@ -39,7 +39,19 @@ module.exports = {
           key: 'id_user'
         },
       },
-      id_orcamento: {
+      id_service_owner: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        schema: 'atelie',
+        references: {
+          model: {
+            schema: 'atelie',
+            tableName: 'users'
+          },
+          key: 'id_user'
+        },
+      },      
+      id_budget: {
         allowNull: false,
         type: Sequelize.INTEGER,
         schema: 'atelie',

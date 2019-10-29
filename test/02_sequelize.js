@@ -9,38 +9,40 @@ const sequelizeP = new Sequelize(configP.database, configP.username, configP.pas
 // ----------------------------------- CONSOLE.LOG COLOR HELPER -----------------------
 const color = require('../server/factory/consoleLogColor')
 // ----------------------------------- MSG FACTORY SEND REPORT ------------------------
-const msgF  = require('../server/factory/msgFactory')
-// ----------------------------------- AJUST OF TEXT OUTPUT TAB SHOW ------------------
-const space = '  '
-// ----------------------------------- VALIDATION VARIABLE ----------------------------
-describe(color('f-yellow','► ') + msgF('tst-0005').title, function () {
-    it(color('f-yellow','├') + color('f-hidden', msgF('tst-0006').info + ' | ') + color('f-green','DEV'), function testSlash(done) {
+const msgF = require('../server/factory/msgFactory')
+// ----------------------------------- TEST CONECTIONS --------------------------------
+describe(color('f-yellow', '► ') + msgF('tst-0005').title, function () {
+// ----------------------------------- TEST DEVELOPMENT -------------------------------
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0006').info + ' | ') + color('f-green', 'DEV'), function testSlash(done) {
         sequelizeD
             .authenticate()
-            .then(() => { 
-                //console.log(color('f-green', space + msgF('suc-0003').info))
-                done() 
+            .then(() => {
+                done()
             })
-            .catch(err => { if (!err) throw (err) })
+            .catch(err => {
+                if (!err) throw (err)
+            })
     })
-
-    it(color('f-yellow','├') + color('f-hidden', msgF('tst-0006').info  + ' | ')  + color('f-yellow','TEST'), function testSlash(done) {
+// ----------------------------------- TEST TEST -------------------------------------
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0006').info + ' | ') + color('f-yellow', 'TEST'), function testSlash(done) {
         sequelizeT
             .authenticate()
-            .then(() => { 
-                //console.log(color('f-green', space + msgF('suc-0003').info))
-                done() 
+            .then(() => {
+                done()
             })
-            .catch(err => { if (!err) throw (err) })
+            .catch(err => {
+                if (!err) throw (err)
+            })
     })
-
-    it(color('f-yellow','└') + color('f-hidden', msgF('tst-0006').info + ' | ') + color('f-red','PROD'), function testSlash(done) {
+// ----------------------------------- TEST PRODUCTION ------------------------------
+    it(color('f-yellow', '└') + color('f-hidden', msgF('tst-0006').info + ' | ') + color('f-red', 'PROD'), function testSlash(done) {
         sequelizeP
             .authenticate()
-            .then(() => { 
-                //console.log(color('f-green', space + msgF('suc-0003').info))
-                done() 
+            .then(() => {
+                done()
             })
-            .catch(err => { if (!err) throw (err) })
+            .catch(err => {
+                if (!err) throw (err)
+            })
     })
 })
