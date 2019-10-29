@@ -307,15 +307,15 @@
                 {
                     "id": 1,
                     "lang": "pt_BR",
-                    "title": "Iniciando teste na classe \"Client\"..",
-                    "info": "Iniciando teste na classe \"Client\"..",
+                    "title": "Iniciando teste de classe \"Client\"...",
+                    "info": "Iniciando teste de classe \"Client\"...",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
-                    "title": "Start test on \"Client\" class..",
-                    "info":  "Start test on \"Client\" class..",
+                    "title": "Start test on \"Client\" class...",
+                    "info":  "Start test on \"Client\" class...",
                     "type": "info"
                 }
             ]
@@ -547,15 +547,15 @@
                 {
                     "id": 1,
                     "lang": "pt_BR",
-                    "title": "Iniciando teste da classe \"Usuario\"..",
-                    "info": "Iniciando teste da classe \"Usuario\"..",
+                    "title": "Iniciando teste de classe \"User\"...",
+                    "info": "Iniciando teste de classe \"User\"...",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
-                    "title": "Start test on \"User\" class..",
-                    "info":  "Start test on \"User\" class..",
+                    "title": "Start test on \"User\" class...",
+                    "info":  "Start test on \"User\" class...",
                     "type": "info"
                 }
             ]
@@ -867,15 +867,15 @@
                 {
                     "id": 1,
                     "lang": "pt_BR",
-                    "title": "Iniciando teste da classe \"Serviço\"..",
-                    "info": "Iniciando teste da classe \"Serviço\"..",
+                    "title": "Iniciando teste de classe \"Service\"...",
+                    "info": "Iniciando teste de classe \"Service\"...",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
-                    "title": "Start test on \"Service\" class..",
-                    "info":  "Start test on \"Service\" class..",
+                    "title": "Start test on \"Service\" class...",
+                    "info":  "Start test on \"Service\" class...",
                     "type": "info"
                 }
             ]
