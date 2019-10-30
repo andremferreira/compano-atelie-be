@@ -9,7 +9,7 @@ Basically for a running application it is necessary to configure:
 - Server HTTP (Express)
 - Routs (Express)
 - Connection database (PostresSQL / pg).
-- Node 6.0.0 iguals or over
+- Node 6.0.0 equal or over
 - Sequelize client on global
 
 ## Instalation
@@ -20,6 +20,11 @@ $ mkdir /app
 $ cd /app
 $ git clone https://github.com/andremferreira/compano-atelie-be.git
 $ npm update
+```
+## Pre-requariment
+Configure the database environment on file:
+```sh
+$ vi ./server/config/config.json
 ```
 ### Preparation 
 Configure the database structure and initial seed.
