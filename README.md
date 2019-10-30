@@ -46,7 +46,7 @@ $ npm run prod
 ```
 
 ## Data Base Default
-Using padronization structure names fields.
+Using standardization framework name fields.
 
 ### Preparation
 | Prefix | Type |
