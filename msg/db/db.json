@@ -948,7 +948,7 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updServiceById.",
-                    "info": " Tente atualizar serviço pelo código, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/service/id/1\";",
+                    "info": " Tente atualizar serviço pelo código, aguardando o retorno (codeStatus:200) na rota \"PUT: /api/service/id/1\";",
                     "type": "info"
                 },
                 {
@@ -1008,14 +1008,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método getServiceByIdNeg.",
-                    "info": " Tente trazer serviço pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) no resultado, utilizando a rota \"GET: /api/user/id/999\";",
+                    "info": " Tente trazer serviço pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) no resultado, utilizando a rota \"GET: /api/service/id/999\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method getServiceByIdNeg.",
-                    "info": " Try get service by id %1(negation)%2, expect return (codeStatus:404) result, using route \"GET: /api/user/id/999\";",
+                    "info": " Try get service by id %1(negation)%2, expect return (codeStatus:404) result, using route \"GET: /api/service/id/999\";",
                     "type": "info"
                 }
             ]
@@ -1056,6 +1056,286 @@
                     "lang": "en_US",
                     "title": "Method delServiceByIdNeg.",
                     "info": " Try delete service by id %1(negation)%2, expect return (codeStatus:404) on route \"DELETE: /api/service/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 54,
+            "code": "22P02",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Formato inválido.",
+                    "info": "Tipo de dados são incompatíveis (%1).",
+                    "type": "danger"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Invalid data types!",
+                    "info": "Data types are incompatibles (%1).",
+                    "type": "danger"
+                }
+            ]
+        },
+        {
+            "id": 54,
+            "code": "23505",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Regra de unicidade quebrada!",
+                    "info": "Regra de unicidade foi quebrada.",
+                    "type": "warning"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Broken oneness rule!",
+                    "info": "Broken the unique id item rules.",
+                    "type": "warning"
+                }
+            ]
+        },
+        {
+            "id": 55,
+            "code": "tst-0045",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Iniciando teste de classe \"Budget\"...",
+                    "info": "Iniciando teste de classe \"Budget\"...",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Start test on \"Budget\" class...",
+                    "info":  "Start test on \"Budget\" class...",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "code": "tst-0046",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getBudgetList.",
+                    "info": " Tente listar orçamentos, esperando o retorno da lista de orçamentos na rota \"GET: /api/budgets\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getBudgetList.",
+                    "info":  " Try list services, expect the return of services list on route \"GET: /api/budgets\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 57,
+            "code": "tst-0047",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método budgetCount.",
+                    "info": " Tente contar oraçamentos, esperando o retorno da quantidade de orçamentos na rota \"GET: /api/budgets/count\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method budgetCount.",
+                    "info":  " Try budgets count, expect to return the quantity of budgets on route \"GET: /api/budgets/count\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 58,
+            "code": "tst-0048",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método addBudget.",
+                    "info": " Tente adicionar novo orçamento, aguardando o retorno (statusCode:201) na rota \"POST: /api/budget\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method addBudget.",
+                    "info": " Try add new budget, expect to return (statusCode:201) on route \"POST: /api/budget\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 59,
+            "code": "tst-0049",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updBudgetById.",
+                    "info": " Tente atualizar orçamento pelo código, aguardando o retorno (codeStatus:200) na rota \"PUT: /api/budget/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updBudgetById.",
+                    "info": " Try update budget by id, expect return (codeStatus:200) on route \"PUT: /api/budget/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 60,
+            "code": "tst-0050",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updServiceByMne.",
+                    "info": " Tente atualizar serviço pelo mnemônico, aguardando o retorno (codeStatus:200) na rota \"PUT: /api/service/mne/RPACM\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updServiceByMne.",
+                    "info": " Try update service by mnemonic, expect return (codeStatus:200) on route \"PUT: /api/service/mne/RPACM\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 61,
+            "code": "tst-0051",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updServiceByMneNeg.",
+                    "info": " Tente atualizar serviço pelo mnemônico RPACM %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/service/mne/RPACM\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updServiceByMneNeg.",
+                    "info": " Try update service by mnemonic RPACM %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/service/mne/RPACM\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 62,
+            "code": "tst-0052",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updBudgetByIdNeg.",
+                    "info": " Tente atualizar orçamento pelo código 999 %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/budget/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updBudgetByIdNeg.",
+                    "info": " Try update budget by id 999 %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/budget/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 63,
+            "code": "tst-0053",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getBudgetById.",
+                    "info": " Tente trazer orçamento pelo código, aguardando o retorno das informações do serviço na rota \"GET: /api/budget/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getBudgetById.",
+                    "info": " Try get budget by id, expect to return the service information on route \"GET: /api/budget/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 64,
+            "code": "tst-0054",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getBudgetByIdNeg.",
+                    "info": " Tente trazer orçamento pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) no resultado, utilizando a rota \"GET: /api/budget/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getBudgetByIdNeg.",
+                    "info": " Try get budget by id %1(negation)%2, expect return (codeStatus:404) result, using route \"GET: /api/budget/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 65,
+            "code": "tst-0055",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delBudgetById.",
+                    "info": " Tente remover orçamento pelo código, aguardando o retorno (codeStatus:200) na rota \"delete: /api/budget/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delBudgetById.",
+                    "info": " Try delete budget by id, expect return (codeStatus:200) on route \"delete: /api/budget/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 66,
+            "code": "tst-0056",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delBudgetByIdNeg.",
+                    "info": " Tente remover orçamento pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"DELETE: /api/budget/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delBudgetByIdNeg.",
+                    "info": " Try delete budget by id %1(negation)%2, expect return (codeStatus:404) on route \"DELETE: /api/budget/id/999\";",
                     "type": "info"
                 }
             ]

@@ -19,7 +19,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
         server.close()
     })
     // ----------------------------------- LIST SERVICES ---------------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0036').info), function listUser(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0036').info), function listService(done) {
         request(server)
             .get('/api/services')
             .set('access-token', devToken)
@@ -27,14 +27,14 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     })
 
     // ----------------------------------- COUNT SERVICES ---------------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0037').info), function countUser(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0037').info), function countService(done) {
         request(server)
             .get('/api/services/count')
             .set('access-token', devToken)
             .expect(200, done)
     })
     // ----------------------------------- ADD SERVICE ---------------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0038').info), function addNewUser(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0038').info), function addNewService(done) {
         servTest = {
             id_service: 1,
             vc_service_mnemonic: "RPACM",
@@ -57,8 +57,8 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
                 done()
             })
     })
-    // ----------------------------------- UPDATE SERVICE BY ID ------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0039').info), function updUserById(done) {
+    // ----------------------------------- UPDATE SERVICE BY MNE ------------------------------
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0050').info), function updServiceByMne(done) {
         servTest = {
             vc_service_mnemonic: "TSRPA",
             tx_service_description: "T-SHIRT REPAIR",
@@ -74,11 +74,48 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
                 done()
             })
     })
+    // ----------------------------------- UPDATE SERVICE BY MNE NEG --------------------------
+    msgS = msgF('tst-0051').info
+    msgS = msgS.replace('%1', color('f-red-i', ''))
+    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    it(color('f-yellow', '├') + color('f-hidden', msgS), function updServiceByMneNeg(done) {
+        servTest = {
+            vc_service_mnemonic: "TSRPA",
+            tx_service_description: "T-SHIRT REPAIR",
+            vc_contact: "JONNY MANFISH"
+          }
+        request(server)
+            .put('/api/service/mne/RPACM')
+            .set('access-token', devToken)
+            .send(servTest)
+            .expect(404)
+            .end(function (err, res) {
+                if (err) throw (err)
+                done()
+            })
+    })
+    // ----------------------------------- UPDATE SERVICE BY MNE ------------------------------
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0039').info), function updServiceById(done) {
+        servTest = {
+            vc_service_mnemonic: "TSRPA",
+            tx_service_description: "T-SHIRT REPAIR",
+            vc_contact: "JONNY MANFISH"
+          }
+        request(server)
+            .put('/api/service/id/1')
+            .set('access-token', devToken)
+            .send(servTest)
+            .expect(200)
+            .end(function (err, res) {
+                if (err) throw (err)
+                done()
+            })
+    })
     // ----------------------------------- UPDATE USER BY ID NEG --------------------------
     msgS = msgF('tst-0040').info
     msgS = msgS.replace('%1', color('f-red-i', ''))
     msgS = msgS.replace('%2', color('f-hidden-i', ''))
-    it(color('f-yellow', '├') + color('f-hidden', msgS), function updUserByIdNeg(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgS), function updServiceByIdNeg(done) {
         servTest = {
             tx_service_description: "T-SHIRT REPAIR",
             vc_contact: "JONNY MANFISH"
@@ -94,7 +131,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
             })
     })
      // ----------------------------------- GET SERVICE BY ID ---------------------------------
-     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0041').info), function getUserById(done) {
+     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0041').info), function getServiceById(done) {
         request(server)
             .get('/api/service/id/1')
             .set('access-token', devToken)
@@ -108,7 +145,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     msgS = msgF('tst-0042').info
     msgS = msgS.replace('%1', color('f-red-i', ''))
     msgS = msgS.replace('%2', color('f-hidden-i', ''))
-    it(color('f-yellow', '├') + color('f-hidden', msgS), function getUserByIdNeg(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgS), function getServiceByIdNeg(done) {
         request(server)
             .get('/api/service/id/999')
             .set('access-token', devToken)
@@ -117,7 +154,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
             }).expect(404, msgF('err-0002'), done)
     })
     // ----------------------------------- REMOVE SERVICE BY ID ---------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0043').info), function delUserByEmail(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0043').info), function delServiceById(done) {
         request(server)
             .delete('/api/service/id/1')
             .set('access-token', devToken)
@@ -131,7 +168,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     msgS = msgF('tst-0044').info
     msgS = msgS.replace('%1', color('f-red-i', ''))
     msgS = msgS.replace('%2', color('f-hidden-i', ''))
-    it(color('f-yellow', '└') + color('f-hidden', msgS), function getUserByEmailNeg(done) {
+    it(color('f-yellow', '└') + color('f-hidden', msgS), function delServiceByIdNeg(done) {
         request(server)
             .delete('/api/service/id/999')
             .set('access-token', devToken)

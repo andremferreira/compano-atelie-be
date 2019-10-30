@@ -9,7 +9,7 @@ const auth = require('../auth/userAuth')
 const userTest = require('../server/factory/userTest').user
 const devToken = auth.createIdToken(userTest, true)
 // ----------------------------------- TEST BUDGET -----------------------------------------
-describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
+describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
     let msgS
     let server
     beforeEach(function () {
@@ -19,7 +19,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
         server.close()
     })
     // ----------------------------------- LIST BUDGETS ---------------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0036').info), function listUser(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0046').info), function listBudget(done) {
         request(server)
             .get('/api/budgets')
             .set('access-token', devToken)
@@ -27,19 +27,19 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
     })
 
     // ----------------------------------- COUNT BUDGETS ---------------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0037').info), function countUser(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0047').info), function countBudget(done) {
         request(server)
             .get('/api/budgets/count')
             .set('access-token', devToken)
             .expect(200, done)
     })
     // ----------------------------------- ADD BUDGET ---------------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0038').info), function addNewUser(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0048').info), function addNewBudget(done) {
         bgTest = {
             id_budget: 1,
             id_client: 1,
             id_user: 1,
-            js_budget_service: {
+            js_budget_service: [{
                 id: 1,
                 vc_service_mnemonic: "RPACM",
                 tx_service_description: "REPARO DE CAMISA / CAMISETA",
@@ -47,11 +47,11 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
                 nu_material_cost: 4.65,
                 nu_third_party_cost: 0.00,
                 nu_service_cost: 3.99,
-                vc_contact: "Maria Souza",
+                vc_contact: "MARIA SOUZA",
                 bo_critical_service: false,
                 id_owner: 1,
                 in_quantity: 3
-            }
+            }]
         }
         request(server)
             .post('/api/budget')
@@ -64,9 +64,8 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
             })
     })
     // ----------------------------------- UPDATE BUDGET BY ID ------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0039').info), function updUserById(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0049').info), function updBudgetById(done) {
         bgTest = {
-            id_budget: 1,
             id_client: 1,
             id_user: 1,
             js_budget_service: [{
@@ -93,11 +92,11 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
                 done()
             })
     })
-    // ----------------------------------- UPDATE USER BY ID NEG --------------------------
-    msgS = msgF('tst-0040').info
+    // ----------------------------------- UPDATE BUDGET BY ID NEG --------------------------
+    msgS = msgF('tst-0052').info
     msgS = msgS.replace('%1', color('f-red-i', ''))
     msgS = msgS.replace('%2', color('f-hidden-i', ''))
-    it(color('f-yellow', '├') + color('f-hidden', msgS), function updUserByIdNeg(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgS), function updBudgetByIdNeg(done) {
         bgTest = {
             js_budget_service: [{
                     id: 1,
@@ -130,8 +129,8 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
                 done()
             })
     })
-    // ----------------------------------- GET SERVICE BY ID ---------------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0041').info), function getUserById(done) {
+    // ----------------------------------- GET BUDGET BY ID ---------------------------------
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0053').info), function getBudgetById(done) {
         request(server)
             .get('/api/budget/id/1')
             .set('access-token', devToken)
@@ -141,11 +140,11 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
                 done()
             })
     })
-    // ----------------------------------- GET SERVICE BY ID WITHOUT RESULT ------------------
-    msgS = msgF('tst-0042').info
+    // ----------------------------------- GET BUDGET BY ID WITHOUT RESULT ------------------
+    msgS = msgF('tst-0054').info
     msgS = msgS.replace('%1', color('f-red-i', ''))
     msgS = msgS.replace('%2', color('f-hidden-i', ''))
-    it(color('f-yellow', '├') + color('f-hidden', msgS), function getUserByIdNeg(done) {
+    it(color('f-yellow', '├') + color('f-hidden', msgS), function getBudgetByIdNeg(done) {
         request(server)
             .get('/api/budget/id/999')
             .set('access-token', devToken)
@@ -153,8 +152,8 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
     })
-    // ----------------------------------- REMOVE SERVICE BY ID ---------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0043').info), function delUserByEmail(done) {
+    // ----------------------------------- REMOVE BUDGET BY ID ---------------------------
+    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0055').info), function delBudgetById(done) {
         request(server)
             .delete('/api/budget/id/1')
             .set('access-token', devToken)
@@ -164,11 +163,11 @@ describe(color('f-yellow', '► ') + msgF('tst-0035').title, function () {
                 done()
             })
     })
-    // ----------------------------------- REMOVE SERVICE BY ID WITHOUT RESULT ------------
-    msgS = msgF('tst-0044').info
+    // ----------------------------------- REMOVE BUDGET BY ID WITHOUT RESULT ------------
+    msgS = msgF('tst-0056').info
     msgS = msgS.replace('%1', color('f-red-i', ''))
     msgS = msgS.replace('%2', color('f-hidden-i', ''))
-    it(color('f-yellow', '└') + color('f-hidden', msgS), function getUserByEmailNeg(done) {
+    it(color('f-yellow', '└') + color('f-hidden', msgS), function delBudgetByIdNeg(done) {
         request(server)
             .delete('/api/budget/id/999')
             .set('access-token', devToken)

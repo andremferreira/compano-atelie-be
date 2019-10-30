@@ -13,9 +13,15 @@ module.exports = {
             .then((budget) => res.status(200).send(budget))
             .catch((error) => {
                 var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var msgError = error.original.code || error.errors[0].type
+                var errResp = msgF(msgError, req.query.lang)
+                if (errResp.nF == true) {
+                    console.log(errResp)
                     return res.status(400).send(error)
                 } else {
+                    msg = errResp.info
+                    msg = msg.replace('%1', error.original)
+                    errResp.info = msg
                     return res.status(400).send(errResp)
                 }
             });
@@ -31,9 +37,15 @@ module.exports = {
             })
             .catch((error) => {
                 var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var msgError = error.original.code || error.errors[0].type
+                var errResp = msgF(msgError, req.query.lang)
+                if (errResp.nF == true) {
+                    console.log(errResp)
                     return res.status(400).send(error)
                 } else {
+                    msg = errResp.info
+                    msg = msg.replace('%1', error.original)
+                    errResp.info = msg
                     return res.status(400).send(errResp)
                 }
             });
@@ -51,9 +63,15 @@ module.exports = {
             })
             .catch((error) => {
                 var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var msgError = error.original.code || error.errors[0].type
+                var errResp = msgF(msgError, req.query.lang)
+                if (errResp.nF == true) {
+                    console.log(errResp)
                     return res.status(400).send(error)
                 } else {
+                    msg = errResp.info
+                    msg = msg.replace('%1', error.original)
+                    errResp.info = msg
                     return res.status(400).send(errResp)
                 }
             });
@@ -68,18 +86,24 @@ module.exports = {
                 js_budget_service: req.body.js_budget_service || null
             }).then((budget) => {
                 // ../../msg/db/db.json -> ADD SUCCESS %2(idTable) -> 'suc-0002'
-                var msgResp = msgF('suc-0002', req.query.lang).info
-                msgRpl = msgResp.replace('%1', budget.id_budget)
-                return res.status(201).send({
-                    success: true,
-                    message: msgRpl
-                })
+                var msgResp = msgF('suc-0002', req.query.lang)
+                msgRpl = msgResp.info
+                msgRpl = msgRpl.replace('%1', budget.id_budget)
+                msgResp.info = msgRpl
+                return res.status(201).send(msgResp)
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
-                    return res.status(400).send(error)
+                var msgError = error.original.code || error.errors[0].type
+                var errResp = msgF(msgError, req.query.lang)
+                if (!errResp || errResp.nF == true) {
+                    return res.status(400).send({
+                        "error": true,
+                        "original": error.errors[0].message
+                    })
                 } else {
+                    msg = errResp.info
+                    msg = msg.replace('%1', error.original)
+                    errResp.info = msg
                     return res.status(400).send(errResp)
                 }
             })
@@ -94,7 +118,7 @@ module.exports = {
         }
         return Budget
             .findByPk(req.params.id).
-        then((budget) => {
+            then((budget) => {
             if (!budget || Object.keys(budget).length === 0) {
                 var errResp = msgF('err-0002', req.query.lang)
                 return res.status(404).send(errResp);
@@ -106,21 +130,40 @@ module.exports = {
                     js_budget_service: req.body.js_budget_service || budget.js_budget_service,
                     ts_update: nDate.timestamp || null,
                 }, condition).then(() => {
-                    var msgResp = msgF('suc-0004', req.query.lang).info
-                    msgRpl = msgResp.replace('%1', budget.id_budget)
-                    return res.status(200).send({
-                        success: true,
-                        message: msgRpl
-                    })
+                    var msgResp = msgF('suc-0004', req.query.lang)
+                    msgRpl = msgResp.info
+                    msgRpl = msgRpl.replace('%1', budget.id_budget)
+                    msgResp.info = msgRpl
+                    return res.status(200).send(msgResp)
                 })
                 .catch((error) => {
+                    console.log(error)
                     var errResp = msgF(error.original.code, req.query.lang)
-                    if (!errResp) {
+                    var msgError = error.original.code || error.errors[0].type
+                    var errResp = msgF(msgError, req.query.lang)
+                    if (errResp.nF == true) {
+                        console.log(errResp)
                         return res.status(400).send(error)
                     } else {
+                        msg = errResp.info
+                        msg = msg.replace('%1', error.original)
+                        errResp.info = msg
                         return res.status(400).send(errResp)
                     }
                 })
+        }).catch((error) => {
+            var errResp = msgF(error.original.code, req.query.lang)
+            var msgError = error.original.code || error.errors[0].type
+            var errResp = msgF(msgError, req.query.lang)
+            if (errResp.nF == true) {
+                console.log(errResp)
+                return res.status(400).send(error)
+            } else {
+                msg = errResp.info
+                msg = msg.replace('%1', error.original)
+                errResp.info = msg
+                return res.status(400).send(errResp)
+            }
         })
     },
     // ----------------------------------- REMOVE BY ID ------------------------------------
@@ -128,7 +171,7 @@ module.exports = {
         condition = {
             where: {
                 id_budget: req.params.id
-            } 
+            }
         }
         return Budget
             .findByPk(req.params.id)
@@ -147,13 +190,27 @@ module.exports = {
                         });
                     })
                     .catch((error) => {
-                        var errResp = msgF(error.original.code, req.query.lang)
-                        if (!errResp) {
+                        var msgError = error.original.code || error.errors[0].type
+                        var errResp = msgF(msgError, req.query.lang)
+                        if (!errResp || errResp.nF) {
                             return res.status(400).send(error)
                         } else {
                             return res.status(400).send(errResp)
                         }
                     });
+            }).catch((error) => {
+                var errResp = msgF(error.original.code, req.query.lang)
+                var msgError = error.original.code || error.errors[0].type
+                var errResp = msgF(msgError, req.query.lang)
+                if (errResp.nF == true) {
+                    console.log(errResp)
+                    return res.status(400).send(error)
+                } else {
+                    msg = errResp.info
+                    msg = msg.replace('%1', error.original)
+                    errResp.info = msg
+                    return res.status(400).send(errResp)
+                }
             })
     }
 }
