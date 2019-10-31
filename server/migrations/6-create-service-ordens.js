@@ -63,23 +63,27 @@ module.exports = {
           key: 'id_budget'
         },
       },
-      nu_value_of_service: {
+      nu_vservice: {
         allowNull: false,
         type: Sequelize.NUMERIC(10,2),
       },  
       bo_canceled: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
       bo_received: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
       bo_paid: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
       bo_delivered: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },

@@ -63,6 +63,7 @@ module.exports = {
     add(req, res) {
         return User
             .create({
+                id_user: req.body.id_user || null,
                 vc_name: req.body.vc_name || null,
                 vc_lastname: req.body.vc_lastname || null,
                 vc_email: req.body.vc_email || null,

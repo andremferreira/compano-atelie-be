@@ -13,6 +13,7 @@
 /* ║ -Client  */ const clientController  = require('../controllers/Client');                         /*║*/
 /* ║ -Service */ const serviceController = require('../controllers/Service');                        /*║*/
 /* ║ -Budget  */ const budgetController = require('../controllers/Budget');                          /*║*/
+/* ║ -S.Order */ const serOrderController = require('../controllers/ServiceOrder');                  /*║*/
 // ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝ 
 // ╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗
 // ║██████████████████████████████████ REQUIRE EXPRESS & ROUTE  ███████████████████████████████████████║
@@ -89,6 +90,16 @@
 /* ║║ -AddNew  */ ProtectedRoutes.post('/budget', budgetController.add);                         /*║   ║*/
 /* ║║ -Update  */ ProtectedRoutes.put('/budget/id/:id', budgetController.update);                /*║   ║*/
 /* ║║ -Delete  */ ProtectedRoutes.delete('/budget/id/:id', budgetController.delete);             /*║   ║*/
+// ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
+// ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
+// ║║██████████████████████████████████ ROUTE OF CRUD SERV.ORDER ██████████████████████████████████║   ║
+// ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
+/* ║║ -ListAll */ ProtectedRoutes.get('/servOrders', serOrderController.list);                   /*║   ║*/
+/* ║║ -Count   */ ProtectedRoutes.get('/servOrders/count', serOrderController.count);            /*║   ║*/
+/* ║║ -GetId   */ ProtectedRoutes.get('/servOrder/id/:id', serOrderController.getById);          /*║   ║*/
+/* ║║ -AddNew  */ ProtectedRoutes.post('/servOrder', serOrderController.add);                    /*║   ║*/
+/* ║║ -Update  */ ProtectedRoutes.put('/servOrder/id/:id', serOrderController.update);           /*║   ║*/
+/* ║║ -Delete  */ ProtectedRoutes.delete('/servOrder/id/:id', serOrderController.delete);        /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
 // ║║██████████████████████████████████ CRIPTO PROCESS COMPARE   ██████████████████████████████████║   ║
