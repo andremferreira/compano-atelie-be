@@ -788,14 +788,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método addClientById.",
-                    "info": " Tente adicionar cliente com código 999, aguardando o retorno (codeStatus:201) na rota \"POST: /api/client/id/999\";",
+                    "info": " Tente adicionar cliente com código, aguardando o retorno (codeStatus:201) na rota \"POST: /api/client/id/999\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method addClientById.",
-                    "info": " Try add client by id 999, expect return (codeStatus:201) on route \"POST: /api/client/id/999\";",
+                    "info": " Try add client by id, expect return (codeStatus:201) on route \"POST: /api/client/id/999\";",
                     "type": "info"
                 }
             ]
@@ -808,14 +808,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método addClientById.",
-                    "info": " Tente adicionar cliente com código 999 %1(negando)%2, aguardando o retorno (codeStatus:400) na rota \"POST: /api/client/id/999\";",
+                    "info": " Tente adicionar cliente com código %1(negando)%2, aguardando o retorno (codeStatus:400) na rota \"POST: /api/client/id/999\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method addClientById.",
-                    "info": " Try add client by id 999 %1(negation)%2, expect return (codeStatus:400) on route \"POST: /api/client/id/999\";",
+                    "info": " Try add client by id %1(negation)%2, expect return (codeStatus:400) on route \"POST: /api/client/id/999\";",
                     "type": "info"
                 }
             ]
@@ -848,14 +848,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updUserById.",
-                    "info": " Tente atualizar usuário pelo código 999 %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/user/id/999\";",
+                    "info": " Tente atualizar usuário pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/user/id/999\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method updUserById.",
-                    "info": " Try update user by id 999 %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/user/id/999\";",
+                    "info": " Try update user by id %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/user/id/999\";",
                     "type": "info"
                 }
             ]
@@ -968,14 +968,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updServiceByIdNeg.",
-                    "info": " Tente atualizar serviço pelo código 999 %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/service/id/999\";",
+                    "info": " Tente atualizar serviço pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/service/id/999\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method updServiceByIdNeg.",
-                    "info": " Try update service by id 999 %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/service/id/999\";",
+                    "info": " Try update service by id %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/service/id/999\";",
                     "type": "info"
                 }
             ]
@@ -1248,14 +1248,14 @@
                     "id": 1,
                     "lang": "pt_BR",
                     "title": "Método updBudgetByIdNeg.",
-                    "info": " Tente atualizar orçamento pelo código 999 %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/budget/id/999\";",
+                    "info": " Tente atualizar orçamento pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/budget/id/999\";",
                     "type": "info"
                 },
                 {
                     "id": 2,
                     "lang": "en_US",
                     "title": "Method updBudgetByIdNeg.",
-                    "info": " Try update budget by id 999 %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/budget/id/999\";",
+                    "info": " Try update budget by id %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/budget/id/999\";",
                     "type": "info"
                 }
             ]
@@ -1336,6 +1336,246 @@
                     "lang": "en_US",
                     "title": "Method delBudgetByIdNeg.",
                     "info": " Try delete budget by id %1(negation)%2, expect return (codeStatus:404) on route \"DELETE: /api/budget/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 67,
+            "code": "tst-0057",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Iniciando teste de classe \"ServiceOrder\"...",
+                    "info": "Iniciando teste de classe \"ServiceOrder\"...",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Start test on \"ServiceOrder\" class...",
+                    "info":  "Start test on \"ServiceOrder\" class...",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 68,
+            "code": "tst-0058",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getServiceOrderList.",
+                    "info": " Tente listar ordem de serviço, esperando o retorno da lista de ordem de serviço na rota \"GET: /api/servOrders\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getBudgetList.",
+                    "info":  " Try list service orders, expect the return of service orders list on route \"GET: /api/servOrders\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 69,
+            "code": "tst-0059",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método servOrdersCount.",
+                    "info": " Tente contar ordem de serviço, esperando o retorno da quantidade de ordem de serviço na rota \"GET: /api/servOrders/count\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method servOrdersCount.",
+                    "info":  " Try service orders count, expect to return the quantity of service orders on route \"GET: /api/servOrders/count\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 70,
+            "code": "tst-0060",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método addServOrder.",
+                    "info": " Tente adicionar nova ordem de serviço, aguardando o retorno (statusCode:201) na rota \"POST: /api/servOrder\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method addServOrder.",
+                    "info": " Try add new service order, expect to return (statusCode:201) on route \"POST: /api/servOrder\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 71,
+            "code": "tst-0061",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updServOrderById.",
+                    "info": " Tente atualizar ordem de serviço pelo código, aguardando o retorno (codeStatus:200) na rota \"PUT: /api/servOrder/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updServOrderById.",
+                    "info": " Try update service order by id, expect return (codeStatus:200) on route \"PUT: /api/servOrder/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 72,
+            "code": "tst-0062",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método updSerOrderByIdNeg.",
+                    "info": " Tente atualizar ordem de serviço pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"PUT: /api/servOrder/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method updSerOrderByIdNeg.",
+                    "info": " Try update service order by id %1(negation)%2, expect return (codeStatus:404) on route \"PUT: /api/servOrder/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 73,
+            "code": "tst-0063",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método addBudgetId.",
+                    "info": " Tente adicionar orçamento de código 1, aguardando o retorno (statusCode:201), fkReqOs na rota \"POST: /api/budget\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method addBudgetId.",
+                    "info": " Try add budget on id 1, expect to return (statusCode:201), fkReqSo on route \"POST: /api/budget\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 74,
+            "code": "tst-0064",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getServiceOrderById.",
+                    "info": " Tente trazer ordem de serviço pelo código, aguardando o retorno das informações da ordem de serviço na rota \"GET: /api/servOrder/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getServiceOrderById.",
+                    "info": " Try get service order by id, expect to return the service order information on route \"GET: /api/servOrder/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 75,
+            "code": "tst-0065",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método getServiceOrderByIdNeg.",
+                    "info": " Tente trazer ordem de serviço pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) no resultado, utilizando a rota \"GET: /api/servOrder/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getServiceOrderByIdNeg.",
+                    "info": " Try get service order by id %1(negation)%2, expect return (codeStatus:404) result, using route \"GET: /api/servOrder/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 76,
+            "code": "tst-0066",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delServiceOrderById.",
+                    "info": " Tente remover ordem de serviço pelo código, aguardando o retorno (codeStatus:200) na rota \"delete: /api/servOrder/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delServiceOrderById.",
+                    "info": " Try delete service order by id, expect return (codeStatus:200) on route \"delete: /api/servOrder/id/1\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 77,
+            "code": "tst-0067",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delServiceOrderByIdNeg.",
+                    "info": " Tente remover ordem de serviço pelo código %1(negando)%2, aguardando o retorno (codeStatus:404) na rota \"DELETE: /api/servOrder/id/999\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delServiceOrderByIdNeg.",
+                    "info": " Try delete service order by id %1(negation)%2, expect return (codeStatus:404) on route \"DELETE: /api/servOrder/id/999\";",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 78,
+            "code": "tst-0068",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método delBudgetById.",
+                    "info": " Tente remover orçamento pelo código, aguardando o retorno (codeStatus:200), fkReqOs na rota \"delete: /api/budget/id/1\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method delBudgetById.",
+                    "info": " Try delete budget by id, expect return (codeStatus:200), fkReqSo on route \"delete: /api/budget/id/1\";",
                     "type": "info"
                 }
             ]
