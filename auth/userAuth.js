@@ -1,29 +1,21 @@
 const _ = require('lodash')
-const config = require('../config/.config')
 const jwt = require('jsonwebtoken')
-const Secret = 'secret'
-const secret = require('../config/.config')[Secret]
+const secret = require('../config/.config')['secret']
+const bcrypt = require('bcrypt');
+// ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
+const dtCurr = require('../server/factory/currentTimeStamp');
 // SAMPLE OF REGISTER DATABASE
 
 function createIdToken(usuarios, dev) {
     if (dev) {
-        return jwt.sign(_.omit(usuarios, 'password'), config.secret, {
-            expiresIn: 3600
+        return jwt.sign(_.omit(usuarios, 'password'), secret, {
+            expiresIn: 86400
         })
     } else {
-        return jwt.sign(_.omit(usuarios, 'password'), config.secret, {
-            expiresIn: 1440
+        return jwt.sign(_.omit(usuarios, 'password'), secret, {
+            expiresIn: 3600
         })
     }
-}
-
-function createAccessToken() {
-    return jwt.sign({
-        exp: Math.floor(Date.now() / 1000) + (3600),
-        scope: 'full_access',
-        jti: genJti(),
-        alg: 'HS256'
-    }, config.secret)
 }
 
 function verifyToken(req, res, next) {
@@ -56,8 +48,39 @@ function genJti() {
     return jti;
 }
 
+// VERIFY USER DURING SINGIN
+function verifySingIn(passSend, user) {
+    let nDate = new dtCurr
+    let compare = bcrypt.compareSync(passSend, user.hash);
+    try { 
+        if ( compare === true ) {
+            console.log('entrou aqui!')
+            let userLoggin = {
+                id: user.id,
+                name: user.name,
+                lastname: user.lastname,
+                email: user.email,
+                profile: user.profile,
+                jti: genJti(),
+                iat: Math.floor(Date.now() / 1000),
+                exp: Math.floor(Date.now() / 1000) + (86400),
+                dtInf: nDate.timestamp
+            }
+            var authToken = jwt.sign(_.omit(user.email, passSend), secret, {
+                expiresIn: 86400
+            })
+            return { auth: true, authToken: authToken, data: userLoggin }
+        } else {
+            return { auth: false }
+        }
+
+    } catch(e) {
+        console.log(e)
+    }
+};
+
 module.exports = {
     createIdToken,
-    createAccessToken,
-    verifyToken
+    verifyToken,
+    verifySingIn
 }

@@ -1579,6 +1579,66 @@
                     "type": "info"
                 }
             ]
+        },
+        {
+            "id": 79,
+            "code": "err-0004",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Dados requeridos!",
+                    "info": "Informe usuário e senha.",
+                    "type": "warning"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Required information.",
+                    "info": "Enter username and password.",
+                    "type": "warning"
+                }
+            ]
+        },
+        {
+            "id": 80,
+            "code": "err-0005",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Sem dados.",
+                    "info": "Usuário não encontrado!",
+                    "type": "warning"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "No results.",
+                    "info": "User not found!",
+                    "type": "warning"
+                }
+            ]
+        },
+        {
+            "id": 81,
+            "code": "err-0006",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Autenticação Inválida!",
+                    "info": "Permissão de acesso negada, falha na autenticação!",
+                    "type": "danger"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Access denny!",
+                    "info": "Permission deny, authentication was failed!",
+                    "type": "danger"
+                }
+            ]
         }
     ]
 }

@@ -9,10 +9,11 @@
 // ╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗
 // ║██████████████████████████████████ REQUIRE STRUCTURE CTL    ███████████████████████████████████████║
 // ╟───────────────────────────────────────────────────────────────────────────────────────────────────╢
-/* ║ -User    */ const userController    = require('../controllers/User');                           /*║*/
-/* ║ -Client  */ const clientController  = require('../controllers/Client');                         /*║*/
-/* ║ -Service */ const serviceController = require('../controllers/Service');                        /*║*/
-/* ║ -Budget  */ const budgetController = require('../controllers/Budget');                          /*║*/
+/* ║ -User    */ const userController     = require('../controllers/User');                          /*║*/
+/* ║ -User    */ const singInController   = require('../controllers/SingIn');                        /*║*/
+/* ║ -Client  */ const clientController   = require('../controllers/Client');                        /*║*/
+/* ║ -Service */ const serviceController  = require('../controllers/Service');                       /*║*/
+/* ║ -Budget  */ const budgetController   = require('../controllers/Budget');                        /*║*/
 /* ║ -S.Order */ const serOrderController = require('../controllers/ServiceOrder');                  /*║*/
 // ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝ 
 // ╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗
@@ -104,18 +105,7 @@
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
 // ║║██████████████████████████████████ CRIPTO PROCESS COMPARE   ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
-/* ║║ -Cripto  */ ProtectedRoutes.get('/cryptopass', (req, res)=>{                               /*║   ║*/
-/* ║║          */  /*let secretHex = bcrypt.genSalt(Buffer.from('@SolutIon0864!*'))*/            /*║   ║*/
-/* ║║          */  /*console.log(secretHex)*/                                                    /*║   ║*/
-/* ║║          */ let salt = bcrypt.genSaltSync();                                               /*║   ║*/
-/* ║║          */ let passwordHash = bcrypt.hashSync(secret, salt);                              /*║   ║*/
-/* ║║          */ console.log(secret);                                                           /*║   ║*/
-/* ║║          */ let password = 'SECRETapiKEYhere@!*';                                          /*║   ║*/
-/* ║║          */ let compare = bcrypt.compareSync(password, passwordHash);                      /*║   ║*/
-/* ║║          */ return res.status(200).send({                                                  /*║   ║*/
-/* ║║          */   password: password,                                                          /*║   ║*/
-/* ║║          */   passwordHash: passwordHash,                                                  /*║   ║*/
-/* ║║          */   comparar: compare })});                                                      /*║   ║*/
+/* ║║ -SingIn  */ OpenRoutes.post('/singin',singInController.singIn);                            /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 /* ║ - End    */ };                                                                                  /*║*/
 // ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝

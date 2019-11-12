@@ -9,7 +9,7 @@
     "operatorAliases": "false",
     "freezeTableName": "true",
     "migrationStorageTableName": "sequelizes",
-    "logging": true,
+    "logging": false,
     "pool": {
       "max": 5,
       "min": 0,
