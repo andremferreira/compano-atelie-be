@@ -2,3 +2,4 @@ node_modules
 access.log
 .vscode
 package-lock.json
+log.txt
