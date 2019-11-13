@@ -7,7 +7,7 @@ const sequelizeT = new Sequelize(configT.database, configT.username, configT.pas
 const sequelizeD = new Sequelize(configD.database, configD.username, configD.password, configD);
 const sequelizeP = new Sequelize(configP.database, configP.username, configP.password, configP);
 // ----------------------------------- CONSOLE.LOG COLOR HELPER -----------------------
-const color = require('../server/factory/consoleLogColor')
+const color = require('../server/util/consoleLogColor')
 // ----------------------------------- MSG FACTORY SEND REPORT ------------------------
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- TEST CONECTIONS --------------------------------

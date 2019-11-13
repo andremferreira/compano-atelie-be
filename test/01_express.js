@@ -4,14 +4,13 @@ const port = require('../config/.config')[pt];
 // ----------------------------------- INITIAL MOCHA WITH SUPERTEST -------------------
 const request = require('supertest')
 // ----------------------------------- CONSOLE.LOG COLOR HELPER -----------------------
-const color = require('../server/factory/consoleLogColor')
+const color = require('../server/util/consoleLogColor')
 // ----------------------------------- MSG FACTORY SEND REPORT ------------------------
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- TEST LOADING EXPRESS SERVER --------------------
-var msgS = msgF('tst-0001').info
+var msgS = msgF('tst-0001', '', [port]).info
 describe(color('f-yellow', '► ') + color('default', msgS), async function () {
     var server
-    var msg
     beforeEach(function () {
         server = require('../bin/www');
     })
@@ -20,9 +19,8 @@ describe(color('f-yellow', '► ') + color('default', msgS), async function () {
         server.close()
     })
     // ----------------------------------- TEST SLASH ROUTE -----------------------
-    msgS = msgF('tst-0002').info
-    msg = msgS.replace('%1', port)
-    it(color('f-yellow', '├') + color('f-hidden', msg), function testSlash(done) {
+    msgS = msgF('tst-0002', '', [port]).info
+    it(color('f-yellow', '├') + color('f-hidden', msgS), function testSlash(done) {
         request(server)
             .get('/')
             .expect(403, done)

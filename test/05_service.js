@@ -1,7 +1,7 @@
 // ----------------------------------- INITIAL MOCHA WITH SUPERTEST ----------------------
 const request = require('supertest')
 // ----------------------------------- CONSOLE.LOG COLOR HELPER --------------------------
-const color = require('../server/factory/consoleLogColor')
+const color = require('../server/util/consoleLogColor')
 // ----------------------------------- MSG FACTORY SEND REPORT ---------------------------
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
@@ -75,9 +75,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
             })
     })
     // ----------------------------------- UPDATE SERVICE BY MNE NEG --------------------------
-    msgS = msgF('tst-0051').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0051', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function updServiceByMneNeg(done) {
         servTest = {
             vc_service_mnemonic: "TSRPA",
@@ -112,9 +110,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
             })
     })
     // ----------------------------------- UPDATE USER BY ID NEG --------------------------
-    msgS = msgF('tst-0040').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0040', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function updServiceByIdNeg(done) {
         servTest = {
             tx_service_description: "T-SHIRT REPAIR",
@@ -142,9 +138,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
             })
     })
     // ----------------------------------- GET SERVICE BY ID WITHOUT RESULT ------------------
-    msgS = msgF('tst-0042').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0042', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getServiceByIdNeg(done) {
         request(server)
             .get('/api/service/id/999')
@@ -165,9 +159,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
             })
     })
     // ----------------------------------- REMOVE SERVICE BY ID WITHOUT RESULT ------------
-    msgS = msgF('tst-0044').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0044', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '└') + color('f-hidden', msgS), function delServiceByIdNeg(done) {
         request(server)
             .delete('/api/service/id/999')

@@ -1,7 +1,7 @@
 // ----------------------------------- INITIAL MOCHA WITH SUPERTEST ----------------------
 const request = require('supertest')
 // ----------------------------------- CONSOLE.LOG COLOR HELPER --------------------------
-const color = require('../server/factory/consoleLogColor')
+const color = require('../server/util/consoleLogColor')
 // ----------------------------------- MSG FACTORY SEND REPORT ---------------------------
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
@@ -93,9 +93,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
             })
     })
     // ----------------------------------- UPDATE BUDGET BY ID NEG --------------------------
-    msgS = msgF('tst-0052').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0052', '', [color('f-red-i',''), color('f-hidden-i','')] ).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function updBudgetByIdNeg(done) {
         bgTest = {
             js_budget_service: [{
@@ -141,9 +139,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
             })
     })
     // ----------------------------------- GET BUDGET BY ID WITHOUT RESULT ------------------
-    msgS = msgF('tst-0054').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0054', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getBudgetByIdNeg(done) {
         request(server)
             .get('/api/budget/id/999')
@@ -164,9 +160,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
             })
     })
     // ----------------------------------- REMOVE BUDGET BY ID WITHOUT RESULT ------------
-    msgS = msgF('tst-0056').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0056', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '└') + color('f-hidden', msgS), function delBudgetByIdNeg(done) {
         request(server)
             .delete('/api/budget/id/999')

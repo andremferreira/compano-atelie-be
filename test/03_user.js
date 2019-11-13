@@ -1,7 +1,7 @@
 // ----------------------------------- INITIAL MOCHA WITH SUPERTEST ----------------------
 const request = require('supertest')
 // ----------------------------------- CONSOLE.LOG COLOR HELPER --------------------------
-const color = require('../server/factory/consoleLogColor')
+const color = require('../server/util/consoleLogColor')
 // ----------------------------------- MSG FACTORY SEND REPORT ---------------------------
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
@@ -77,9 +77,7 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
             })
     })
     // ----------------------------------- UPDATE USER BY ID NEG --------------------------
-    msgS = msgF('tst-0034').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0034', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function updUserByIdNeg(done) {
         usrTest = {
             vc_lastname: 'SYSTEM-ADMINISTRATOR-1'
@@ -106,9 +104,7 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
             })
     })
     // ----------------------------------- GET USER BY ID WITHOUT RESULT ------------------
-    msgS = msgF('tst-0025').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0025', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getUserByIdNeg(done) {
         request(server)
             .get('/api/user/id/9999')
@@ -129,9 +125,7 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
             })
     })
     // ----------------------------------- REMOVE USER BY EMAIL WITHOUT RESULT ------------
-    msgS = msgF('tst-0026').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0026', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '└') + color('f-hidden', msgS), function getUserByEmailNeg(done) {
         request(server)
             .delete('/api/user/email/WOUTEMAIL@TESTE-2.COM')
@@ -140,73 +134,4 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
     })
-/*
-    // ----------------------------------- GET CLIENT BY EMAIL -----------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0015').info), function getClientByEmail(done) {
-        request(server)
-            .get('/api/cliente/email/EMAIL@TESTE-1.COM')
-            .set('access-token', devToken)
-            .expect(200)
-            .end(function (err, res) {
-                if (err) throw err;
-                done()
-            })
-    })
-    // ----------------------------------- GET CLIENT BY EMAIL WITHOUT RESULT -------------
-    msgS = msgF('tst-0016').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
-    it(color('f-yellow', '├') + color('f-hidden', msgS), function getClientByEmailNeg(done) {
-        request(server)
-            .get('/api/cliente/email/WOUTEMAIL@TESTE.COM')
-            .set('access-token', devToken)
-            .expect(function (res) {
-                JSON.parse(res.text)
-            }).expect(404, msgF('err-0002'), done)
-    })
-    // ----------------------------------- DELETE CLIENT BY ID -----------------------------
-    it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0017').info), function delClientById(done) {
-            var cliente = {
-                id_cliente: 999,
-                vc_nome: 'NAME-TESTE-999-DEL',
-                vc_sobrenome: 'LASTNAME-TESTE-DEL',
-                nu_ddd: 99,
-                nu_celular: 598756456,
-                vc_contato: 'CONTATO-TESTE-DEL',
-                vc_email: 'DELETE@TEST.COM',
-                nu_cpf: 3215648975,
-                nu_cep: 65478951,
-                vc_cidade: 'DELETE',
-                vc_estado: 'DELETE',
-                vc_bairro: 'TEST DELETE',
-                vc_endereco: 'DELETE',
-                vc_endereco_numero: '9999',
-                vc_endereco_complemento: 'DELETE',
-                vc_aniversario: '09/09',
-            }
-            request(server)
-                .post('/api/cliente')
-                .set('access-token', devToken)
-                .send(cliente)
-                .expect(201)
-
-            request(server)
-                .delete('/api/cliente/id/999')
-                .set('access-token', devToken)
-                .expect(204)
-            done()
-        });
-    // ----------------------------------- DELETE CLIENT BY ID WITHOUT RESULT --------------
-    msgS = msgF('tst-0018').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))        
-    it(color('f-yellow', '└') + color('f-hidden', msgS), function delClientByIdNeg(done) {
-        request(server)
-            .delete('/api/cliente/id/999')
-            .set('access-token', devToken)
-            .expect(function (res) {
-                JSON.parse(res.text)
-            }).expect(404, msgF('err-0002'), done)
-    });
-*/        
 })

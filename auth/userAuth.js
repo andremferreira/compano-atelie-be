@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const secret = require('../config/.config')['secret']
 const bcrypt = require('bcrypt');
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
-const dtCurr = require('../server/factory/currentTimeStamp');
+const dtCurr = require('../server/util/currentTimeStamp');
 // SAMPLE OF REGISTER DATABASE
 
 function createIdToken(usuarios, dev) {
@@ -87,5 +87,6 @@ module.exports = {
     createIdToken,
     encryptPwd,
     verifyToken,
-    verifySingIn
+    verifySingIn,
+    genJti
 }

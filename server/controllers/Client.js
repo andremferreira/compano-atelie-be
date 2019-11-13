@@ -1,7 +1,8 @@
 // ----------------------------------- SEQUELIZE MODULE IMPORT -----------------------
 const Client = require('../models').Client;
-// ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
-const dtCurr = require('../factory/currentTimeStamp')
+// ----------------------------------- UTIL ------------------------------------------
+const dtCurr = require('../util/currentTimeStamp')
+const myUtl = require('../util/myInspect')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory')
 // ----------------------------------- CRUD ------------------------------------------
@@ -12,10 +13,11 @@ module.exports = {
             .findAll()
             .then((client) => res.status(200).send(client))
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -31,10 +33,11 @@ module.exports = {
                 })
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -51,10 +54,11 @@ module.exports = {
                 return res.status(200).send(client);
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -76,10 +80,11 @@ module.exports = {
                 return res.status(200).send(client);
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -106,17 +111,17 @@ module.exports = {
                 bo_promotion: req.body.bo_promotion || false
             })
             .then((client) => {
-                // ../../msg/db/db.json -> ADD SUCCESS %2(idTable) -> 'suc-0002'
-                var msgResp = msgF('suc-0002', req.query.lang).info
-                msgRpl = msgResp.replace('%1', client.id_client)
-                return res.status(201).send({
-                    success: true,
-                    message: msgRpl
-                })
+                var msgResp = msgF('suc-0002', req.query.lang, [client.id_client])
+                return res.status(201).send(msgResp)
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                return res.status(400).send(errResp)
+                var v = myUtl.myInspect(error, ['original','code'])
+                if(!v){
+                    return res.status(400).send(error)
+                } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
+                    return res.status(400).send(errResp)
+                }
             })
     },
     // ----------------------------------- ADD NEW -----------------------------------------
@@ -142,17 +147,17 @@ module.exports = {
                 bo_promotion: req.body.bo_promotion || false
             })
             .then((client) => {
-                // ../../msg/db/db.json -> ADD SUCCESS %2(idTable) -> 'suc-0002'
-                var msgResp = msgF('suc-0002', req.query.lang).info
-                msgRpl = msgResp.replace('%1', client.id_client)
-                return res.status(201).send({
-                    success: true,
-                    message: msgRpl
-                })
+                var msgResp = msgF('suc-0002', req.query.lang, [client.id_client])
+                return res.status(201).send(msgResp)
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                return res.status(400).send(errResp)
+                var v = myUtl.myInspect(error, ['original','code'])
+                if(!v){
+                    return res.status(400).send(error)
+                } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
+                    return res.status(400).send(errResp)
+                }
             })
     },
     // ----------------------------------- UPDATE BY ID ------------------------------------
@@ -190,18 +195,15 @@ module.exports = {
                         bo_promotion: req.body.bo_promotion || client.bo_promotion,
                         ts_update: nDate.timestamp || null
                     }, condition ).then((success) => {
-                        var msgResp = msgF('suc-0004', req.query.lang).info
-                        msgRpl = msgResp.replace('%1', client.id_client)
-                        return res.status(200).send({
-                            success: true,
-                            message: msgRpl
-                        })
+                        var msgResp = msgF('suc-0004', req.query.lang, [client.id_client])
+                        return res.status(200).send(msgResp)
                     })
                     .catch((error) => {
-                        var errResp = msgF(error.original.code, req.query.lang)
-                        if (!errResp) {
+                        var v = myUtl.myInspect(error, ['original','code'])
+                        if (!v) {
                             return res.status(400).send(error)
                         } else {
+                            var errResp = msgF(error.original.code, req.query.lang)
                             return res.status(400).send(errResp)
                         }
                     })
@@ -242,18 +244,15 @@ module.exports = {
                         bo_promotion: req.body.bo_promotion || client.bo_promotion,
                         ts_update: nDate.timestamp || null
                     }, condition ).then((success) => {
-                        var msgResp = msgF('suc-0004', req.query.lang).info
-                        msgRpl = msgResp.replace('%1', client.id_client)
-                        return res.status(200).send({
-                            success: true,
-                            message: msgRpl
-                        })
+                        var msgResp = msgF('suc-0004', req.query.lang, [client.id_client])
+                        return res.status(200).send(msgResp)
                     })
                     .catch((error) => {
-                        var errResp = msgF(error.original.code, req.query.lang)
-                        if (!errResp) {
+                        var v = myUtl.myInspect(error, ['original','code'])
+                        if (!v) {
                             return res.status(400).send(error)
                         } else {
+                            var errResp = msgF(error.original.code, req.query.lang)
                             return res.status(400).send(errResp)
                         }
                     })
@@ -277,25 +276,24 @@ module.exports = {
                     .destroy(condition)
                     .then(() => {
                         var msgResp = msgF('suc-0001', req.query.lang)
-                        return res.status(200).send({
-                            success: true,
-                            message: msgResp.info
-                        });
+                        return res.status(200).send(msgResp);
                     })
                     .catch((error) => {
-                        var errResp = msgF(error.original.code, req.query.lang)
-                        if (!errResp) {
+                        var v = myUtl.myInspect(error, ['original','code'])
+                        if (!v) {
                             return res.status(400).send(error)
                         } else {
+                            var errResp = msgF(error.original.code, req.query.lang)
                             return res.status(400).send(errResp)
                         }
                     });
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -318,25 +316,24 @@ module.exports = {
                     .destroy(condition)
                     .then(() => {
                         var msgResp = msgF('suc-0001', req.query.lang)
-                        return res.status(200).send({
-                            success: true,
-                            message: msgResp.info
-                        });
+                        return res.status(200).send(msgResp);
                     })
                     .catch((error) => {
-                        var errResp = msgF(error.original.code, req.query.lang)
-                        if (!errResp) {
+                        var v = myUtl.myInspect(error, ['original','code'])
+                        if (!v) {
                             return res.status(400).send(error)
                         } else {
+                            var errResp = msgF(error.original.code, req.query.lang)
                             return res.status(400).send(errResp)
                         }
                     });
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });

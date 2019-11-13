@@ -1,7 +1,8 @@
 // ----------------------------------- SEQUELIZE MODULE IMPORT -----------------------
 const Service = require('../models').Service;
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
-const dtCurr = require('../factory/currentTimeStamp')
+const dtCurr = require('../util/currentTimeStamp')
+const myUtl = require('../util/myInspect')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory')
 // ----------------------------------- CRUD ------------------------------------------
@@ -12,10 +13,11 @@ module.exports = {
             .findAll()
             .then((service) => res.status(200).send(service))
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -30,10 +32,11 @@ module.exports = {
                 })
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -50,10 +53,11 @@ module.exports = {
                 return res.status(200).send(service);
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -74,18 +78,15 @@ module.exports = {
                 id_user: req.body.id_user || parseInt('1')
             }).then((service) => {
                 // ../../msg/db/db.json -> ADD SUCCESS %2(idTable) -> 'suc-0002'
-                var msgResp = msgF('suc-0002', req.query.lang).info
-                msgRpl = msgResp.replace('%1', service.id_service)
-                return res.status(201).send({
-                    success: true,
-                    message: msgRpl
-                })
+                var msgResp = msgF('suc-0002', req.query.lang, [service.id_service])
+                return res.status(201).send(msgResp)
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                if (!errResp) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             })
@@ -118,19 +119,15 @@ module.exports = {
                     id_user: req.body.id_user || service.id_user,
                     ts_update: nDate.timestamp || null,
                 }, condition).then(() => {
-                    var msgResp = msgF('suc-0004', req.query.lang).info
-                    msgRpl = msgResp.replace('%1', service.id_service)
-                    return res.status(200).send({
-                        success: true,
-                        message: msgRpl,
-                        sql: res.text
-                    })
+                    var msgResp = msgF('suc-0004', req.query.lang, [service.id_service])
+                    return res.status(200).send(msgResp)
                 })
                 .catch((error) => {
-                    var errResp = msgF(error.original.code, req.query.lang)
-                    if (!errResp) {
+                    var v = myUtl.myInspect(error, ['original','code'])
+                    if (!v) {
                         return res.status(400).send(error)
                     } else {
+                        var errResp = msgF(error.original.code, req.query.lang)
                         return res.status(400).send(errResp)
                     }
                 })
@@ -164,19 +161,15 @@ module.exports = {
                     id_user: req.body.id_user || service.id_user,
                     ts_update: nDate.timestamp || null,
                 }, condition).then(() => {
-                    var msgResp = msgF('suc-0004', req.query.lang).info
-                    msgRpl = msgResp.replace('%1', service.id_service)
-                    return res.status(200).send({
-                        success: true,
-                        message: msgRpl,
-                        sql: res.text
-                    })
+                    var msgResp = msgF('suc-0004', req.query.lang, [service.id_service])
+                    return res.status(200).send(msgResp)
                 })
                 .catch((error) => {
-                    var errResp = msgF(error.original.code, req.query.lang)
-                    if (!errResp) {
+                    var v = myUtl.myInspect(error, ['original','code'])
+                    if (!v) {
                         return res.status(400).send(error)
                     } else {
+                        var errResp = msgF(error.original.code, req.query.lang)
                         return res.status(400).send(errResp)
                     }
                 })
@@ -200,16 +193,14 @@ module.exports = {
                     .destroy(condition)
                     .then(() => {
                         var msgResp = msgF('suc-0001', req.query.lang)
-                        return res.status(200).send({
-                            success: true,
-                            message: msgResp.info
-                        });
+                        return res.status(200).send(msgResp);
                     })
                     .catch((error) => {
-                        var errResp = msgF(error.original.code, req.query.lang)
-                        if (!errResp) {
+                        var v = myUtl.myInspect(error, ['original','code'])
+                        if (!v) {
                             return res.status(400).send(error)
                         } else {
+                            var errResp = msgF(error.original.code, req.query.lang)
                             return res.status(400).send(errResp)
                         }
                     });

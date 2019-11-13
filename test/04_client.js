@@ -1,7 +1,7 @@
 // ----------------------------------- INITIAL MOCHA WITH SUPERTEST ----------------------
 const request = require('supertest')
 // ----------------------------------- CONSOLE.LOG COLOR HELPER --------------------------
-const color = require('../server/factory/consoleLogColor')
+const color = require('../server/util/consoleLogColor')
 // ----------------------------------- MSG FACTORY SEND REPORT ---------------------------
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
@@ -91,9 +91,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
             })
     });
     // ----------------------------------- UPDATE CLIENT BY WITHOUT RESULT-------------------
-    msgS = msgF('tst-0028').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0028', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function updateClientByEmailNeg(done) {
         client = {
             vc_name: 'NOME-TESTE-2-UPD',
@@ -132,7 +130,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
             })
     });
     // ----------------------------------- REMOVE CLIENT BY EMAIL WITHOUT RESULT ------------
-    msgS = msgF('tst-0014').info
+    msgS = msgF('tst-0014', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     msgS = msgS.replace('%1', color('f-red-i', ''))
     msgS = msgS.replace('%2', color('f-hidden-i', ''))
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getClientByEmailNeg(done) {
@@ -155,9 +153,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
             })
     });
     // ----------------------------------- GET CLIENT BY EMAIL WITHOUT RESULT -------------
-    msgS = msgF('tst-0016').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0016', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getClientByEmailNeg(done) {
         request(server)
             .get('/api/client/email/WOUTEMAIL@TESTE.COM')
@@ -193,9 +189,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
             .expect(201, done)
     });
     // ----------------------------------- ADD CLIENT BY ID NEG --------------------------
-    msgS = msgF('tst-0032').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0032', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function addClientById(done) {
         var client = {
             id_client: 999,
@@ -237,9 +231,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
             })
     });
     // ----------------------------------- GET CLIENT BY ID WITHOUT RESULT ------------------
-    msgS = msgF('tst-0012').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0012', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getClientByIdNeg(done) {
         request(server)
             .get('/api/client/id/99999')
@@ -260,9 +252,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
             .expect(200, done)
     });
     // ----------------------------------- UPDATE CLIENT BY ID NEG ------------------------
-    msgS = msgF('tst-0030').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0030', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function updateClientById(done) {
         client = {
             vc_name: 'TEST-UPD_ID-999'
@@ -281,9 +271,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
             .expect(200, done)
     });
     // ----------------------------------- DELETE CLIENT BY ID WITHOUT RESULT --------------
-    msgS = msgF('tst-0018').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0018', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '└') + color('f-hidden', msgS), function delClientByIdNeg(done) {
         request(server)
             .delete('/api/client/id/999')

@@ -1,9 +1,10 @@
 // ----------------------------------- SEQUELIZE MODULE IMPORT -----------------------
 const Budget = require('../models').Budget;
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
-const dtCurr = require('../factory/currentTimeStamp')
+const dtCurr = require('../util/currentTimeStamp')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory')
+const myUtl = require ('../util/myInspect')
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
@@ -12,16 +13,12 @@ module.exports = {
             .findAll()
             .then((budget) => res.status(200).send(budget))
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                var msgError = error.original.code || error.errors[0].type
-                var errResp = msgF(msgError, req.query.lang)
-                if (errResp.nF == true) {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     console.log(errResp)
                     return res.status(400).send(error)
                 } else {
-                    msg = errResp.info
-                    msg = msg.replace('%1', error.original)
-                    errResp.info = msg
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -36,16 +33,11 @@ module.exports = {
                 })
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                var msgError = error.original.code || error.errors[0].type
-                var errResp = msgF(msgError, req.query.lang)
-                if (errResp.nF == true) {
-                    console.log(errResp)
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
-                    msg = errResp.info
-                    msg = msg.replace('%1', error.original)
-                    errResp.info = msg
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -62,16 +54,11 @@ module.exports = {
                 return res.status(200).send(budget);
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                var msgError = error.original.code || error.errors[0].type
-                var errResp = msgF(msgError, req.query.lang)
-                if (errResp.nF == true) {
-                    console.log(errResp)
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
-                    msg = errResp.info
-                    msg = msg.replace('%1', error.original)
-                    errResp.info = msg
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             });
@@ -85,25 +72,15 @@ module.exports = {
                 id_user: req.body.id_user || null,
                 js_budget_service: req.body.js_budget_service || null
             }).then((budget) => {
-                // ../../msg/db/db.json -> ADD SUCCESS %2(idTable) -> 'suc-0002'
-                var msgResp = msgF('suc-0002', req.query.lang)
-                msgRpl = msgResp.info
-                msgRpl = msgRpl.replace('%1', budget.id_budget)
-                msgResp.info = msgRpl
+                var msgResp = msgF('suc-0002', req.query.lang, [ budget.id_budget ])
                 return res.status(201).send(msgResp)
             })
             .catch((error) => {
-                var msgError = error.original.code || error.errors[0].type
-                var errResp = msgF(msgError, req.query.lang)
-                if (!errResp || errResp.nF == true) {
-                    return res.status(400).send({
-                        "error": true,
-                        "original": error.errors[0].message
-                    })
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
+                    return res.status(400).send(error)
                 } else {
-                    msg = errResp.info
-                    msg = msg.replace('%1', error.original)
-                    errResp.info = msg
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             })
@@ -130,38 +107,25 @@ module.exports = {
                     js_budget_service: req.body.js_budget_service || budget.js_budget_service,
                     ts_update: nDate.timestamp || null,
                 }, condition).then(() => {
-                    var msgResp = msgF('suc-0004', req.query.lang)
-                    msgRpl = msgResp.info
-                    msgRpl = msgRpl.replace('%1', budget.id_budget)
-                    msgResp.info = msgRpl
+                    var msgResp = msgF('suc-0004', req.query.lang, [budget.id_budget])
                     return res.status(200).send(msgResp)
                 })
                 .catch((error) => {
                     console.log(error)
-                    var errResp = msgF(error.original.code, req.query.lang)
-                    var msgError = error.original.code || error.errors[0].type
-                    var errResp = msgF(msgError, req.query.lang)
-                    if (errResp.nF == true) {
-                        console.log(errResp)
+                    var v = myUtl.myInspect(error, ['original','code'])
+                    if (!v) {
                         return res.status(400).send(error)
                     } else {
-                        msg = errResp.info
-                        msg = msg.replace('%1', error.original)
-                        errResp.info = msg
+                        var errResp = msgF(error.original.code, req.query.lang)
                         return res.status(400).send(errResp)
                     }
                 })
         }).catch((error) => {
-            var errResp = msgF(error.original.code, req.query.lang)
-            var msgError = error.original.code || error.errors[0].type
-            var errResp = msgF(msgError, req.query.lang)
-            if (errResp.nF == true) {
-                console.log(errResp)
+            var v = myUtl.myInspect(error, ['original','code'])
+            if (!v) {
                 return res.status(400).send(error)
             } else {
-                msg = errResp.info
-                msg = msg.replace('%1', error.original)
-                errResp.info = msg
+                var errResp = msgF(error.original.code, req.query.lang)
                 return res.status(400).send(errResp)
             }
         })
@@ -184,31 +148,23 @@ module.exports = {
                     .destroy(condition)
                     .then(() => {
                         var msgResp = msgF('suc-0001', req.query.lang)
-                        return res.status(200).send({
-                            success: true,
-                            message: msgResp.info
-                        });
+                        return res.status(200).send(msgResp);
                     })
                     .catch((error) => {
-                        var msgError = error.original.code || error.errors[0].type
-                        var errResp = msgF(msgError, req.query.lang)
-                        if (!errResp || errResp.nF) {
+                        var v = myUtl.myInspect(error, ['original','code'])
+                        if (!v) {
                             return res.status(400).send(error)
                         } else {
+                            var errResp = msgF(error.original.code, req.query.lang)
                             return res.status(400).send(errResp)
                         }
                     });
             }).catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                var msgError = error.original.code || error.errors[0].type
-                var errResp = msgF(msgError, req.query.lang)
-                if (errResp.nF == true) {
-                    console.log(errResp)
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
                     return res.status(400).send(error)
                 } else {
-                    msg = errResp.info
-                    msg = msg.replace('%1', error.original)
-                    errResp.info = msg
+                    var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)
                 }
             })

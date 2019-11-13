@@ -1,7 +1,7 @@
 // ----------------------------------- INITIAL MOCHA WITH SUPERTEST ----------------------
 const request = require('supertest')
 // ----------------------------------- CONSOLE.LOG COLOR HELPER --------------------------
-const color = require('../server/factory/consoleLogColor')
+const color = require('../server/util/consoleLogColor')
 // ----------------------------------- MSG FACTORY SEND REPORT ---------------------------
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
@@ -99,9 +99,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0057').title, function () {
             })
     })
     // ----------------------------------- UPDATE SERVICE ORDER BY ID NEG --------------------------
-    msgS = msgF('tst-0062').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0062', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function updServOrderByIdNeg(done) {
         soTest = {
             nu_vservice: 1001.33
@@ -128,9 +126,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0057').title, function () {
             })
     })
     // ----------------------------------- GET SERVICE ORDER BY ID WITHOUT RESULT ------------------
-    msgS = msgF('tst-0065').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0065', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getServOrderByIdNeg(done) {
         request(server)
             .get('/api/servOrder/id/999')
@@ -151,9 +147,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0057').title, function () {
             })
     })
     // ----------------------------------- REMOVE SERVICE ORDER BY ID WITHOUT RESULT ------------
-    msgS = msgF('tst-0067').info
-    msgS = msgS.replace('%1', color('f-red-i', ''))
-    msgS = msgS.replace('%2', color('f-hidden-i', ''))
+    msgS = msgF('tst-0067', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '├') + color('f-hidden', msgS), function delServOrderByIdNeg(done) {
         request(server)
             .delete('/api/servOrder/id/999')

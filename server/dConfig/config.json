@@ -1,15 +1,20 @@
 {
     "dConfig": {
         "dlang": "pt_BR",
-        "dLogActionRegister": true,
-        "dLogRegisterTimeTransaction": true,
+        "dLog": { 
+                "active": true,
+                "actionRegister": true,
+                "dateTimeRegister": true,
+                "uniqueId": true
+        },
         "dSendError": {
             "active": false,
-            "email": "andremendesferreira@live.com"
+            "email": "reporterror@gmail.com",
+            "title": "BackEnd Error Report - ComPano"
         },
         "dShowHeaderToken": false,
         "dUserAdm": "SysAdm",
-        "dInitPassHashAdm": "$2b$10$v1qm1IhpRVG1w4WCPWb.netStph4tuP31/GfJo/hEmnuTXF0RpV3K",
+        "dInitPassHashAdm": "Ad1M1ñ5y5@k3y",
         "dUserAdmMail": "sysadm@email.com"
     }
 }
