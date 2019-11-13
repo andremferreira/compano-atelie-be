@@ -19,7 +19,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(50),
         validate: {
-          len: [3, 100],
+          len: [3, 50],
           msg: "Only allow values with length between 3 and 50 characters."
         },
       },
@@ -43,6 +43,11 @@ module.exports = {
       vc_password: {
         allowNull: false,
         type: Sequelize.STRING(64)
+      },
+      it_profile: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        default: 2
       },
       tx_image: {
         type: Sequelize.TEXT

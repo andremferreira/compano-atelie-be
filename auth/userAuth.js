@@ -18,6 +18,10 @@ function createIdToken(usuarios, dev) {
     }
 }
 
+function encryptPwd(pwd) {
+    return bcrypt.hashSync(pwd, bcrypt.genSaltSync())
+}
+
 function verifyToken(req, res, next) {
     let token = req.headers['access-token']
     if (token) {
@@ -81,6 +85,7 @@ function verifySingIn(passSend, user) {
 
 module.exports = {
     createIdToken,
+    encryptPwd,
     verifyToken,
     verifySingIn
 }

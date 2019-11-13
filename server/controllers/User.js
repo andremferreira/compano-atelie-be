@@ -4,6 +4,8 @@ const User = require('../models').User;
 const dtCurr = require('../factory/currentTimeStamp')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory')
+// ----------------------------------- AUTH ------------------------------------------
+const Auth = require('../../auth/userAuth');
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
@@ -61,13 +63,18 @@ module.exports = {
     },
     // ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
+        if (!req.body.vc_password) { 
+            return res.status(404).send(msgF('err-0002', req.query.lang)) 
+        } 
+        let pwd = Auth.encryptPwd(req.body.vc_password)
         return User
             .create({
                 id_user: req.body.id_user || null,
                 vc_name: req.body.vc_name || null,
                 vc_lastname: req.body.vc_lastname || null,
                 vc_email: req.body.vc_email || null,
-                vc_password: req.body.vc_password || null,
+                vc_password: pwd,
+                it_profile: req.body.it_profile || 2,
                 tx_image: req.body.tx_image || null,
                 vc_password_reset: req.body.vc_password_reset || null,
                 ts_exp_password_reset: req.body.ts_exp_password_reset || null
@@ -82,8 +89,13 @@ module.exports = {
                 })
             })
             .catch((error) => {
-                var errResp = msgF(error.original.code, req.query.lang)
-                return res.status(400).send(errResp)
+                console.log(error)
+                if ( error.original.code === 'undefined' ){
+                    return res.status(400).send(error)
+                }else{
+                    var errResp = msgF(error.original.code, req.query.lang)
+                    return res.status(400).send(errResp)
+                }
             })
     },
     // ----------------------------------- UPDATE BY ID ------------------------------------
@@ -107,6 +119,7 @@ module.exports = {
                     vc_lastname: req.body.vc_lastname || user.vc_lastname,
                     vc_email: req.body.vc_email || user.vc_email,
                     vc_password: req.body.vc_password || user.vc_password,
+                    it_profile: req.body.it_profile || user.it_profile,
                     tx_image: req.body.tx_image || user.tx_image,
                     vc_password_reset: req.body.vc_password_reset || user.vc_password_reset,
                     ts_exp_password_reset: req.body.ts_exp_password_reset || user.ts_exp_password_reset,

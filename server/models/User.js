@@ -27,6 +27,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: Sequelize.STRING(64)
     },
+    it_profile: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      defaultValue: 2
+    },
     tx_image: {
       type: Sequelize.TEXT
     },

@@ -36,7 +36,7 @@ module.exports = {
                             return res.status(200).send({token: isMatch.authToken, user: isMatch.data} );
                         } else {
                             var errResp = msgF('err-0006', req.query.lang)
-                            return res.status(400).send(errResp);
+                            return res.status(401).send(errResp);
                         }
                     }
                 })
