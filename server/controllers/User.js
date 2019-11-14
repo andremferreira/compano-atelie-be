@@ -3,17 +3,24 @@ const User = require('../models').User;
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
 const dtCurr = require('../util/currentTimeStamp')
 const myUtl = require('../util/myInspect')
-// ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
+// ----------------------------------- DATA BASE MESSAGE REPORT AND LOG --------------
 const msgF = require('../factory/msgFactory')
+const Log = require ('../factory/logFactory')
+const action = { file: './service/controllers/User.js', call: 'User' } 
 // ----------------------------------- AUTH ------------------------------------------
 const Auth = require('../../auth/userAuth');
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
     list(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return User
             .findAll()
-            .then((user) => res.status(200).send(user))
+            .then((user) => { 
+                return res.status(200).send(user) 
+            })
             .catch((error) => {
                 var v = myUtl.myInspect(error, ['original','code'])
                 if (!v) {
@@ -26,6 +33,9 @@ module.exports = {
     },
     // ----------------------------------- COUNT ---------------------------------------
     count(req, res) {
+        action.method = 'Count'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return User
             .findAndCountAll()
             //.findAndCountAll({ offset: 10, limit: 2})
@@ -46,6 +56,9 @@ module.exports = {
     },
     // ----------------------------------- FIND BY ID -------------------------------------
     getById(req, res) {
+        action.method = 'getById'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return User
             .findByPk(req.params.id)
             .then((user) => {
@@ -70,6 +83,9 @@ module.exports = {
         if (!req.body.vc_password) { 
             return res.status(404).send(msgF('err-0002', req.query.lang)) 
         } 
+        action.method = 'add'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         let pwd = Auth.encryptPwd(req.body.vc_password)
         return User
             .create({
@@ -78,7 +94,7 @@ module.exports = {
                 vc_lastname: req.body.vc_lastname || null,
                 vc_email: req.body.vc_email || null,
                 vc_password: pwd,
-                it_profile: req.body.it_profile || 2,
+                in_profile: req.body.it_profile || 2,
                 tx_image: req.body.tx_image || null,
                 vc_password_reset: req.body.vc_password_reset || null,
                 ts_exp_password_reset: req.body.ts_exp_password_reset || null
@@ -105,6 +121,9 @@ module.exports = {
                 id_user: req.params.id
             }
         }
+        action.method = 'update'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return User
             .findByPk(req.params.id).
         then((user) => {
@@ -118,7 +137,7 @@ module.exports = {
                     vc_lastname: req.body.vc_lastname || user.vc_lastname,
                     vc_email: req.body.vc_email || user.vc_email,
                     vc_password: req.body.vc_password || user.vc_password,
-                    it_profile: req.body.it_profile || user.it_profile,
+                    in_profile: req.body.it_profile || user.it_profile,
                     tx_image: req.body.tx_image || user.tx_image,
                     vc_password_reset: req.body.vc_password_reset || user.vc_password_reset,
                     ts_exp_password_reset: req.body.ts_exp_password_reset || user.ts_exp_password_reset,
@@ -145,6 +164,9 @@ module.exports = {
                 id_user: req.params.id
             }
         }
+        action.method = 'delete'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return User
             .findByPk(req.params.id)
             .then(user => {
@@ -176,6 +198,9 @@ module.exports = {
                 vc_email: req.params.email
             }
         }
+        action.method = 'deleteByEmail'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return User
             .findAll(condition)
             .then(user => {

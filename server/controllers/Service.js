@@ -74,6 +74,7 @@ module.exports = {
                 nu_third_party_cost: Number(req.body.nu_third_party_cost) || Number('0.00'),
                 nu_service_cost: Number(req.body.nu_service_cost) || Number('0.00'),
                 vc_contact: req.body.vc_contact || null,
+                bo_active: req.body.bo_active || true,
                 bo_critical_service: req.body.bo_critical_service || false,
                 id_user: req.body.id_user || parseInt('1')
             }).then((service) => {
@@ -115,6 +116,7 @@ module.exports = {
                     nu_third_party_cost: Number(req.body.nu_third_party_cost) || service.nu_third_party_cost,
                     nu_service_cost: Number(req.body.nu_service_cost) || service.nu_service_cost,
                     vc_contact: req.body.vc_contact || service.vc_contact,
+                    bo_active: req.body.bo_active || service.bo_active,
                     bo_critical_service: req.body.bo_critical_service || service.bo_critical_service,
                     id_user: req.body.id_user || service.id_user,
                     ts_update: nDate.timestamp || null,
@@ -157,6 +159,7 @@ module.exports = {
                     nu_third_party_cost: Number(req.body.nu_third_party_cost) || service.nu_third_party_cost,
                     nu_service_cost: Number(req.body.nu_service_cost) || service.nu_service_cost,
                     vc_contact: req.body.vc_contact || service.vc_contact,
+                    bo_active: req.body.bo_active || service.bo_active,
                     bo_critical_service: req.body.bo_critical_service || service.bo_critical_service,
                     id_user: req.body.id_user || service.id_user,
                     ts_update: nDate.timestamp || null,

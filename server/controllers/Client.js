@@ -5,10 +5,15 @@ const dtCurr = require('../util/currentTimeStamp')
 const myUtl = require('../util/myInspect')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory')
+const Log = require ('../factory/logFactory')
+const action = { file: './service/controllers/Client.js', call: 'Client' } 
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
     list(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .findAll()
             .then((client) => res.status(200).send(client))
@@ -24,6 +29,9 @@ module.exports = {
     },
     // ----------------------------------- COUNT ---------------------------------------
     count(req, res) {
+        action.method = 'count'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .findAndCountAll()
             //.findAndCountAll({ offset: 10, limit: 2})
@@ -44,6 +52,9 @@ module.exports = {
     },
     // ----------------------------------- FIND BY ID -------------------------------------
     getById(req, res) {
+        action.method = 'getById'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .findByPk(req.params.id)
             .then((client) => {
@@ -70,6 +81,9 @@ module.exports = {
                 vc_email: req.params.email
             }
         }
+        action.method = 'getByEmail'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .findAll(condition)
             .then((client) => {
@@ -91,6 +105,9 @@ module.exports = {
     },
     // ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
+        action.method = 'add'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .create({
                 vc_name: req.body.vc_name || null,
@@ -126,6 +143,9 @@ module.exports = {
     },
     // ----------------------------------- ADD NEW -----------------------------------------
     addById(req, res) {
+        action.method = 'addById'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .create({
                 id_client: req.params.id || null,
@@ -168,6 +188,9 @@ module.exports = {
                 id_client: req.params.id
             }
         }
+        action.method = 'update'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .findByPk(req.params.id)
             .then((client) => {
@@ -217,6 +240,9 @@ module.exports = {
                 vc_email: req.params.email
             }
         }
+        action.method = 'updateByEmail'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .findAll(condition)
             .then((client) => {
@@ -265,6 +291,9 @@ module.exports = {
                 id_client: req.params.id
             }
         }
+        action.method = 'delete'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .findByPk(req.params.id)
             .then(client => {
@@ -305,6 +334,9 @@ module.exports = {
                 vc_email: req.params.email
             }
         }
+        action.method = 'deleteByEmail'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
         return Client
             .findAll(condition)
             .then(client => {

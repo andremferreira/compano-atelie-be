@@ -49,6 +49,11 @@ module.exports = {
       vc_contact: {
         type: Sequelize.STRING(30),
       },
+      bo_active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+      },
       bo_critical_service: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

@@ -44,7 +44,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(64)
       },
-      it_profile: {
+      in_profile: {
         allowNull: false,
         type: Sequelize.INTEGER,
         default: 2

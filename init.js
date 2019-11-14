@@ -1,5 +1,6 @@
 // ----------------------------------- LOG REGISTER AND MSG FACTORY ----------------------
 const Log = require ('./server/factory/logFactory')
+const action = { file: './init.js', call: 'Initialize' } 
 const color = require('./server/util/consoleLogColor')
 const msgF = require('./server/factory/msgFactory')
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE -------------------
@@ -28,15 +29,15 @@ if (env == 'development') {
     let usuarios = [{id_usuario: 1, vc_email: 'teste@teste.com', vc_password: 'TESTE!123@'}]
     let devTolk = auth.createIdToken(usuarios, true)
     if (showHToken) console.log('☻ Auth ► ' + color('f-yellow', 'access-token: ' + devTolk ))
-    Log.logRegister('Start app on dev mode.', dconfig.dConfig.dLog)
+    Log.logRegister('Start app on dev mode.', action )
 } else if (env == 'test') {
     console.log('  • ' + Welcome + color('f-yellow', 'test'))
     process.env.NODE_ENV = 'test'
-    Log.logRegister('Start app on test mode.', dconfig.dConfig.dLog)
+    Log.logRegister('Start app on test mode.', action)
 } else {
     console.log('• ' + Welcome + color('f-red', 'production'))
     process.env.NODE_ENV = 'production'
-    Log.logRegister('Start app on prod mode.', dconfig.dConfig.dLog)
+    Log.logRegister('Start app on prod mode.', action)
 }
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

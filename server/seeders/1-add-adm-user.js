@@ -26,7 +26,7 @@ module.exports = {
       vc_lastname: 'SYSTEM ADMINISTRATOR',
       vc_email: useEmail,
       vc_password: passToken,
-      it_profile: 1,
+      in_profile: 1,
       tx_image: sysUserImg
     }], {parameters:'vc_name, vc_last_name, vc_email, vc_senha, ba_imagem'})
     .then((success) => console.log("System administrator was populated with success!"))

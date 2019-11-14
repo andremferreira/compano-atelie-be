@@ -2,10 +2,10 @@
     "dConfig": {
         "dlang": "pt_BR",
         "dLog": { 
-                "active": true,
+                "active": false,
                 "actionRegister": true,
                 "dateTimeRegister": true,
-                "uniqueId": true
+                "uniqueId": false
         },
         "dSendError": {
             "active": false,
