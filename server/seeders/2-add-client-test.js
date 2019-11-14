@@ -23,7 +23,7 @@ module.exports = {
       vc_birthday: '12/12'
     }], {})
     .then((success) => console.log("Initial populate of test-1 client done!"))
-    .catch((error) => console.log("Already populated!"));
+    .catch((error) => console.log(error));
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete({
