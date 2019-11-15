@@ -5,10 +5,15 @@ const dtCurr = require('../util/currentTimeStamp')
 const myUtl = require('../util/myInspect')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory')
+const Log = require ('../factory/logFactory')
+const action = { file: './service/controllers/ServiceOrder.js', call: 'Service Order' } 
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
     list(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service Order requestion.', action )
         return ServiceOrder
             .findAll()
             .then((serviceOrder) => res.status(200).send(serviceOrder))
@@ -24,6 +29,9 @@ module.exports = {
     },
     // ----------------------------------- COUNT ---------------------------------------
     count(req, res) {
+        action.method = 'count'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service Order requestion.', action )
         return ServiceOrder
             .findAndCountAll()
             .then(serviceOrder => {
@@ -43,6 +51,9 @@ module.exports = {
     },
     // ----------------------------------- FIND BY ID -------------------------------------
     getById(req, res) {
+        action.method = 'getById'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service Order requestion.', action )
         return ServiceOrder
             .findByPk(req.params.id)
             .then((serviceOrder) => {
@@ -64,6 +75,9 @@ module.exports = {
     },
     // ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
+        action.method = 'add'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service Order requestion.', action )
         return ServiceOrder
             .create({
                 id_service_order: req.body.id_service_order || null,
@@ -92,6 +106,9 @@ module.exports = {
     },
     // ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
+        action.method = 'update'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service Order requestion.', action )
         nDate = new dtCurr
         condition = {
             where: {
@@ -143,6 +160,9 @@ module.exports = {
     },
     // ----------------------------------- REMOVE BY ID ------------------------------------
     delete(req, res) {
+        action.method = 'delete'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service Order requestion.', action )
         condition = {
             where: {
                 id_service_order: req.params.id

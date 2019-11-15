@@ -7,11 +7,6 @@
                 "dateTimeRegister": true,
                 "uniqueId": false
         },
-        "dSendError": {
-            "active": false,
-            "email": "reporterror@gmail.com",
-            "title": "BackEnd Error Report - ComPano"
-        },
         "dShowHeaderToken": false,
         "dUserAdm": "SysAdm",
         "dInitPassHashAdm": "Ad1M1ñ5y5@k3y",

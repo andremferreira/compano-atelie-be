@@ -2,11 +2,16 @@
 const User = require('../models').User;
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory');
+const Log = require ('../factory/logFactory')
+const action = { file: './service/controllers/SingIn.js', call: 'Singin' } 
 // ----------------------------------- AUTH ------------------------------------------
 const Auth = require('../../auth/userAuth');
 module.exports = {
     // ----------------------------------- SINGIN -------------------------------------
     singIn(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Login requestion.', action )
         if (!req.body.email || !req.body.password) {
             var errResp = msgF('err-0004', req.query.lang)
             return res.status(400).send(errResp);

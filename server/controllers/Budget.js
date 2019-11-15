@@ -2,13 +2,18 @@
 const Budget = require('../models').Budget;
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
 const dtCurr = require('../util/currentTimeStamp')
+const myUtl = require ('../util/myInspect')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory')
-const myUtl = require ('../util/myInspect')
+const Log = require ('../factory/logFactory')
+const action = { file: './service/controllers/Budget.js', call: 'Budget' } 
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
     list(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Budget requestion.', action )
         return Budget
             .findAll()
             .then((budget) => res.status(200).send(budget))
@@ -25,6 +30,9 @@ module.exports = {
     },
     // ----------------------------------- COUNT ---------------------------------------
     count(req, res) {
+        action.method = 'count'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Budget requestion.', action )
         return Budget
             .findAndCountAll()
             .then(budget => {
@@ -44,6 +52,9 @@ module.exports = {
     },
     // ----------------------------------- FIND BY ID -------------------------------------
     getById(req, res) {
+        action.method = 'getById'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Budget requestion.', action )
         return Budget
             .findByPk(req.params.id)
             .then((budget) => {
@@ -65,6 +76,9 @@ module.exports = {
     },
     // ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
+        action.method = 'add'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Budget requestion.', action )
         return Budget
             .create({
                 id_budget: req.body.id_budget || null,
@@ -87,6 +101,9 @@ module.exports = {
     },
     // ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
+        action.method = 'update'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Budget requestion.', action )
         nDate = new dtCurr
         condition = {
             where: {
@@ -132,6 +149,9 @@ module.exports = {
     },
     // ----------------------------------- REMOVE BY ID ------------------------------------
     delete(req, res) {
+        action.method = 'delete'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Budget requestion.', action )
         condition = {
             where: {
                 id_budget: req.params.id

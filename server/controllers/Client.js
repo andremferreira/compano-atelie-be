@@ -13,7 +13,7 @@ module.exports = {
     list(req, res) {
         action.method = 'list'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .findAll()
             .then((client) => res.status(200).send(client))
@@ -31,7 +31,7 @@ module.exports = {
     count(req, res) {
         action.method = 'count'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .findAndCountAll()
             //.findAndCountAll({ offset: 10, limit: 2})
@@ -54,7 +54,7 @@ module.exports = {
     getById(req, res) {
         action.method = 'getById'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .findByPk(req.params.id)
             .then((client) => {
@@ -83,7 +83,7 @@ module.exports = {
         }
         action.method = 'getByEmail'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .findAll(condition)
             .then((client) => {
@@ -107,7 +107,7 @@ module.exports = {
     add(req, res) {
         action.method = 'add'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .create({
                 vc_name: req.body.vc_name || null,
@@ -145,7 +145,7 @@ module.exports = {
     addById(req, res) {
         action.method = 'addById'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .create({
                 id_client: req.params.id || null,
@@ -190,7 +190,7 @@ module.exports = {
         }
         action.method = 'update'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .findByPk(req.params.id)
             .then((client) => {
@@ -242,7 +242,7 @@ module.exports = {
         }
         action.method = 'updateByEmail'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .findAll(condition)
             .then((client) => {
@@ -293,7 +293,7 @@ module.exports = {
         }
         action.method = 'delete'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .findByPk(req.params.id)
             .then(client => {
@@ -336,7 +336,7 @@ module.exports = {
         }
         action.method = 'deleteByEmail'
         action.header = JSON.stringify(req.headers)
-        Log.logRegister('User requestion.', action )
+        Log.logRegister('Client requestion.', action )
         return Client
             .findAll(condition)
             .then(client => {

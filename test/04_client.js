@@ -35,6 +35,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     // ----------------------------------- ADD CLIENT ---------------------------------------
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0010').info), function addNewClient(done) {
         client = {
+            id_client: 2,
             vc_name: 'NOME-TESTE-2',
             vc_lastname: 'SOBRENOME-TESTE-2',
             nu_code_area: 99,

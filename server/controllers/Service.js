@@ -5,10 +5,15 @@ const dtCurr = require('../util/currentTimeStamp')
 const myUtl = require('../util/myInspect')
 // ----------------------------------- DATA BASE MESSAGE REPORT ----------------------
 const msgF = require('../factory/msgFactory')
+const Log = require ('../factory/logFactory')
+const action = { file: './service/controllers/Service.js', call: 'Service' } 
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
     list(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service requestion.', action )
         return Service
             .findAll()
             .then((service) => res.status(200).send(service))
@@ -24,6 +29,9 @@ module.exports = {
     },
     // ----------------------------------- COUNT ---------------------------------------
     count(req, res) {
+        action.method = 'count'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service requestion.', action )
         return Service
             .findAndCountAll()
             .then(service => {
@@ -43,6 +51,9 @@ module.exports = {
     },
     // ----------------------------------- FIND BY ID -------------------------------------
     getById(req, res) {
+        action.method = 'getById'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service requestion.', action )
         return Service
             .findByPk(req.params.id)
             .then((service) => {
@@ -64,6 +75,9 @@ module.exports = {
     },
     // ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
+        action.method = 'add'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service requestion.', action )
         return Service
             .create({
                 id_service: req.body.id_service || null,
@@ -94,6 +108,9 @@ module.exports = {
     },
     // ----------------------------------- UPDATE BY ID ------------------------------------
     update(req, res) {
+        action.method = 'update'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service requestion.', action )
         nDate = new dtCurr
         condition = {
             where: {
@@ -137,6 +154,9 @@ module.exports = {
     },
     // ----------------------------------- UPDATE BY MNE ------------------------------------
     updateMne(req, res) {
+        action.method = 'updateMne'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service requestion.', action )
         nDate = new dtCurr
         condition = {
             where: {
@@ -180,6 +200,9 @@ module.exports = {
     },
     // ----------------------------------- REMOVE BY ID ------------------------------------
     delete(req, res) {
+        action.method = 'delete'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Service requestion.', action )
         condition = {
             where: {
                 id_service: req.params.id
