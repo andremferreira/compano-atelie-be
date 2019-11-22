@@ -23,7 +23,7 @@ function encryptPwd(pwd) {
 }
 
 function verifyToken(req, res, next) {
-    let token = req.headers['access-token']
+    const token = req.body.token || req.query.token || req.headers['authorization'] || req.headers["x-access-token"]
     if (token) {
         jwt.verify(token, secret, (err, decoded) => {
             if (err) {
@@ -31,7 +31,6 @@ function verifyToken(req, res, next) {
                     errors: ['Failed to authenticate token.']
                 })
             } else {
-                req.decoded = decoded
                 next()
             }
         })
@@ -56,9 +55,8 @@ function genJti() {
 function verifySingIn(passSend, user) {
     let nDate = new dtCurr
     let compare = bcrypt.compareSync(passSend, user.hash);
-    try { 
-        if ( compare === true ) {
-            console.log('entrou aqui!')
+    try {
+        if (compare === true) {
             let userLoggin = {
                 id: user.id,
                 name: user.name,
@@ -73,12 +71,18 @@ function verifySingIn(passSend, user) {
             var authToken = jwt.sign(_.omit(user.email, passSend), secret, {
                 expiresIn: 86400
             })
-            return { auth: true, authToken: authToken, data: userLoggin }
+            return {
+                auth: true,
+                Authorization: authToken,
+                data: userLoggin
+            }
         } else {
-            return { auth: false }
+            return {
+                auth: false
+            }
         }
 
-    } catch(e) {
+    } catch (e) {
         console.log(e)
     }
 };

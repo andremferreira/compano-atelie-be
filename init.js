@@ -12,7 +12,6 @@ const dconfig = JSON.parse(dConfig)
 const showHToken = Boolean(dconfig.dConfig.dShowHeaderToken)
 // ----------------------------------- DEFAULT MIDDLES  ----------------------------------
 const express = require('express');
-const bodyParser = require('body-parser');
 const logger = require('morgan');
 // ----------------------------------- START APP USING EXPRESS ---------------------------
 const app = express();
@@ -39,8 +38,7 @@ if (env == 'development') {
     process.env.NODE_ENV = 'production'
     Log.logRegister('Start app on prod mode.', action)
 }
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+
 require('./server/routes')(app);
 
 module.exports = app;
