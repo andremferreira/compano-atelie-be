@@ -38,7 +38,7 @@ module.exports = {
                         }
                         const isMatch = Auth.verifySingIn(req.body.password, userSmall)
                         if (isMatch.auth) {
-                            return res.status(200).send({token: isMatch.authToken, user: isMatch.data} );
+                            return res.status(200).send({token: isMatch.Authorization, user: isMatch.data} );
                         } else {
                             var errResp = msgF('err-0006', req.query.lang)
                             return res.status(401).send(errResp);
