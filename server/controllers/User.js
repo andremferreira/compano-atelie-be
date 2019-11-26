@@ -36,7 +36,7 @@ module.exports = {
         action.header = JSON.stringify(req.headers)
         Log.logRegister('User requestion.', action )
         return User
-            .findAll({attributes: ['id_user', 'vc_name', 'vc_lastname', 'vc_email']})
+            .findAll({attributes: ['id_user', 'vc_name', 'vc_lastname', 'vc_email', 'in_profile']})
             .then((user) => { 
                 return res.status(200).send(user) 
             })
