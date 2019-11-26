@@ -31,6 +31,25 @@ module.exports = {
                 }
             });
     },
+    listSmall(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
+        return User
+            .findAll({attributes: ['id_user', 'vc_name', 'vc_lastname', 'vc_email']})
+            .then((user) => { 
+                return res.status(200).send(user) 
+            })
+            .catch((error) => {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
+                    return res.status(400).send(error)
+                } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
+                    return res.status(400).send(errResp)
+                }
+            });
+    },
     // ----------------------------------- COUNT ---------------------------------------
     count(req, res) {
         action.method = 'Count'

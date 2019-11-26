@@ -82,6 +82,7 @@
 // ║║██████████████████████████████████ ROUTE OF CRUD USERS      ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
 /* ║║ -ListAll */ ProtectedRoutes.get('/users', userController.list);                            /*║   ║*/
+/* ║║ -ListSma */ ProtectedRoutes.get('/users/small', userController.listSmall);                 /*║   ║*/
 /* ║║ -Count   */ ProtectedRoutes.get('/users/count', userController.count);                     /*║   ║*/
 /* ║║ -GetId   */ ProtectedRoutes.get('/user/id/:id', userController.getById);                   /*║   ║*/
 /* ║║ -AddNew  */ ProtectedRoutes.post('/user', userController.add);                             /*║   ║*/
