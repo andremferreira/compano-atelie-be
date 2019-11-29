@@ -23,7 +23,7 @@ function encryptPwd(pwd) {
 }
 
 function verifyToken(req, res, next) {
-    const token = req.body.token || req.query.token || req.headers['authorization'] || req.headers["x-access-token"]
+    const token =  req.body.token || req.query.token || req.headers["authorization"] || req.headers["x-access-token"]
     if (token) {
         jwt.verify(token, secret, (err, decoded) => {
             if (err) {

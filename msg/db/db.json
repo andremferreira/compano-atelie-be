@@ -1639,6 +1639,66 @@
                     "type": "danger"
                 }
             ]
+        },
+        {
+            "id": 82,
+            "code": "err-0007",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Campo obrigatório!",
+                    "info": "O(s) campo(s) (%1) é(são) de preenchimento obrigatório(s)!",
+                    "type": "danger"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Access denny!",
+                    "info": "The (%1) field(s) is(are) required!",
+                    "type": "danger"
+                }
+            ]
+        },
+        {
+            "id": 83,
+            "code": "req-usr-01",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Campos",
+                    "info": ["Nome", "Sobrenome", "E-mail", "Perfil", "Senha", "Confirmar Senha" ],
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Fields",
+                    "info": ["Name", "Lastname", "E-mail", "Profile", "Password", "Confirm password" ],
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 84,
+            "code": "err-0008",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Campo obrigatório!",
+                    "info": "A senha e a confirmação não conferem!",
+                    "type": "warning"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Access denny!",
+                    "info": "The \"Password\" and \"Confirm Password\" not match!",
+                    "type": "warning"
+                }
+            ]
         }
     ]
 }

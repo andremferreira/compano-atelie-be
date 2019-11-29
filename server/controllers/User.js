@@ -99,9 +99,26 @@ module.exports = {
     },
     // ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
-        if (!req.body.vc_password) { 
-            return res.status(404).send(msgF('err-0002', req.query.lang)) 
+        let fieldsReq = msgF('req-usr-01', req.query.lang).info
+        console.log(fieldsReq)
+        if (req.body.vc_name) fieldsReq.splice(0,1)
+        if (req.body.vc_lastname) fieldsReq.splice(0,1)
+        if (req.body.vc_email) fieldsReq.splice(0,1)
+        if (req.body.in_profile) fieldsReq.splice(0,1)
+        if (req.body.vc_password) fieldsReq.splice(0,1)
+        if (req.body.vc_repassword) fieldsReq.splice(0,1)
+
+        if (fieldsReq.length) { 
+            var fields = ''
+            for (var x in fieldsReq) {
+                console.log(fieldsReq[x])
+                fields = x==0 ? fieldsReq[x] : fields + ', ' + fieldsReq[x] 
+            }
+            console.log(fields)
+            return res.status(404).send(msgF('err-0007', req.query.lang, [fields])) 
+
         } 
+        if ( req.body.vc_password !== req.body.vc_repassword ) return res.status(404).send(msgF('err-0008', req.query.lang)) 
         action.method = 'add'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('User requestion.', action )
@@ -113,7 +130,7 @@ module.exports = {
                 vc_lastname: req.body.vc_lastname || null,
                 vc_email: req.body.vc_email || null,
                 vc_password: pwd,
-                in_profile: req.body.it_profile || 2,
+                in_profile: req.body.in_profile || 2,
                 tx_image: req.body.tx_image || null,
                 vc_password_reset: req.body.vc_password_reset || null,
                 ts_exp_password_reset: req.body.ts_exp_password_reset || null
@@ -156,7 +173,7 @@ module.exports = {
                     vc_lastname: req.body.vc_lastname || user.vc_lastname,
                     vc_email: req.body.vc_email || user.vc_email,
                     vc_password: req.body.vc_password || user.vc_password,
-                    in_profile: req.body.it_profile || user.it_profile,
+                    in_profile: req.body.in_profile || user.in_profile,
                     tx_image: req.body.tx_image || user.tx_image,
                     vc_password_reset: req.body.vc_password_reset || user.vc_password_reset,
                     ts_exp_password_reset: req.body.ts_exp_password_reset || user.ts_exp_password_reset,
