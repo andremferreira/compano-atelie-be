@@ -87,6 +87,7 @@
 /* ║║ -GetId   */ ProtectedRoutes.get('/user/id/:id', userController.getById);                   /*║   ║*/
 /* ║║ -AddNew  */ ProtectedRoutes.post('/user', userController.add);                             /*║   ║*/
 /* ║║ -Update  */ ProtectedRoutes.put('/user/id/:id', userController.update);                    /*║   ║*/
+/* ║║ -Delete  */ ProtectedRoutes.delete('/user/id/:id', userController.delete);                 /*║   ║*/
 /* ║║ -DelEml  */ ProtectedRoutes.delete('/user/email/:email', userController.deleteByEmail);    /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║

@@ -214,7 +214,7 @@ module.exports = {
                     .destroy(condition)
                     .then(() => {
                         var errResp = msgF('suc-0001', req.query.lang)
-                        return res.status(204).send(errResp);
+                        return res.status(200).send(errResp);
                     })
                     .catch((error) => {
                         var v = myUtl.myInspect(error, ['original','code'])
