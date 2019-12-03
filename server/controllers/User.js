@@ -1,5 +1,7 @@
 // ----------------------------------- SEQUELIZE MODULE IMPORT -----------------------
 const User = require('../models').User;
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE ---------------
 const dtCurr = require('../util/currentTimeStamp')
 const myUtl = require('../util/myInspect')
@@ -31,12 +33,24 @@ module.exports = {
                 }
             });
     },
+        // ----------------------------------- LIST SMALL PAGINATOR --------------------------------------
     listSmall(req, res) {
-        action.method = 'list'
+        action.method = 'listSmall'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('User requestion.', action )
+        const page = req.query.page || 1
+        const limit = req.query.limit || 5
+        const offset = (( page - 1 )  * limit)
+        const usrId = req.query.id || 1
+        const perfil = req.query.pf || 1
         return User
-            .findAll({attributes: ['id_user', 'vc_name', 'vc_lastname', 'vc_email', 'in_profile']})
+            .findAndCountAll(
+                        { attributes: ['id_user', 'vc_name', 'vc_lastname', 'vc_email', 'in_profile'], 
+                          where: { id_user: { [Op.ne] : usrId }, in_profile: { [Op.gt] : perfil } }, 
+                          limit: limit, 
+                          offset: offset 
+                        }
+                    )
             .then((user) => { 
                 return res.status(200).send(user) 
             })
@@ -126,9 +140,9 @@ module.exports = {
         return User
             .create({
                 id_user: req.body.id_user || null,
-                vc_name: req.body.vc_name || null,
-                vc_lastname: req.body.vc_lastname || null,
-                vc_email: req.body.vc_email || null,
+                vc_name: `${req.body.vc_name}`.toUpperCase() || null,
+                vc_lastname: `${req.body.vc_lastname}`.toUpperCase() || null,
+                vc_email: `${req.body.vc_email}`.toLowerCase() || null,
                 vc_password: pwd,
                 in_profile: req.body.in_profile || 2,
                 tx_image: req.body.tx_image || null,
@@ -169,9 +183,9 @@ module.exports = {
             }
             return User
                 .update({
-                    vc_name: req.body.vc_name || user.vc_name,
-                    vc_lastname: req.body.vc_lastname || user.vc_lastname,
-                    vc_email: req.body.vc_email || user.vc_email,
+                    vc_name: `${req.body.vc_name}`.toUpperCase() || `${user.vc_name}`.toUpperCase(),
+                    vc_lastname: `${req.body.vc_lastname}`.toUpperCase() || `${user.vc_lastname}`.toUpperCase(),
+                    vc_email: `${req.body.vc_email}`.toLowerCase() || `${user.vc_email}`.toLowerCase(),
                     vc_password: req.body.vc_password || user.vc_password,
                     in_profile: req.body.in_profile || user.in_profile,
                     tx_image: req.body.tx_image || user.tx_image,
