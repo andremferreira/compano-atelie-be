@@ -114,7 +114,6 @@ module.exports = {
     // ----------------------------------- ADD NEW -----------------------------------------
     add(req, res) {
         let fieldsReq = msgF('req-usr-01', req.query.lang).info
-        console.log(fieldsReq)
         if (req.body.vc_name) fieldsReq.splice(0,1)
         if (req.body.vc_lastname) fieldsReq.splice(0,1)
         if (req.body.vc_email) fieldsReq.splice(0,1)
@@ -128,7 +127,6 @@ module.exports = {
                 console.log(fieldsReq[x])
                 fields = x==0 ? fieldsReq[x] : fields + ', ' + fieldsReq[x] 
             }
-            console.log(fields)
             return res.status(404).send(msgF('err-0007', req.query.lang, [fields])) 
 
         } 
@@ -174,6 +172,9 @@ module.exports = {
         action.method = 'update'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('User requestion.', action )
+        let pwd = req.body.password
+        if ( req.body.password !== req.body.vc_repassword ) return res.status(404).send(msgF('err-0008', req.query.lang)) 
+        pwd = pwd ? Auth.encryptPwd(pwd) : null
         return User
             .findByPk(req.params.id).
         then((user) => {
@@ -186,7 +187,7 @@ module.exports = {
                     vc_name: `${req.body.vc_name}`.toUpperCase() || `${user.vc_name}`.toUpperCase(),
                     vc_lastname: `${req.body.vc_lastname}`.toUpperCase() || `${user.vc_lastname}`.toUpperCase(),
                     vc_email: `${req.body.vc_email}`.toLowerCase() || `${user.vc_email}`.toLowerCase(),
-                    vc_password: req.body.vc_password || user.vc_password,
+                    vc_password: pwd || user.vc_password,
                     in_profile: req.body.in_profile || user.in_profile,
                     tx_image: req.body.tx_image || user.tx_image,
                     vc_password_reset: req.body.vc_password_reset || user.vc_password_reset,
