@@ -85,13 +85,5 @@ module.exports = (sequelize, DataTypes) => {
     schema: 'atelie',
     timestamps: false
   });
-//   Usuarios.associate = function (models) {
-//     Group.hasMany(models.Jsontable, {
-//       foreignKey: 'isn_group',
-//       onDelete: 'CASCADE',
-//       onUpdate: 'CASCADE'
-//     });
-//     Group.schema('cog')
-//   };
   return Client;
 };
