@@ -4,12 +4,13 @@
   "description": "",
   "main": "init.js",
   "scripts": {
-    "test": "npm run migrate:reset && set NODE_ENV=test && nodemon --exec mocha ./test/ || true",
+    "test": "set NODE_ENV=test && nodemon --exec mocha ./test/ || true",
     "dev": "set NODE_ENV=development && nodemon --exec babel-node ./bin/www ",
     "prod": "set NODE_ENV=production && node ./bin/www",
     "debug": "set NODE_END=debug && nodemon --exec babel-node ./bin/www --inspect-brk=9229 ./init.js",
     "migrate": "sequelize db:migrate && sequelize db:seeds",
-    "migrate:reset": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
+    "migrate:reset": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "seed": "sequelize db:seed:all"
   },
   "repository": {
     "type": "git",

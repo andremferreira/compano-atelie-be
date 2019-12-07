@@ -8,11 +8,11 @@ const dtCurr = require('../server/util/currentTimeStamp');
 
 function createIdToken(usuarios, dev) {
     if (dev) {
-        return jwt.sign(_.omit(usuarios, 'password'), secret, {
+        return jwt.sign(_.omit(usuarios, 'Ad1M1ñ5y5@k3y'), secret, {
             expiresIn: 86400
         })
     } else {
-        return jwt.sign(_.omit(usuarios, 'password'), secret, {
+        return jwt.sign(_.omit(usuarios, 'Ad1M1ñ5y5@k3y'), secret, {
             expiresIn: 3600
         })
     }

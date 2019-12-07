@@ -6,8 +6,10 @@ const color = require('../server/util/consoleLogColor')
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
 const auth = require('../auth/userAuth')
-const userTest = require('../server/factory/userTest').user
-const devToken = auth.createIdToken(userTest, true)
+const user = require('../server/factory/userTest')
+const userTest = user.User()
+const usrInfoToken = auth.verifySingIn('Ad1M1ñ5y5@k3y', userTest)
+const devToken = usrInfoToken.Authorization
 // ----------------------------------- TEST CLIENT ---------------------------------------
 describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     let msgS
@@ -22,14 +24,14 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0008').info), function listClient(done) {
         request(server)
             .get('/api/clients')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     });
     // ----------------------------------- COUNT CLIENT ---------------------------------------
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0009').info), function countClient(done) {
         request(server)
             .get('/api/clients/count')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     });
     // ----------------------------------- ADD CLIENT ---------------------------------------
@@ -54,7 +56,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
         }
         request(server)
             .post('/api/client')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(client)
             .expect(201)
             .end(function (err, res) {
@@ -83,7 +85,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
         }
         request(server)
             .put('/api/client/email/EMAIL@TESTE-2.COM')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(client)
             .expect(200)
             .end(function (err, res) {
@@ -113,7 +115,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
         }
         request(server)
             .put('/api/client/email/WHOUTEMAIL@TESTE-2.COM')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(client)
             .expect(function (res) {
                 JSON.parse(res.text)
@@ -123,7 +125,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0013').info), function delClientByEmail(done) {
         request(server)
             .delete('/api/client/email/EMAIL@TESTE-2.COM.UPD')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw err;
@@ -137,7 +139,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getClientByEmailNeg(done) {
         request(server)
             .delete('/api/client/email/WOUTEMAIL@TESTE-2.COM')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
@@ -146,7 +148,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0015').info), function getClientByEmail(done) {
         request(server)
             .get('/api/client/email/EMAIL@TESTE-1.COM')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw err;
@@ -158,7 +160,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getClientByEmailNeg(done) {
         request(server)
             .get('/api/client/email/WOUTEMAIL@TESTE.COM')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
@@ -185,7 +187,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
         }
         request(server)
             .post('/api/client/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(client)
             .expect(201, done)
     });
@@ -212,7 +214,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
         }
         request(server)
             .post('/api/client/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(client)
             .expect(400)
             .end(function (err, res) {
@@ -224,7 +226,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0011').info), function getClientById(done) {
         request(server)
             .get('/api/client/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw err;
@@ -236,7 +238,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getClientByIdNeg(done) {
         request(server)
             .get('/api/client/id/99999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
@@ -248,7 +250,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
         }
         request(server)
             .put('/api/client/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(client)
             .expect(200, done)
     });
@@ -260,7 +262,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
         }
         request(server)
             .put('/api/client/id/99999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(client)
             .expect(404, done)
     });
@@ -268,7 +270,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0017').info), function delClientById(done) {
         request(server)
             .delete('/api/client/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     });
     // ----------------------------------- DELETE CLIENT BY ID WITHOUT RESULT --------------
@@ -276,7 +278,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0007').title, function () {
     it(color('f-yellow', '└') + color('f-hidden', msgS), function delClientByIdNeg(done) {
         request(server)
             .delete('/api/client/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)

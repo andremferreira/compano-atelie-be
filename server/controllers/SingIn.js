@@ -34,7 +34,7 @@ module.exports = {
                             hash:  user[0].dataValues.vc_password,
                             lastname: user[0].dataValues.vc_lastname,
                             email: user[0].dataValues.vc_email,
-                            profile: user[0].dataValues.it_profile || 2
+                            profile: user[0].dataValues.in_profile || 2
                         }
                         const isMatch = Auth.verifySingIn(req.body.password, userSmall)
                         if (isMatch.auth) {

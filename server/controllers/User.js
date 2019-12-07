@@ -71,7 +71,6 @@ module.exports = {
         Log.logRegister('User requestion.', action )
         return User
             .findAndCountAll()
-            //.findAndCountAll({ offset: 10, limit: 2})
             .then(user => {
                 res.status(200).send({
                     'count': user.count
@@ -172,9 +171,13 @@ module.exports = {
         action.method = 'update'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('User requestion.', action )
-        let pwd = req.body.password
-        if ( req.body.password !== req.body.vc_repassword ) return res.status(404).send(msgF('err-0008', req.query.lang)) 
+
+        let pwd = req.body.password || req.body.vc_password
+        if ( pwd !== req.body.vc_repassword ) return res.status(404).send(msgF('err-0008', req.query.lang)) 
         pwd = pwd ? Auth.encryptPwd(pwd) : null
+        var name = req.body.vc_name ? `${req.body.vc_name}`.toUpperCase() : null
+        var lastname = req.body.vc_lastname ? `${req.body.vc_lastname}`.toUpperCase() : null
+        var email = req.body.vc_email ? `${req.body.vc_email}`.toLowerCase() : null
         return User
             .findByPk(req.params.id).
         then((user) => {
@@ -184,9 +187,9 @@ module.exports = {
             }
             return User
                 .update({
-                    vc_name: `${req.body.vc_name}`.toUpperCase() || `${user.vc_name}`.toUpperCase(),
-                    vc_lastname: `${req.body.vc_lastname}`.toUpperCase() || `${user.vc_lastname}`.toUpperCase(),
-                    vc_email: `${req.body.vc_email}`.toLowerCase() || `${user.vc_email}`.toLowerCase(),
+                    vc_name: name || user.vc_name,
+                    vc_lastname: lastname || user.vc_lastname,
+                    vc_email: email || user.vc_email,
                     vc_password: pwd || user.vc_password,
                     in_profile: req.body.in_profile || user.in_profile,
                     tx_image: req.body.tx_image || user.tx_image,

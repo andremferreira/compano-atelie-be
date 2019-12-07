@@ -1699,6 +1699,46 @@
                     "type": "warning"
                 }
             ]
+        },
+        {
+            "id": 85,
+            "code": "tst-0069",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Iniciando teste de classe \"SingIn\"...",
+                    "info": "Iniciando teste de classe \"SingIn\"...",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Start test on \"SingIn\" class...",
+                    "info":  "Start test on \"SingIn\" class...",
+                    "type": "info"
+                }
+            ]
+        },
+        {
+            "id": 86,
+            "code": "tst-0070",
+            "msgObj": [
+                {
+                    "id": 1,
+                    "lang": "pt_BR",
+                    "title": "Método singIn.",
+                    "info": " Tente realizar login de usuário, esperando o retorno do token na rota \"POST: /oapi/singin\";",
+                    "type": "info"
+                },
+                {
+                    "id": 2,
+                    "lang": "en_US",
+                    "title": "Method getUserList.",
+                    "info":  " Try singin user, expect the return of token on route \"POST: /oapi/singin\";",
+                    "type": "info"
+                }
+            ]
         }
     ]
 }

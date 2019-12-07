@@ -6,8 +6,10 @@ const color = require('../server/util/consoleLogColor')
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
 const auth = require('../auth/userAuth')
-const userTest = require('../server/factory/userTest').user
-const devToken = auth.createIdToken(userTest, true)
+const user = require('../server/factory/userTest')
+const userTest = user.User()
+const usrInfoToken = auth.verifySingIn('Ad1M1ñ5y5@k3y', userTest)
+const devToken = usrInfoToken.Authorization
 // ----------------------------------- TEST USER -----------------------------------------
 describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     let msgS
@@ -22,7 +24,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0036').info), function listService(done) {
         request(server)
             .get('/api/services')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     })
 
@@ -30,7 +32,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0037').info), function countService(done) {
         request(server)
             .get('/api/services/count')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     })
     // ----------------------------------- ADD SERVICE ---------------------------------------
@@ -49,7 +51,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
           }
         request(server)
             .post('/api/service')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(servTest)
             .expect(201)
             .end(function (err, res) {
@@ -66,7 +68,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
           }
         request(server)
             .put('/api/service/mne/RPACM')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(servTest)
             .expect(200)
             .end(function (err, res) {
@@ -84,7 +86,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
           }
         request(server)
             .put('/api/service/mne/RPACM')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(servTest)
             .expect(404)
             .end(function (err, res) {
@@ -101,7 +103,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
           }
         request(server)
             .put('/api/service/id/1')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(servTest)
             .expect(200)
             .end(function (err, res) {
@@ -118,7 +120,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
           }
         request(server)
             .put('/api/service/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(servTest)
             .expect(404)
             .end(function (err, res) {
@@ -130,7 +132,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
      it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0041').info), function getServiceById(done) {
         request(server)
             .get('/api/service/id/1')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw err;
@@ -142,7 +144,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getServiceByIdNeg(done) {
         request(server)
             .get('/api/service/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
@@ -151,7 +153,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0043').info), function delServiceById(done) {
         request(server)
             .delete('/api/service/id/1')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw (err);
@@ -163,7 +165,7 @@ describe(color('f-yellow','► ') + msgF('tst-0035').title, function () {
     it(color('f-yellow', '└') + color('f-hidden', msgS), function delServiceByIdNeg(done) {
         request(server)
             .delete('/api/service/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)

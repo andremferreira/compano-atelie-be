@@ -6,8 +6,10 @@ const color = require('../server/util/consoleLogColor')
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
 const auth = require('../auth/userAuth')
-const userTest = require('../server/factory/userTest').user
-const devToken = auth.createIdToken(userTest, true)
+const user = require('../server/factory/userTest')
+const userTest = user.User()
+const usrInfoToken = auth.verifySingIn('Ad1M1ñ5y5@k3y', userTest)
+const devToken = usrInfoToken.Authorization
 // ----------------------------------- TEST BUDGET -----------------------------------------
 describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
     let msgS
@@ -22,7 +24,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0046').info), function listBudget(done) {
         request(server)
             .get('/api/budgets')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     })
 
@@ -30,7 +32,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0047').info), function countBudget(done) {
         request(server)
             .get('/api/budgets/count')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     })
     // ----------------------------------- ADD BUDGET ---------------------------------------
@@ -55,7 +57,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
         }
         request(server)
             .post('/api/budget')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(bgTest)
             .expect(201)
             .end(function (err, res) {
@@ -84,7 +86,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
         }
         request(server)
             .put('/api/budget/id/1')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(bgTest)
             .expect(200)
             .end(function (err, res) {
@@ -119,7 +121,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
         }
         request(server)
             .put('/api/budget/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(bgTest)
             .expect(404)
             .end(function (err, res) {
@@ -131,7 +133,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0053').info), function getBudgetById(done) {
         request(server)
             .get('/api/budget/id/1')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw err;
@@ -143,7 +145,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getBudgetByIdNeg(done) {
         request(server)
             .get('/api/budget/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
@@ -152,7 +154,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0055').info), function delBudgetById(done) {
         request(server)
             .delete('/api/budget/id/1')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw (err);
@@ -164,7 +166,7 @@ describe(color('f-yellow', '► ') + msgF('tst-0045').title, function () {
     it(color('f-yellow', '└') + color('f-hidden', msgS), function delBudgetByIdNeg(done) {
         request(server)
             .delete('/api/budget/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)

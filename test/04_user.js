@@ -6,8 +6,10 @@ const color = require('../server/util/consoleLogColor')
 const msgF = require('../server/factory/msgFactory')
 // ----------------------------------- DEFAULT TEST USER AUTH TOKEN ----------------------
 const auth = require('../auth/userAuth')
-const userTest = require('../server/factory/userTest').user
-const devToken = auth.createIdToken(userTest, true)
+const user = require('../server/factory/userTest')
+const userTest = user.User()
+const usrInfoToken = auth.verifySingIn('Ad1M1ñ5y5@k3y', userTest)
+const devToken = usrInfoToken.Authorization
 // ----------------------------------- INITIAL CONFIG OF PATH AND FILE -------------------
 const fs = require('fs')
 const path = require('path')
@@ -27,11 +29,12 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
     afterEach(function () {
         server.close()
     })
+
     // ----------------------------------- LIST USERS ---------------------------------------
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0020').info), function listUser(done) {
         request(server)
             .get('/api/users')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     })
 
@@ -39,21 +42,24 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0021').info), function countUser(done) {
         request(server)
             .get('/api/users/count')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200, done)
     })
-    // ----------------------------------- ADD CLIENT ---------------------------------------
+    // ----------------------------------- ADD USER ---------------------------------------
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0023').info), function addNewUser(done) {
         usrTest = {
+            id_user: 2,
             vc_name: 'TEST_NEW_USER',
             vc_lastname: 'TEST_NEW_USER',
             vc_email: 'TESTE@NEW.USER',
+            in_profile: 2,
             vc_password: passToken,
-            tx_image: sysUserImg
+            vc_repassword: passToken
           }
+
         request(server)
             .post('/api/user')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(usrTest)
             .expect(201)
             .end(function (err, res) {
@@ -68,7 +74,7 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
           }
         request(server)
             .put('/api/user/id/1')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(usrTest)
             .expect(200)
             .end(function (err, res) {
@@ -84,7 +90,7 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
           }
         request(server)
             .put('/api/user/id/999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .send(usrTest)
             .expect(404)
             .end(function (err, res) {
@@ -96,7 +102,7 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
      it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0022').info), function getUserById(done) {
         request(server)
             .get('/api/user/id/1')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw err;
@@ -108,16 +114,16 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
     it(color('f-yellow', '├') + color('f-hidden', msgS), function getUserByIdNeg(done) {
         request(server)
             .get('/api/user/id/9999')
-            .set('access-token', devToken)
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
     })
-    // ----------------------------------- REMOVE USER BY EMAIL ---------------------------
+    // ----------------------------------- REMOVE USER BY ID ---------------------------
     it(color('f-yellow', '├') + color('f-hidden', msgF('tst-0024').info), function delUserByEmail(done) {
         request(server)
-            .delete('/api/user/email/TESTE@NEW.USER')
-            .set('access-token', devToken)
+            .delete('/api/user/id/2')
+            .set('authorization', devToken)
             .expect(200)
             .end(function (err, res) {
                 if (err) throw (err);
@@ -128,8 +134,8 @@ describe(color('f-yellow','► ') + msgF('tst-0019').title, function () {
     msgS = msgF('tst-0026', '', [color('f-red-i',''), color('f-hidden-i','')]).info
     it(color('f-yellow', '└') + color('f-hidden', msgS), function getUserByEmailNeg(done) {
         request(server)
-            .delete('/api/user/email/WOUTEMAIL@TESTE-2.COM')
-            .set('access-token', devToken)
+            .delete('/api/user/id/2')
+            .set('authorization', devToken)
             .expect(function (res) {
                 JSON.parse(res.text)
             }).expect(404, msgF('err-0002'), done)
