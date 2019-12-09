@@ -177,7 +177,11 @@ module.exports = {
         if ( req.body.vc_repassword ){ 
             if (pwd !== req.body.vc_repassword) return res.status(404).send(msgF('err-0008', req.query.lang))
         }
-        if (pwd.length < 20) { pwd = Auth.encryptPwd(pwd) } else { pwd = null }
+        try {
+            if (pwd.length < 20  || pwd) { pwd = Auth.encryptPwd(pwd) } else { pwd = null }
+        } catch(e){
+            pwd = null
+        }
         var name = req.body.vc_name ? `${req.body.vc_name}`.toUpperCase() : null
         var lastname = req.body.vc_lastname ? `${req.body.vc_lastname}`.toUpperCase() : null
         var email = req.body.vc_email ? `${req.body.vc_email}`.toLowerCase() : null
