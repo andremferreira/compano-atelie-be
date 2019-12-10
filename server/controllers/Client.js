@@ -14,8 +14,14 @@ module.exports = {
         action.method = 'list'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Client requestion.', action )
+        const page = req.query.page || 1
+        const limit = req.query.limit || 5
+        const offset = (( page - 1 )  * limit)
         return Client
-            .findAll()
+            .findAndCountAll({ 
+                limit: limit, 
+                offset: offset 
+            })
             .then((client) => res.status(200).send(client))
             .catch((error) => {
                 var v = myUtl.myInspect(error, ['original','code'])
@@ -108,16 +114,23 @@ module.exports = {
         action.method = 'add'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Client requestion.', action )
+        const onlyNumber= /\D/g
+        const zip_code = parseInt(`${req.body.nu_zip_code}`.replace(onlyNumber,''))
+        const code_area = parseInt(`${req.body.nu_code_area}`.replace(onlyNumber,''))
+        const mobile = parseInt(`${req.body.nu_mobile}`.replace(onlyNumber,''))
+        const social_security_code = `${req.body.nu_social_security_code}`.replace(onlyNumber,'')
+        console.log(social_security_code, req.body.nu_social_security_code)
         return Client
             .create({
+                id_client: req.body.id || null,
                 vc_name: req.body.vc_name || null,
                 vc_lastname: req.body.vc_lastname || null,
-                nu_code_area: req.body.nu_code_area || null,
-                nu_mobile: req.body.nu_mobile || null,
+                nu_code_area: code_area || null,
+                nu_mobile: mobile || null,
                 vc_contact: req.body.vc_contact || null,
                 vc_email: req.body.vc_email || null,
-                nu_social_security_code: req.body.nu_social_security_code || null,
-                nu_zip_code: req.body.nu_zip_code,
+                nu_social_security_code: social_security_code || null,
+                nu_zip_code: zip_code,
                 vc_city: req.body.vc_city || null,
                 vc_state: req.body.vc_state || null,
                 vc_district: req.body.vc_district || null,
@@ -132,6 +145,7 @@ module.exports = {
                 return res.status(201).send(msgResp)
             })
             .catch((error) => {
+                //console.log(error)
                 var v = myUtl.myInspect(error, ['original','code'])
                 if(!v){
                     return res.status(400).send(error)
@@ -146,17 +160,21 @@ module.exports = {
         action.method = 'addById'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Client requestion.', action )
+        const zip_code = parseInt(`${req.body.nu_zip_code}`.replace(/()-/g,''))
+        const code_area = parseInt(`${req.body.nu_code_area}`.replace(/()-/g,''))
+        const mobile = parseInt(`${req.body.nu_mobile}`.replace(/()-/g,''))
+        const social_security_code = `${req.body.nu_social_security_code}`.replace(/()-./g,'')
         return Client
             .create({
-                id_client: req.params.id || null,
+                id_client: req.body.id || null,
                 vc_name: req.body.vc_name || null,
                 vc_lastname: req.body.vc_lastname || null,
-                nu_code_area: req.body.nu_code_area || null,
-                nu_mobile: req.body.nu_mobile || null,
+                nu_code_area: code_area || null,
+                nu_mobile: mobile || null,
                 vc_contact: req.body.vc_contact || null,
                 vc_email: req.body.vc_email || null,
-                nu_social_security_code: req.body.nu_social_security_code || null,
-                nu_zip_code: req.body.nu_zip_code,
+                nu_social_security_code: social_security_code || null,
+                nu_zip_code: zip_code,
                 vc_city: req.body.vc_city || null,
                 vc_state: req.body.vc_state || null,
                 vc_district: req.body.vc_district || null,
@@ -171,6 +189,7 @@ module.exports = {
                 return res.status(201).send(msgResp)
             })
             .catch((error) => {
+                console.log(error)
                 var v = myUtl.myInspect(error, ['original','code'])
                 if(!v){
                     return res.status(400).send(error)
@@ -191,6 +210,10 @@ module.exports = {
         action.method = 'update'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Client requestion.', action )
+        const zip_code = parseInt(`${req.params.nu_zip_code}`.replace(/()-/g,''))
+        const code_area = parseInt(`${req.params.nu_code_area}`.replace(/()-/g,''))
+        const mobile = parseInt(`${req.params.nu_mobile}`.replace(/()-/g,''))
+        const social_security_code = parseFloat(`${req.params.nu_social_security_code}`.replace(/()-./g,''))
         return Client
             .findByPk(req.params.id)
             .then((client) => {
@@ -202,12 +225,12 @@ module.exports = {
                     .update({
                         vc_name: req.body.vc_name || client.vc_name,
                         vc_lastname: req.body.vc_lastname || client.vc_lastname,
-                        nu_code_area: req.body.nu_code_area || client.nu_code_area,
-                        nu_mobile: req.body.nu_mobile || client.nu_mobile,
+                        nu_code_area: code_area || client.nu_code_area,
+                        nu_mobile: mobile || client.nu_mobile,
                         vc_contact: req.body.vc_contact || client.vc_contact,
                         vc_email: req.body.vc_email || client.vc_email,
-                        nu_social_security_code: req.body.nu_social_security_code || client.nu_social_security_code,
-                        nu_zip_code: req.body.nu_zip_code || client.nu_zip_code,
+                        nu_social_security_code: social_security_code || client.nu_social_security_code,
+                        nu_zip_code: zip_code || client.nu_zip_code,
                         vc_city: req.body.vc_city || client.vc_city,
                         vc_state: req.body.vc_state || client.vc_state,
                         vc_district: req.body.vc_district || client.vc_district,
@@ -223,6 +246,8 @@ module.exports = {
                     })
                     .catch((error) => {
                         var v = myUtl.myInspect(error, ['original','code'])
+                        console.log(v)
+                        console.log(error)
                         if (!v) {
                             return res.status(400).send(error)
                         } else {
