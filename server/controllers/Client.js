@@ -7,6 +7,7 @@ const myUtl = require('../util/myInspect')
 const msgF = require('../factory/msgFactory')
 const Log = require ('../factory/logFactory')
 const action = { file: './service/controllers/Client.js', call: 'Client' } 
+const onlyNumber= /\D/g
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
@@ -114,23 +115,21 @@ module.exports = {
         action.method = 'add'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Client requestion.', action )
-        const onlyNumber= /\D/g
-        const zip_code = parseInt(`${req.body.nu_zip_code}`.replace(onlyNumber,''))
-        const code_area = parseInt(`${req.body.nu_code_area}`.replace(onlyNumber,''))
-        const mobile = parseInt(`${req.body.nu_mobile}`.replace(onlyNumber,''))
-        const social_security_code = `${req.body.nu_social_security_code}`.replace(onlyNumber,'')
-        console.log(social_security_code, req.body.nu_social_security_code)
+        const zip_code = `${req.body.vc_zip_code}`.replace(onlyNumber,'')
+        const code_area = `${req.body.vc_code_area}`.replace(onlyNumber,'')
+        const mobile = `${req.body.vc_mobile}`.replace(onlyNumber,'')
+        const social_security_code = `${req.body.vc_social_security_code}`.replace(onlyNumber,'')
         return Client
             .create({
                 id_client: req.body.id || null,
                 vc_name: req.body.vc_name || null,
                 vc_lastname: req.body.vc_lastname || null,
-                nu_code_area: code_area || null,
-                nu_mobile: mobile || null,
+                vc_code_area: code_area || null,
+                vc_mobile: mobile || null,
                 vc_contact: req.body.vc_contact || null,
                 vc_email: req.body.vc_email || null,
-                nu_social_security_code: social_security_code || null,
-                nu_zip_code: zip_code,
+                vc_social_security_code: social_security_code || null,
+                vc_zip_code: zip_code || null,
                 vc_city: req.body.vc_city || null,
                 vc_state: req.body.vc_state || null,
                 vc_district: req.body.vc_district || null,
@@ -160,21 +159,21 @@ module.exports = {
         action.method = 'addById'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Client requestion.', action )
-        const zip_code = parseInt(`${req.body.nu_zip_code}`.replace(/()-/g,''))
-        const code_area = parseInt(`${req.body.nu_code_area}`.replace(/()-/g,''))
-        const mobile = parseInt(`${req.body.nu_mobile}`.replace(/()-/g,''))
-        const social_security_code = `${req.body.nu_social_security_code}`.replace(/()-./g,'')
+        const zip_code = `${req.body.vc_zip_code}`.replace(onlyNumber,'')
+        const code_area = `${req.body.vc_code_area}`.replace(onlyNumber,'')
+        const mobile = `${req.body.vc_mobile}`.replace(onlyNumber,'')
+        const social_security_code = `${req.body.vc_social_security_code}`.replace(onlyNumber,'')
         return Client
             .create({
                 id_client: req.body.id || null,
                 vc_name: req.body.vc_name || null,
                 vc_lastname: req.body.vc_lastname || null,
-                nu_code_area: code_area || null,
-                nu_mobile: mobile || null,
+                vc_code_area: code_area || null,
+                vc_mobile: mobile || null,
                 vc_contact: req.body.vc_contact || null,
                 vc_email: req.body.vc_email || null,
-                nu_social_security_code: social_security_code || null,
-                nu_zip_code: zip_code,
+                vc_social_security_code: social_security_code || null,
+                vc_zip_code: zip_code,
                 vc_city: req.body.vc_city || null,
                 vc_state: req.body.vc_state || null,
                 vc_district: req.body.vc_district || null,
@@ -210,10 +209,10 @@ module.exports = {
         action.method = 'update'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Client requestion.', action )
-        const zip_code = parseInt(`${req.params.nu_zip_code}`.replace(/()-/g,''))
-        const code_area = parseInt(`${req.params.nu_code_area}`.replace(/()-/g,''))
-        const mobile = parseInt(`${req.params.nu_mobile}`.replace(/()-/g,''))
-        const social_security_code = parseFloat(`${req.params.nu_social_security_code}`.replace(/()-./g,''))
+        const zip_code = `${req.params.vc_zip_code}`.replace(onlyNumber,'')
+        const code_area = `${req.params.vc_code_area}`.replace(onlyNumber,'')
+        const mobile = `${req.params.vc_mobile}`.replace(onlyNumber,'')
+        const social_security_code = `${req.params.vc_social_security_code}`.replace(onlyNumber,'')
         return Client
             .findByPk(req.params.id)
             .then((client) => {
@@ -225,12 +224,12 @@ module.exports = {
                     .update({
                         vc_name: req.body.vc_name || client.vc_name,
                         vc_lastname: req.body.vc_lastname || client.vc_lastname,
-                        nu_code_area: code_area || client.nu_code_area,
-                        nu_mobile: mobile || client.nu_mobile,
+                        vc_code_area: code_area || client.vc_code_area,
+                        vc_mobile: mobile || client.vc_mobile,
                         vc_contact: req.body.vc_contact || client.vc_contact,
                         vc_email: req.body.vc_email || client.vc_email,
-                        nu_social_security_code: social_security_code || client.nu_social_security_code,
-                        nu_zip_code: zip_code || client.nu_zip_code,
+                        vc_social_security_code: social_security_code || client.vc_social_security_code,
+                        vc_zip_code: zip_code || client.vc_zip_code,
                         vc_city: req.body.vc_city || client.vc_city,
                         vc_state: req.body.vc_state || client.vc_state,
                         vc_district: req.body.vc_district || client.vc_district,
@@ -279,12 +278,12 @@ module.exports = {
                     .update({
                         vc_name: req.body.vc_name || client.vc_name,
                         vc_lastname: req.body.vc_lastname || client.vc_lastname,
-                        nu_code_area: req.body.nu_code_area || client.nu_code_area,
-                        nu_mobile: req.body.nu_mobile || client.nu_mobile,
+                        vc_code_area: req.body.vc_code_area || client.vc_code_area,
+                        vc_mobile: req.body.vc_mobile || client.vc_mobile,
                         vc_contact: req.body.vc_contact || client.vc_contact,
                         vc_email: req.body.vc_email || client.vc_email,
-                        nu_social_security_code: req.body.nu_social_security_code || client.nu_social_security_code,
-                        nu_zip_code: req.body.nu_zip_code || client.nu_zip_code,
+                        vc_social_security_code: req.body.vc_social_security_code || client.vc_social_security_code,
+                        vc_zip_code: req.body.vc_zip_code || client.vc_zip_code,
                         vc_city: req.body.vc_city || client.vc_city,
                         vc_state: req.body.vc_state || client.vc_state,
                         vc_district: req.body.vc_district || client.vc_district,

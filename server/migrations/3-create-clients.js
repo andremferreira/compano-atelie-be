@@ -31,13 +31,13 @@ module.exports = {
           msg: "Only allow values with length between 5 and 100 characters."
         },
       },
-      nu_code_area: {
+      vc_code_area: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(3),
       },
-      nu_mobile: {
+      vc_mobile: {
         allowNull: false,
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING(10),
       },
       vc_contact: {
         type: Sequelize.STRING(30),
@@ -54,13 +54,14 @@ module.exports = {
           msg: "Only allow values with length between 10 and 100 characters."
         },
       },
-      nu_social_security_code: {
+      vc_social_security_code: {
         allowNull: false,
         unique: true,
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING(20),
       },
-      nu_zip_code: {
-        type: Sequelize.INTEGER,
+      vc_zip_code: {
+        allowNull: false,
+        type: Sequelize.STRING(10),
       },
       vc_city: {
         allowNull: false,

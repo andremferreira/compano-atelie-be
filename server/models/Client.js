@@ -16,13 +16,13 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING(100),
       },
-      nu_code_area: {
+      vc_code_area: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(3),
       },
-      nu_mobile: {
+      vc_mobile: {
         allowNull: false,
-        type: DataTypes.BIGINT,
+        type: DataTypes.STRING(10)
       },
       vc_contact: {
         type: DataTypes.STRING(30),
@@ -32,13 +32,14 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         type: DataTypes.STRING(100),
       },
-      nu_social_security_code: {
+      vc_social_security_code: {
         allowNull: false,
         unique: true,
-        type: DataTypes.BIGINT,
+        type: DataTypes.STRING(20),
       },
-      nu_zip_code: {
-        type: DataTypes.INTEGER,
+      vc_zip_code: {
+        allowNull: false,
+        type: DataTypes.STRING(10),
       },
       vc_city: {
         allowNull: false,
