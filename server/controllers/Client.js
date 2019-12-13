@@ -8,6 +8,8 @@ const msgF = require('../factory/msgFactory')
 const Log = require ('../factory/logFactory')
 const action = { file: './service/controllers/Client.js', call: 'Client' } 
 const onlyNumber= /\D/g
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op;
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
@@ -18,8 +20,28 @@ module.exports = {
         const page = req.query.page || 1
         const limit = req.query.limit || 5
         const offset = (( page - 1 )  * limit)
+        let name
+        let lastname
+        let where = {}
+        if (req.query.name) name = req.query.name 
+        if (req.query.lastname) lastname =  req.query.lastname
+        if (name && lastname) {
+            where = {
+                vc_name: { [Op.like]: name },
+                vc_lastname: { [Op.like]: lastname }
+            }
+        } else if (name && !lastname) {
+            where = {
+                vc_name: { [Op.like]: name } 
+            }
+        } else if (!name && lastname) {
+            where = {
+                vc_lastname: { [Op.like]: lastname }
+            }
+        }
         return Client
-            .findAndCountAll({ 
+            .findAndCountAll({
+                where: where, 
                 limit: limit, 
                 offset: offset 
             })
