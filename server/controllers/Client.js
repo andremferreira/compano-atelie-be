@@ -166,10 +166,10 @@ module.exports = {
                 return res.status(201).send(msgResp)
             })
             .catch((error) => {
-                //console.log(error)
                 var v = myUtl.myInspect(error, ['original','code'])
+                var respDef = error.errors[0].message
                 if(!v){
-                    return res.status(400).send(error)
+                    return res.status(400).send({ info: respDef})
                 } else {
                     var errResp = msgF(error.original.code, req.query.lang)
                     return res.status(400).send(errResp)

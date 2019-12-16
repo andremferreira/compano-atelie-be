@@ -34,7 +34,8 @@ module.exports = {
                             hash:  user[0].dataValues.vc_password,
                             lastname: user[0].dataValues.vc_lastname,
                             email: user[0].dataValues.vc_email,
-                            profile: user[0].dataValues.in_profile || 2
+                            profile: user[0].dataValues.in_profile || 2,
+                            avatar: user[0].dataValues.tx_image
                         }
                         const isMatch = Auth.verifySingIn(req.body.password, userSmall)
                         if (isMatch.auth) {
@@ -46,7 +47,8 @@ module.exports = {
                     }
                 })
                 .catch((error) => {
-                        return res.status(400).send(error)
+                        var errResp = msgF('err-0005', req.query.lang)
+                        return res.status(400).send(errResp);
                 });
         }
     }

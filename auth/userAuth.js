@@ -83,6 +83,7 @@ function verifySingIn(passSend, user) {
                 lastname: user.lastname,
                 email: user.email,
                 profile: user.profile,
+                avatar: user.avatar,
                 jti: genJti(),
                 iat: Math.floor(Date.now() / 1000),
                 exp: Math.floor(Date.now() / 1000) + (86400),
