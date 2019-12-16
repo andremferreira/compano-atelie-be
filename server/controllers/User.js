@@ -172,16 +172,11 @@ module.exports = {
         action.header = JSON.stringify(req.headers)
         Log.logRegister('User requestion.', action )
 
-        let pwd = req.body.password || req.body.vc_password
-        console.log(req.body)
+        let pwd = req.body.vc_password 
         if ( req.body.vc_repassword ){ 
             if (pwd !== req.body.vc_repassword) return res.status(404).send(msgF('err-0008', req.query.lang))
         }
-        try {
-            if (pwd.length < 20  || pwd) { pwd = Auth.encryptPwd(pwd) } else { pwd = null }
-        } catch(e){
-            pwd = null
-        }
+        pwd = pwd ? Auth.encryptPwd(pwd) : null
         var name = req.body.vc_name ? `${req.body.vc_name}`.toUpperCase() : null
         var lastname = req.body.vc_lastname ? `${req.body.vc_lastname}`.toUpperCase() : null
         var email = req.body.vc_email ? `${req.body.vc_email}`.toLowerCase() : null
@@ -204,7 +199,59 @@ module.exports = {
                     ts_exp_password_reset: req.body.ts_exp_password_reset || user.ts_exp_password_reset,
                     ts_update: nDate.timestamp || null,
                 }, condition).then(() => {
-                    var msgResp = msgF('suc-0004', req.query.lang, [user.id_user])
+                    var msgResp = msgF('suc-0004', req.query.lang, [user.vc_email])
+                    return res.status(200).send(msgResp)
+                })
+                .catch((error) => {
+                    var v = myUtl.myInspect(error, ['original','code'])
+                    if (!v) {
+                        return res.status(400).send(error)
+                    } else {
+                        var errResp = msgF(error.original.code, req.query.lang)
+                        return res.status(400).send(errResp)
+                    }
+                })
+        })
+    },
+    // ----------------------------------- UPDATE BY ID ------------------------------------
+    myProfile(req, res) {
+        nDate = new dtCurr
+        condition = {
+            where: {
+                id_user: req.params.id
+            }
+        }
+        action.method = 'modify profile'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
+        if ( req.body.vc_repassword ){ 
+            if (req.body.password !== req.body.vc_repassword) return res.status(404).send(msgF('err-0008', req.query.lang))
+        }
+        let pwd = req.body.password ? Auth.encryptPwd(req.body.password) : null
+        var name = req.body.vc_name ? `${req.body.vc_name}`.toUpperCase() : null
+        var lastname = req.body.vc_lastname ? `${req.body.vc_lastname}`.toUpperCase() : null
+        var email = req.body.vc_email ? `${req.body.vc_email}`.toLowerCase() : null
+        console.log(req.body)
+        return User
+            .findByPk(req.params.id)
+            .then((user) => {
+            if (!user || Object.keys(user).length === 0) {
+                var errResp = msgF('err-0002', req.query.lang)
+                return res.status(404).send(errResp);
+            }
+            return User
+                .update({
+                    vc_name: name || user.vc_name,
+                    vc_lastname: lastname || user.vc_lastname,
+                    vc_email: email || user.vc_email,
+                    vc_password: pwd || user.vc_password,
+                    in_profile: req.body.in_profile || user.in_profile,
+                    tx_image: req.body.tx_image || user.tx_image,
+                    vc_password_reset: req.body.vc_password_reset || user.vc_password_reset,
+                    ts_exp_password_reset: req.body.ts_exp_password_reset || user.ts_exp_password_reset,
+                    ts_update: nDate.timestamp || null,
+                }, condition).then(() => {
+                    var msgResp = msgF('suc-0004', req.query.lang, [user.vc_email])
                     return res.status(200).send(msgResp)
                 })
                 .catch((error) => {

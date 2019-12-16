@@ -41,6 +41,26 @@ function verifyToken(req, res, next) {
     }
 }
 
+function vToken(req, res) {
+    const token =  req.body.token || req.query.token || req.headers["authorization"] || req.headers["x-access-token"]
+    if (token) {
+        jwt.verify(token, secret, (err, decoded) => {
+            if (err) {
+                return res.status(403).send({
+                    errors: ['Failed to authenticate token.']
+                })
+            } else {
+                // console.log(decoded)
+                return res.status(200).send(req.body)
+            }
+        })
+    } else {
+        return res.status(403).send({
+            errors: ['No token provided.']
+        })
+    }
+}
+
 // UNIQUE ID TOLKEN
 function genJti() {
     let jti = '';
@@ -91,6 +111,7 @@ module.exports = {
     createIdToken,
     encryptPwd,
     verifyToken,
+    vToken,
     verifySingIn,
     genJti
 }

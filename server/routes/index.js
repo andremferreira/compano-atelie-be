@@ -88,6 +88,7 @@
 /* ║║ -GetId   */ ProtectedRoutes.get('/user/id/:id', userController.getById);                   /*║   ║*/
 /* ║║ -AddNew  */ ProtectedRoutes.post('/user', userController.add);                             /*║   ║*/
 /* ║║ -Update  */ ProtectedRoutes.put('/user/id/:id', userController.update);                    /*║   ║*/
+/* ║║ -Update  */ ProtectedRoutes.put('/myProfile/id/:id', userController.myProfile);            /*║   ║*/
 /* ║║ -Delete  */ ProtectedRoutes.delete('/user/id/:id', userController.delete);                 /*║   ║*/
 /* ║║ -DelEml  */ ProtectedRoutes.delete('/user/email/:email', userController.deleteByEmail);    /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
@@ -126,11 +127,12 @@
 // ║║██████████████████████████████████ SINGIN ROUTE VERIFY      ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
 /* ║║ -SingIn  */ OpenRoutes.post('/singin',singInController.singIn);                            /*║   ║*/
+/* ║║ -SingIn  */ OpenRoutes.post('/vToken',auth.vToken);                                        /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
 // ║║██████████████████████████████████ ZIP CODE INFORMATION     ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
-/* ║║ -SingIn  */ ProtectedRoutes.get('/zipcode', zipCodeController.getByZipCode);               /*║   ║*/
+/* ║║ -ZipCode */ ProtectedRoutes.get('/zipcode', zipCodeController.getByZipCode);               /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 /* ║ - End    */ };                                                                                  /*║*/
 // ╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝
