@@ -7,6 +7,7 @@ const myUtl = require('../util/myInspect')
 const msgF = require('../factory/msgFactory')
 const Log = require ('../factory/logFactory')
 const action = { file: './service/controllers/Service.js', call: 'Service' } 
+const onlyNumber= /\D/g
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
@@ -14,8 +15,14 @@ module.exports = {
         action.method = 'list'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Service requestion.', action )
+        const page = req.query.page || 1
+        const limit = req.query.limit || 5
+        const offset = (( page - 1 )  * limit)
         return Service
-            .findAll()
+            .findAndCountAll({
+                limit: limit, 
+                offset: offset 
+            })
             .then((service) => res.status(200).send(service))
             .catch((error) => {
                 var v = myUtl.myInspect(error, ['original','code'])
@@ -78,26 +85,42 @@ module.exports = {
         action.method = 'add'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Service requestion.', action )
+        let cMaterial;
+        let cThird;
+        let cService;
+        if (req.body.nu_material_cost) {
+            cMaterial = req.body.nu_material_cost.replace(onlyNumber,'');
+            cMaterial = `${cMaterial.substr(0, cMaterial.length - 2 )}.${cMaterial.substr(cMaterial.length - 2, 2)}`;
+        }
+        if (req.body.nu_third_party_cost) {
+            cThird = req.body.nu_third_party_cost.replace(onlyNumber,'');
+            cThird = `${cThird.substr(0, cThird.length - 2 )}.${cThird.substr(cThird.length - 2, 2)}`;
+        }
+        if (req.body.nu_service_cost) {
+            cService = req.body.nu_service_cost.replace(onlyNumber,'');
+            cService = `${cService.substr(0, cService.length - 2 )}.${cService.substr(cService.length - 2, 2)}`;
+        }
+        console.log(req.body)
         return Service
             .create({
                 id_service: req.body.id_service || null,
                 vc_service_mnemonic: req.body.vc_service_mnemonic || null,
                 tx_service_description: req.body.tx_service_description || null,
                 tm_estimate_time_service: req.body.tm_estimate_time_service || null,
-                nu_material_cost: Number(req.body.nu_material_cost) || Number('0.00'),
-                nu_third_party_cost: Number(req.body.nu_third_party_cost) || Number('0.00'),
-                nu_service_cost: Number(req.body.nu_service_cost) || Number('0.00'),
+                nu_material_cost: Number(cMaterial) || Number('0.00'),
+                nu_third_party_cost: Number(cThird) || Number('0.00'),
+                nu_service_cost: Number(cService) || Number('0.00'),
                 vc_contact: req.body.vc_contact || null,
                 bo_active: req.body.bo_active || true,
                 bo_critical_service: req.body.bo_critical_service || false,
                 id_user: req.body.id_user || parseInt('1')
             }).then((service) => {
-                // ../../msg/db/db.json -> ADD SUCCESS %2(idTable) -> 'suc-0002'
-                var msgResp = msgF('suc-0002', req.query.lang, [service.id_service])
+                var msgResp = msgF('suc-0002', req.query.lang, [service.vc_service_mnemonic])
                 return res.status(201).send(msgResp)
             })
             .catch((error) => {
                 var v = myUtl.myInspect(error, ['original','code'])
+                console.log(error)
                 if (!v) {
                     return res.status(400).send(error)
                 } else {
@@ -117,6 +140,22 @@ module.exports = {
                 id_service: req.params.id
             }
         }
+        let cMaterial;
+        let cThird;
+        let cService;
+        if (req.body.nu_material_cost) {
+            cMaterial = req.body.nu_material_cost.replace(onlyNumber,'');
+            cMaterial = `${cMaterial.substr(0, cMaterial.length - 2 )}.${cMaterial.substr(cMaterial.length - 2, 2)}`;
+        }
+        if (req.body.nu_third_party_cost) {
+            cThird = req.body.nu_third_party_cost.replace(onlyNumber,'');
+            cThird = `${cThird.substr(0, cThird.length - 2 )}.${cThird.substr(cThird.length - 2, 2)}`;
+        }
+        if (req.body.nu_service_cost) {
+            cService = req.body.nu_service_cost.replace(onlyNumber,'');
+            cService = `${cService.substr(0, cService.length - 2 )}.${cService.substr(cService.length - 2, 2)}`;
+        }
+        console.log(req.body.bo_critical_service, 'teste', req.body.bo_critical_service)
         return Service
             .findByPk(req.params.id).
         then((service) => {
@@ -129,16 +168,16 @@ module.exports = {
                     vc_service_mnemonic: req.body.vc_service_mnemonic || service.vc_service_mnemonic,
                     tx_service_description: req.body.tx_service_description || service.tx_service_description,
                     tm_estimate_time_service: req.body.tm_estimate_time_service || service.tm_estimate_time_service,
-                    nu_material_cost: Number(req.body.nu_material_cost) || service.nu_material_cost,
-                    nu_third_party_cost: Number(req.body.nu_third_party_cost) || service.nu_third_party_cost,
-                    nu_service_cost: Number(req.body.nu_service_cost) || service.nu_service_cost,
+                    nu_material_cost: Number(cMaterial) || service.nu_material_cost,
+                    nu_third_party_cost: Number(cThird) || service.nu_third_party_cost,
+                    nu_service_cost: Number(cService) || service.nu_service_cost,
                     vc_contact: req.body.vc_contact || service.vc_contact,
-                    bo_active: req.body.bo_active || service.bo_active,
-                    bo_critical_service: req.body.bo_critical_service || service.bo_critical_service,
+                    bo_active: req.body.bo_active,
+                    bo_critical_service: req.body.bo_critical_service,
                     id_user: req.body.id_user || service.id_user,
                     ts_update: nDate.timestamp || null,
                 }, condition).then(() => {
-                    var msgResp = msgF('suc-0004', req.query.lang, [service.id_service])
+                    var msgResp = msgF('suc-0004', req.query.lang, [service.vc_service_mnemonic])
                     return res.status(200).send(msgResp)
                 })
                 .catch((error) => {
