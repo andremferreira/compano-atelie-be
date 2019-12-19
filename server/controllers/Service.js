@@ -8,18 +8,23 @@ const msgF = require('../factory/msgFactory')
 const Log = require ('../factory/logFactory')
 const action = { file: './service/controllers/Service.js', call: 'Service' } 
 const onlyNumber= /\D/g
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op;
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
     list(req, res) {
-        action.method = 'list'
-        action.header = JSON.stringify(req.headers)
-        Log.logRegister('Service requestion.', action )
-        const page = req.query.page || 1
-        const limit = req.query.limit || 5
-        const offset = (( page - 1 )  * limit)
+        action.method = 'list';
+        action.header = JSON.stringify(req.headers);
+        Log.logRegister('Service requestion.', action );
+        const page = req.query.page || 1;
+        const limit = req.query.limit || 5;
+        const offset = (( page - 1 )  * limit);
+        let mne = req.query.mne ? `${req.query.mne}%` :  false;
+        let where = mne ? { vc_service_mnemonic: { [Op.like]: mne } } : {};
         return Service
             .findAndCountAll({
+                where: where, 
                 limit: limit, 
                 offset: offset 
             })
