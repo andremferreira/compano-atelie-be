@@ -100,7 +100,6 @@ module.exports = {
             cService = req.body.nu_service_cost.replace(onlyNumber,'');
             cService = `${cService.substr(0, cService.length - 2 )}.${cService.substr(cService.length - 2, 2)}`;
         }
-        console.log(req.body)
         return Service
             .create({
                 id_service: req.body.id_service || null,
@@ -155,7 +154,6 @@ module.exports = {
             cService = req.body.nu_service_cost.replace(onlyNumber,'');
             cService = `${cService.substr(0, cService.length - 2 )}.${cService.substr(cService.length - 2, 2)}`;
         }
-        console.log(req.body.bo_critical_service, 'teste', req.body.bo_critical_service)
         return Service
             .findByPk(req.params.id).
         then((service) => {
