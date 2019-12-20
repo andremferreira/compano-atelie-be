@@ -56,6 +56,26 @@ module.exports = {
                 }
             });
     },
+    // ----------------------------------- List Box Client ------------------------------
+    listBoxClient(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('Client requestion.', action )
+        return Client
+            .findAll({
+                attributes: ['id_client', 'vc_social_security_code', 'vc_name', 'vc_lastname']
+            })
+            .then((client) => res.status(200).send({ rows:client }))
+            .catch((error) => {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
+                    return res.status(400).send(error)
+                } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
+                    return res.status(400).send(errResp)
+                }
+            });
+    },
     // ----------------------------------- COUNT ---------------------------------------
     count(req, res) {
         action.method = 'count'

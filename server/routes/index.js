@@ -69,6 +69,7 @@
 // ║║██████████████████████████████████ ROUTE OF CRUD CLIENTS    ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
 /* ║║ -ListAll */ ProtectedRoutes.get('/clients', clientController.list);                        /*║   ║*/
+/* ║║ -ListAll */ ProtectedRoutes.get('/lstbClients', clientController.listBoxClient);           /*║   ║*/
 /* ║║ -Count   */ ProtectedRoutes.get('/clients/count', clientController.count);                 /*║   ║*/
 /* ║║ -GetId   */ ProtectedRoutes.get('/client/id/:id', clientController.getById);               /*║   ║*/
 /* ║║ -GetEmail*/ ProtectedRoutes.get('/client/email/:email', clientController.getByEmail);      /*║   ║*/
