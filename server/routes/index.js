@@ -97,6 +97,7 @@
 // ║║██████████████████████████████████ ROUTE OF CRUD SERVICES   ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
 /* ║║ -ListAll */ ProtectedRoutes.get('/services', serviceController.list);                      /*║   ║*/
+/* ║║ -ListAll */ ProtectedRoutes.get('/lstbServices', serviceController.getlistBox);            /*║   ║*/
 /* ║║ -Count   */ ProtectedRoutes.get('/services/count', serviceController.count);               /*║   ║*/
 /* ║║ -GetId   */ ProtectedRoutes.get('/service/id/:id', serviceController.getById);             /*║   ║*/
 /* ║║ -AddNew  */ ProtectedRoutes.post('/service', serviceController.add);                       /*║   ║*/

@@ -30,7 +30,32 @@ module.exports = {
             })
             .then((service) => res.status(200).send(service))
             .catch((error) => {
+                
                 var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
+                    return res.status(400).send(error)
+                } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
+                    return res.status(400).send(errResp)
+                }
+            });
+    },
+    // ----------------------------------- SERVICE LIST BOX --------------------------------------
+    getlistBox(req, res) {
+        action.method = 'list';
+        action.header = JSON.stringify(req.headers);
+        Log.logRegister('Service requestion.', action );
+        return Service
+            .findAll({
+                attributes: ['id_service', 'vc_service_mnemonic', 'tx_service_description',
+                [ Sequelize.literal('(case when bo_critical_service = true then (nu_material_cost + nu_third_party_cost + nu_service_cost) * 1.2 else (nu_material_cost + nu_third_party_cost + nu_service_cost) end )'),
+                 'total']], 
+                where: { bo_active: {[Op.eq] : true } }
+            })
+            .then((service) => res.status(200).send(service))
+            .catch((error) => {
+                var v = myUtl.myInspect(error, ['original','code'])
+                console.log(error)
                 if (!v) {
                     return res.status(400).send(error)
                 } else {
