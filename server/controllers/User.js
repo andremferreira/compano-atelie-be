@@ -33,6 +33,29 @@ module.exports = {
                 }
             });
     },
+    // ----------------------------------- LIST USER ALL --------------------------------------
+    getUserList(req, res) {
+        action.method = 'list'
+        action.header = JSON.stringify(req.headers)
+        Log.logRegister('User requestion.', action )
+        return User
+            .findAll({
+                    attributes:['id_user', 'vc_name']
+                }
+            )
+            .then((user) => { 
+                return res.status(200).send(user) 
+            })
+            .catch((error) => {
+                var v = myUtl.myInspect(error, ['original','code'])
+                if (!v) {
+                    return res.status(400).send(error)
+                } else {
+                    var errResp = msgF(error.original.code, req.query.lang)
+                    return res.status(400).send(errResp)
+                }
+            });
+    },
         // ----------------------------------- LIST SMALL PAGINATOR --------------------------------------
     listSmall(req, res) {
         action.method = 'listSmall'

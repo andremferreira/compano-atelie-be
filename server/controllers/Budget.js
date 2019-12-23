@@ -7,6 +7,8 @@ const myUtl = require ('../util/myInspect')
 const msgF = require('../factory/msgFactory')
 const Log = require ('../factory/logFactory')
 const action = { file: './service/controllers/Budget.js', call: 'Budget' } 
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op;
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
@@ -14,8 +16,17 @@ module.exports = {
         action.method = 'list'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Budget requestion.', action )
+        const page = req.query.page || 1;
+        const limit = req.query.limit || 5;
+        const offset = (( page - 1 )  * limit);
+        let budget = req.query.budget ? `${req.query.budget}` :  false;
+        let where = budget ? { id_budget: { [Op.eq]: budget } } : {};        
         return Budget
-            .findAll()
+            .findAndCountAll({
+                where: where, 
+                limit: limit, 
+                offset: offset 
+            })
             .then((budget) => res.status(200).send(budget))
             .catch((error) => {
                 var v = myUtl.myInspect(error, ['original','code'])

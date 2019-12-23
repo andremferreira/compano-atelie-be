@@ -83,7 +83,6 @@ module.exports = {
         Log.logRegister('Client requestion.', action )
         return Client
             .findAndCountAll()
-            //.findAndCountAll({ offset: 10, limit: 2})
             .then(client => {
                 res.status(200).send({
                     'count': client.count
