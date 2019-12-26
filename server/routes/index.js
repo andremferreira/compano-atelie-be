@@ -21,6 +21,7 @@
 // ╟───────────────────────────────────────────────────────────────────────────────────────────────────╢
 /* ║ -User    */ const userController     = require('../controllers/User');                          /*║*/
 /* ║ -User    */ const singInController   = require('../controllers/SingIn');                        /*║*/
+/* ║ -User    */ const singUnController   = require('../controllers/SingUp');                        /*║*/
 /* ║ -Client  */ const clientController   = require('../controllers/Client');                        /*║*/
 /* ║ -Service */ const serviceController  = require('../controllers/Service');                       /*║*/
 /* ║ -Budget  */ const budgetController   = require('../controllers/Budget');                        /*║*/
@@ -127,9 +128,10 @@
 /* ║║ -Delete  */ ProtectedRoutes.delete('/servOrder/id/:id', serOrderController.delete);        /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
-// ║║██████████████████████████████████ SINGIN ROUTE VERIFY      ██████████████████████████████████║   ║
+// ║║██████████████████████████████████ SING & ROUTE VERIFY      ██████████████████████████████████║   ║
 // ║╟──────────────────────────────────────────────────────────────────────────────────────────────╢   ║
 /* ║║ -SingIn  */ OpenRoutes.post('/singin',singInController.singIn);                            /*║   ║*/
+/* ║║ -SingIn  */ OpenRoutes.post('/singup',singUnController.singUp);                            /*║   ║*/
 /* ║║ -SingIn  */ OpenRoutes.post('/vToken',auth.vToken);                                        /*║   ║*/
 // ║╚══════════════════════════════════════════════════════════════════════════════════════════════╝   ║
 // ║╔══════════════════════════════════════════════════════════════════════════════════════════════╗   ║
