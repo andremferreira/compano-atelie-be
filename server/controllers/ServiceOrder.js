@@ -7,6 +7,8 @@ const myUtl = require('../util/myInspect')
 const msgF = require('../factory/msgFactory')
 const Log = require ('../factory/logFactory')
 const action = { file: './service/controllers/ServiceOrder.js', call: 'Service Order' } 
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op;
 // ----------------------------------- CRUD ------------------------------------------
 module.exports = {
     // ----------------------------------- LIST ALL --------------------------------------
@@ -14,8 +16,20 @@ module.exports = {
         action.method = 'list'
         action.header = JSON.stringify(req.headers)
         Log.logRegister('Service Order requestion.', action )
+        const page = req.query.page || 1;
+        const limit = req.query.limit || 5;
+        const offset = (( page - 1 )  * limit);
+        let servOrder = req.query.servOrder ? `${req.query.servOrder}` :  false;
+        let where = servOrder ? { id_service_order: { [Op.eq]: servOrder } } : {};              
         return ServiceOrder
-            .findAll()
+            .findAndCountAll({
+                where: where,
+                order: [
+                    ['id_service_order', 'DESC']
+                ],
+                limit: limit, 
+                offset: offset 
+            })
             .then((serviceOrder) => res.status(200).send(serviceOrder))
             .catch((error) => {
                 var v = myUtl.myInspect(error, ['original','code'])

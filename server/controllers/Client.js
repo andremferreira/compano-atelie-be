@@ -41,7 +41,10 @@ module.exports = {
         }
         return Client
             .findAndCountAll({
-                where: where, 
+                where: where,
+                order: [
+                    ['id_client', 'DESC']
+                ],
                 limit: limit, 
                 offset: offset 
             })

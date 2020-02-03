@@ -23,7 +23,10 @@ module.exports = {
         let where = budget ? { id_budget: { [Op.eq]: budget } } : {};        
         return Budget
             .findAndCountAll({
-                where: where, 
+                where: where,
+                order: [
+                    ['id_budget', 'DESC']
+                ],
                 limit: limit, 
                 offset: offset 
             })

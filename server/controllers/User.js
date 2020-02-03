@@ -40,7 +40,10 @@ module.exports = {
         Log.logRegister('User requestion.', action )
         return User
             .findAll({
-                    attributes:['id_user', 'vc_name']
+                    attributes:['id_user', 'vc_name'],
+                    order: [
+                        ['id_user', 'DESC']
+                    ],
                 }
             )
             .then((user) => { 
@@ -70,6 +73,9 @@ module.exports = {
             .findAndCountAll(
                         { attributes: ['id_user', 'vc_name', 'vc_lastname', 'vc_email', 'in_profile'], 
                           where: { id_user: { [Op.ne] : usrId }, in_profile: { [Op.gt] : perfil } }, 
+                          order: [
+                            ['id_user', 'DESC']
+                          ],
                           limit: limit, 
                           offset: offset 
                         }
