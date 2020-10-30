@@ -12,7 +12,7 @@ module.exports = function (cod, lang, rpl=[]) {
     let dconfig = JSON.parse(dConfig)
     let dLang = dconfig.dConfig.dlang
     let msgResp = {}
-    // ----------------------------------- VERIFY LAG VARIABLE --------------------------
+    // ----------------------------------- VERIFY LANG VARIABLE -------------------------
     if (!lang) lang = dLang
     // ----------------------------------- VERIFY COD VARIABLE --------------------------
     for (var idKeyA in dbMsg.messages) {
